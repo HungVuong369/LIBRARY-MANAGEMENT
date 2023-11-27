@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucTransitioningChild"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Content="Transitioning Child"
+               FontSize="20"
+               HorizontalAlignment="Center"
+               FontWeight="Bold"/>
+        
+        <StackPanel Orientation="Vertical" Grid.Row="1"
+                    Margin="10">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Search by identify"
+                       FontSize="14"
+                       FontWeight="SemiBold"/>
+
+                <TextBox Name="txtSearch1"
+                         TextChanged="txtSearch1_TextChanged"/>
+            </StackPanel>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Select an adult"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Name="lbSelectAdult1"/>
+
+                <Label Content="Select a child"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Name="lbSelectChild"
+                       Foreground="Transparent"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                            Grid.Column="1"
+                            Margin="5">
+                    <Button Name="btnBack1"
+                            Content="◀" Grid.Column="1"
+                            Width="40"
+                            Height="25"
+                            IsEnabled="False"
+                            Click="btnBack1_Click"/>
+                    <Label Content="1/2"
+                           Name="lbPage1"
+                           FontSize="14"
+                           Grid.Column="2"
+                           FontWeight="SemiBold"
+                           Margin="10 0"/>
+                    <Button Content="▶"
+                            Grid.Column="3"
+                            Height="25"
+                            Width="40"
+                            Name="btnNext1"
+                            IsEnabled="False"
+                            Click="btnNext1_Click"/>
+                </StackPanel>
+            </Grid>
+            <local:ucAdultAndQuantityChildDataGrid x:Name="ucAdultDataGrid1"/>
+            <local:ucChildDataGrid x:Name="ucChildDataGrid1" Visibility="Collapsed"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <Button Name="btnTransition"
+                    Content="↓" Width="100"
+                    FontSize="16"
+                    FontWeight="Bold"
+                    Margin="0 0 10 0"
+                    Click="btnTransition_Click"/>
+            <Button Name="btnTransitionAll"
+                    Content="↧" Width="100"
+                    FontSize="16"
+                    Click="btnTransitionAll_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Margin="10">
+            <StackPanel Orientation="Vertical">
+                <Label Content="Search by identify"
+                       FontSize="14"
+                       FontWeight="SemiBold"/>
+
+                <TextBox Name="txtSearch2"
+                         TextChanged="txtSearch2_TextChanged"/>
+            </StackPanel>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Select an adult"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Name="lbSelectAdult2"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                            Grid.Column="1"
+                            Margin="5">
+                    <Button Content="◀" Grid.Column="1"
+                            Width="40"
+                            IsEnabled="False"
+                            Height="25"
+                            Name="btnBack2"
+                            Click="btnBack2_Click"/>
+                    <Label Content="1/2"
+                           Name="lbPage2"
+                           FontSize="14"
+                           Grid.Column="2"
+                           FontWeight="SemiBold"
+                           Margin="10 0"/>
+                    <Button Content="▶"
+                            Grid.Column="3"
+                            Width="40"
+                            Height="25"
+                            Name="btnNext2"
+                            IsEnabled="False"
+                            Click="btnNext2_Click"/>
+                </StackPanel>
+            </Grid>
+            <local:ucAdultAndQuantityChildDataGrid x:Name="ucAdultDataGrid2"/>
+            <local:ucChildDataGrid x:Name="ucChildDataGrid2" Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

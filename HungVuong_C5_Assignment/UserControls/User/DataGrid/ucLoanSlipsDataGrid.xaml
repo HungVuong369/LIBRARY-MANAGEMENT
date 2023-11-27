@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucLoanSlipsDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid Name="dgLoanSlips" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Reader Name" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Quantity Book" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Loan Paid" Binding="{Binding LoanPaid}"/>
+                <DataGridTextColumn Header="Deposit" Binding="{Binding Deposit}"/>
+                <DataGridTextColumn Header="Loan Date" Binding="{Binding LoanDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate, StringFormat='dd/MM/yyyy'}"/>
+
+                <DataGridTemplateColumn Header="Action">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDetail"
+                                    Content="Detail"
+                                    Tag="{Binding}"
+                                    Click="btnDetail_Click"
+                                    Width="100"
+                                    Margin="10 0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

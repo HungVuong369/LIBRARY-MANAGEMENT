@@ -1,0 +1,20 @@
+﻿HungVuong_C5_Assignment
+
+
+winexe
+C#
+.cs
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\
+HungVuong_C5_Assignment
+none
+false
+DEBUG;TRACE
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\HungVuong_C5_Assignment\HungVuong_C5_Assignment\App.xaml
+76-1897158062
+21750853300
+1781821497885
+19-54205228
+MainWindow.xaml;Styles\Buttons.xaml;Styles\ComboBoxs.xaml;Styles\DataGrids.xaml;Styles\ListBoxs.xaml;Styles\TextBoxs.xaml;Styles\ToggleButtons.xaml;Styles\TreeViews.xaml;UserControls\Admin\DataGrid\Function\ucFunctionDataGrid.xaml;UserControls\Admin\DataGrid\Role\ucRoleDataGrid.xaml;UserControls\Admin\DataGrid\User\ucUserRoleDataGrid.xaml;UserControls\Admin\DataGrid\User\UserDataGrid.xaml;UserControls\Admin\Function\CRUD\Add\ucConfirmFeature.xaml;UserControls\Admin\Function\CRUD\DeleteFeature\ucConfirmDeleteFeature.xaml;UserControls\Admin\Function\CRUD\DeleteFeature\ucDeleteFeature.xaml;UserControls\Admin\Function\CRUD\ucRestoreFeature.xaml;UserControls\Admin\Function\CRUD\Update\ucUpdateFeature.xaml;UserControls\Admin\Function\CRUD\Update\ucUpdateFeatureView.xaml;UserControls\Admin\Function\FeatureManagement.xaml;UserControls\Admin\Function\ucConfirmRestoreFunction.xaml;UserControls\Admin\Function\ucInputFeature.xaml;UserControls\Admin\Function\ucViewFeature.xaml;UserControls\Admin\Role\FeatureAssignment.xaml;UserControls\Admin\Role\RoleManagement.xaml;UserControls\Admin\Role\ucAddRole.xaml;UserControls\Admin\Role\UserAssignment\ucUserAssignment.xaml;UserControls\Admin\Role\UserAssignment\ucUserAssignmentView.xaml;UserControls\Admin\User\CRUD\ucAddUser.xaml;UserControls\Admin\User\CRUD\ucDeleteUser.xaml;UserControls\Admin\User\CRUD\Update\ucUpdateUser.xaml;UserControls\Admin\User\CRUD\Update\ucUpdateUserView.xaml;UserControls\Admin\User\InputUser.xaml;UserControls\Admin\User\UserManagement.xaml;UserControls\Admin\User\View\ucUserInfoShow.xaml;UserControls\Admin\User\View\ucUserView.xaml;UserControls\Pagination.xaml;UserControls\ucLine.xaml;UserControls\User\CRUD\Add\Book\ucAddBook.xaml;UserControls\User\CRUD\Add\Book\ucAddBookISBN.xaml;UserControls\User\CRUD\Add\Book\ucAddBookTitle.xaml;UserControls\User\CRUD\Add\Reader\ucAddAdultReader.xaml;UserControls\User\CRUD\Add\Reader\ucAddChildReader.xaml;UserControls\User\CRUD\Add\Reader\ucAddReader.xaml;UserControls\User\Book\BorrowingBook\ucBorrowingBook.xaml;UserControls\User\CRUD\Delete\ucConfirmDelete.xaml;UserControls\User\CRUD\Delete\ucDeleteReader.xaml;UserControls\User\CRUD\Restore\ucConfirmRestoreAdult.xaml;UserControls\User\CRUD\Restore\ucConfirmRestoreChild.xaml;UserControls\User\CRUD\Restore\ucRestoreReader.xaml;UserControls\User\CRUD\Update\ucTransitioningChild.xaml;UserControls\User\DataGrid\ucAdultAndQuantityChildDataGrid.xaml;UserControls\User\DataGrid\ucBorrowingDataGrid.xaml;UserControls\User\DataGrid\ucChildDataGrid.xaml;UserControls\User\DataGrid\ucEnrollDataGrid.xaml;UserControls\User\DataGrid\ucLoanSlipsDataGrid.xaml;UserControls\User\DataGrid\ucReaderAndIdentifyDataGrid.xaml;UserControls\User\Management\Book\BookISBN_Management.xaml;UserControls\User\Management\Book\BookManagement.xaml;UserControls\User\Management\Book\BookTitleManagement.xaml;UserControls\User\Management\Reader\ReaderManagement.xaml;UserControls\User\Search\ucSearchBook.xaml;UserControls\User\Search\ucSearchByIdentify.xaml;UserControls\User\View\Book\BookISBNInformation\ucBookISBNInformation.xaml;UserControls\User\View\Book\BookISBNInformation\ucDetailBookISBN.xaml;UserControls\User\View\Book\ucBookTitleInformation.xaml;UserControls\User\View\Book\ucLoanDetail.xaml;UserControls\User\View\Book\ucStatusBookISBN.xaml;UserControls\User\View\Reader\ReaderInformation\ucAdultInformation.xaml;UserControls\User\View\Reader\ReaderInformation\ucChildInformation.xaml;UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.xaml;Views\AdminMenu.xaml;Views\ConnectionWindow.xaml;Views\Load.xaml;Views\Login.xaml;Views\UserMenu.xaml;Views\WindowDefault.xaml;
+
+False
+

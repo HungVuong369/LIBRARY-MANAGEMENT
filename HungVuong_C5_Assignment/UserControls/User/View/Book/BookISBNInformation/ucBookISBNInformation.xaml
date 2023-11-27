@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucBookISBNInformation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             Padding="5"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:TrueFalseToAvailableUnavailable x:Key="ConvertTrueFalseToAvailableUnavailable"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DataGrid Name="dgBookISBN" AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single"
+                  Grid.Row="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Author Name" Binding="{Binding AuthorName}"/>
+                <DataGridTextColumn Header="Author BoF" Binding="{Binding AuthorBoF, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status, Converter={StaticResource ConvertTrueFalseToAvailableUnavailable}}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource CellDefault}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="True">
+                                    <Setter Property="Foreground" Value="Green"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="False">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Action">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDetail"
+                                    Content="Detail"
+                                    Tag="{Binding ISBN}"
+                                    Click="btnDetail_Click"
+                                    Width="100"
+                                    Margin="10 0"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <local:Pagination Grid.Row="1"
+                          x:Name="pagination"
+                          Height="45"/>
+    </Grid>
+</UserControl>

@@ -1,0 +1,205 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucBorrowingBook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Loan Books"
+               FontSize="20"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"/>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0"
+                        Margin="10"
+                        Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Borrowing Slip ID:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtBorrowingSlipID"
+                             Width="300"
+                             IsEnabled="False"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    <TextBlock Text="Reader ID:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="txtReaderID"
+                             Width="300"
+                             TextChanged="txtReaderID_TextChanged"/>
+
+                        <ComboBox Width="0" IsDropDownOpen="False"
+                                  Grid.Row="1"
+                                  Height="0"
+                              Name="cbReaderID"
+                              DisplayMemberPath="Id"
+                                  HorizontalAlignment="Left"
+                              SelectionChanged="cbReaderID_SelectionChanged"
+                              SelectedValuePath="Id"
+                              DropDownClosed="cbReaderID_DropDownClosed">
+                        </ComboBox>
+                    </Grid>
+                    
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    
+                    <TextBlock Text="Book ISBN:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBox Name="txtBookISBN"
+                             Width="300"
+                             TextChanged="txtBookISBN_TextChanged"/>
+
+                        <ComboBox Width="0" 
+                                  Height="0"
+                                  HorizontalAlignment="Left"
+                                  IsDropDownOpen="False"
+                              Name="cbBookISBN"
+                                  Grid.Row="1"
+                              DisplayMemberPath="ISBN"
+                              SelectionChanged="cbBookISBN_SelectionChanged"
+                              SelectedValuePath="ISBN"
+                              StaysOpenOnEdit="True"
+                              DropDownClosed="cbBookISBN_DropDownClosed">
+                        </ComboBox>
+                    </Grid>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    <TextBlock Text="Reader Expire Date:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtExpireReader"
+                             Width="300"
+                             IsEnabled="False"
+                             Text="None"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Loan Paid:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtLoanPaid"
+                             Width="300"
+                             IsEnabled="False"
+                             Text="0 VND"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    <TextBlock Text="Deposit:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtDeposit"
+                             Width="300"
+                             TextChanged="txtDeposit_TextChanged"
+                             PreviewTextInput="txtDeposit_PreviewTextInput"/>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    <TextBlock Text="Borrowing Date:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtBorrowingDate"
+                             Width="300"
+                             IsEnabled="False"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 10 0 0">
+                    <TextBlock Text="Return Date:" VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="SemiBold"
+                               Width="130"/>
+                    <TextBox Name="txtReturnDate"
+                             Width="300"
+                             IsEnabled="False"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="350"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="Add Detail Borrowing"
+                        Margin="10 0 10 10"
+                    Width="160"
+                        Name="btnAddDetailBorrowing"
+                        Click="btnAddDetailBorrowing_Click"
+                    HorizontalAlignment="Left"/>
+            
+            <local:ucBorrowingDataGrid Grid.Row="1"
+                                   Height="350"
+                                       Margin="10 0"
+                                   x:Name="ucBorrowing"/>
+        </Grid>
+
+        
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Confirm Loan"
+                    Margin="10"
+                    Name="btnConfirmBorrowing"
+                    Click="btnConfirmBorrowing_Click"/>
+            
+            <Button Content="Cancel"
+                    Grid.Column="1"
+                    Margin="10"
+                    Name="btnCancel"
+                    Click="btnCancel_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

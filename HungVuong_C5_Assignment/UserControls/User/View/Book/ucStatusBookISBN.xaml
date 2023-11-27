@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucStatusBookISBN"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             Padding="5"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid Name="dgBookISBN" AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Author Name" Binding="{Binding AuthorName}"/>
+                <DataGridTextColumn Header="Author BoF" Binding="{Binding AuthorBoF, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

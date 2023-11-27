@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucBorrowingDataGrid"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:TrueFalseToReaderType x:Key="ConvertReaderType"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <DataGrid Name="dgBorrowingDetail" 
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="ReaderType" Binding="{Binding ReaderType, Converter={StaticResource ConvertReaderType}}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource CellDefault}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ReaderType}" Value="True">
+                                    <Setter Property="Foreground" Value="DarkMagenta"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ReaderType}" Value="False">
+                                    <Setter Property="Foreground" Value="DarkBlue"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="BoF" Binding="{Binding BoF, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Book Name" Binding="{Binding BookName}"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                <DataGridTextColumn Header="Enroll Date" Binding="{Binding EnrollDate, StringFormat='dd/MM/yyyy'}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource CellDefault}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Loan">
+                                    <Setter Property="Foreground" Value="Transparent"/>
+                                </DataTrigger>
+                                
+                                <DataTrigger Binding="{Binding Status}" Value="Enroll">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource CellDefault}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Loan">
+                                    <Setter Property="Foreground" Value="Blue"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Status}" Value="Enroll">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Action" Visibility="Visible">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnEditNote"
+                                    Content="Edit Note"
+                                    Tag="{Binding}"
+                                    Click="btnEditNote_Click"
+                                    Width="100"
+                                    Background="Orange"
+                                    Height="20"
+                                    Foreground="DarkBlue"
+                                    Margin="10 0">
+                                <Button.Style>
+                                    <Style TargetType="Button"
+                                           BasedOn="{StaticResource ButtonBasicStyle}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="Enroll">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding Status}" Value="Loan">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

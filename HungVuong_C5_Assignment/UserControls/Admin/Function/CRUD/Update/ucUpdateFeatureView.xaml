@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucUpdateFeatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label FontSize="20"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"
+               Content="Update Feature"/>
+
+        <local:ucInputFeature x:Name="ucInputFeature"
+                              Grid.Row="1"/>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Update"
+                    Name="btnUpdate"
+                    Margin="10 0 5 10"
+                    Click="btnUpdate_Click"
+                    IsEnabled="False"/>
+            <Button Content="Cancel"
+                    Name="btnCancel"
+                    Grid.Column="1"
+                    Margin="5 0 10 10"
+                    Click="btnCancel_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

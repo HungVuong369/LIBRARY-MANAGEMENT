@@ -1,0 +1,226 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucConfirmDelete"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label Content="Confirm Delete"
+               FontWeight="Bold"
+               FontSize="20"
+               HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Name="grdChildReader1" 
+                    Grid.Column="0" 
+                    Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="2 2 2 0"
+                    Margin="5 5 5 0">
+                    <TextBlock Text="Child Reader Information 1"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"></TextBlock>
+                </Border>
+
+                <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Margin="5 0 5 5">
+                    <StackPanel>
+                        <TextBlock Text="{Binding ChildReader1.Id, StringFormat='Id: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding FullNameChild1, StringFormat='Full Name: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader1.boF, StringFormat='BoF: {0}'}"  Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader1.ReaderType, StringFormat='ReaderType: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader1.CreatedAt, StringFormat='CreatedAt: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader1.ModifiedAt, StringFormat='ModifiedAt: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader1.Status, StringFormat='Status: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Name="grdChild1" 
+              Grid.Column="1" 
+              Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="2 2 2 0"
+                    Margin="5 5 5 0">
+                    <TextBlock Text="Child Information 1"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"></TextBlock>
+                </Border>
+
+                <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Margin="5 0 5 5">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Child1.CreatedAt, StringFormat='Created At: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding Child1.ModifiedAt, StringFormat='Modified At: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Name="grdChildReader2"
+              Grid.Column="2" 
+              Margin="10"
+                  Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="2 2 2 0"
+                    Margin="5 5 5 0">
+                    <TextBlock Text="Child Reader Information 2"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"></TextBlock>
+                </Border>
+
+                <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Margin="5 0 5 5">
+                    <StackPanel>
+                        <TextBlock Text="{Binding ChildReader2.Id, StringFormat='Id: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding FullNameChild2, StringFormat='Full Name: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader2.boF, StringFormat='BoF: {0}'}"  Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader2.ReaderType, StringFormat='ReaderType: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader2.CreatedAt, StringFormat='CreatedAt: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader2.ModifiedAt, StringFormat='ModifiedAt: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding ChildReader2.Status, StringFormat='Status: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Grid Name="grdChild2" 
+              Grid.Column="4" 
+              Margin="10"
+                  Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0"
+                    BorderBrush="Black"
+                    BorderThickness="2 2 2 0"
+                    Margin="5 5 5 0">
+                    <TextBlock Text="Child Information 2"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"></TextBlock>
+                </Border>
+
+                <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="2"
+                    Margin="5 0 5 5">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Child2.CreatedAt, StringFormat='Created At: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                        <local:ucLine/>
+                        <TextBlock Text="{Binding Child2.ModifiedAt, StringFormat='Modified At: {0}'}" Margin="5"
+                                       FontSize="14" FontWeight="SemiBold"
+                                       TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="10">
+            <Button Content="Delete"
+                    Name="btnDelete"
+                    Click="btnDelete_Click"
+                    Width="100"
+                    Style="{StaticResource ButtonDeleteStyle}"
+                    Margin="0 0 10 0"></Button>
+            <Button Content="Cancel"
+                    Name="btnCancel"
+                    Click="btnCancel_Click"
+                    Width="100"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

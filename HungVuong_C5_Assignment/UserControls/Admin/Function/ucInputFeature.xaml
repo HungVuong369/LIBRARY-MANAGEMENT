@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucInputFeature"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel Grid.Row="1" Orientation="Vertical"
+                Margin="10"
+                Width="300">
+        <TextBlock Text="Name" 
+                   FontSize="14" FontWeight="SemiBold"/>
+
+        <TextBox Name="txtName" 
+                     TextChanged="txtName_TextChanged">
+            <TextBox.Text>
+                <Binding Path="NameFeature"
+                             UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:InputTextRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBlock Text="Description"
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 10 0 0"/>
+
+        <TextBox Name="txtDescription" 
+                     TextChanged="txtName_TextChanged">
+            <TextBox.Text>
+                <Binding Path="Description" 
+                             UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:InputTextAndNumber />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBlock Text="Parent"
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 10 0 0"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox IsReadOnly="True"
+                         Text="None"
+                         Grid.Column="0"
+                         Name="txtParent"/>
+
+            <Button Name="btnSelect"
+                        Content="Select" Grid.Column="1"
+                        Style="{StaticResource ButtonDefault}"
+                        BorderThickness="0"
+                        Margin="0"
+                        Height="18"
+                        FontSize="14"
+                        Width="100"
+                        Background="Blue"
+                        Click="btnSelect_Click"/>
+        </Grid>
+
+        <TextBlock Text="Url Image"
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 10 0 0"/>
+
+        <TextBox Name="txtUrlImage"
+                     Text="Click me!"
+                     IsReadOnly="True"
+                     GotFocus="txtUrlImage_GotFocus"/>
+
+        <Image Name="imgFeature"
+               Width="100"
+               Height="100"/>
+    </StackPanel>
+</UserControl>
