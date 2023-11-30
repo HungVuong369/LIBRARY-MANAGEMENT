@@ -45,7 +45,7 @@ namespace HungVuong_C5_Assignment
             return false;
         }
 
-        private void IsCheckLoanSlip(IEnumerable<LoanSlip> loanSlips, string language, ref int count, ref bool isDuplicateLanguage)
+        private void IsCheckLoanSlip(IEnumerable<LoanSlip> loanSlips, string isbn, ref int count, ref bool isDuplicateISBN)
         {
             foreach (var loanSlip in loanSlips)
             {
@@ -53,20 +53,20 @@ namespace HungVuong_C5_Assignment
 
                 foreach (var loanDetail in loanSlip.LoanDetails)
                 {
-                    if (loanDetail.Book.BookISBN.Language == language)
+                    if (loanDetail.Book.BookISBN.ISBN == isbn)
                     {
-                        isDuplicateLanguage = true;
+                        isDuplicateISBN = true;
                         break;
                     }
                 }
             }
         }
 
-        private int IsCheckLoanSlips(Reader reader, BookISBN bookISBN, ref int count, ref bool isDuplicateLanguage)
+        private int IsCheckLoanSlips(Reader reader, BookISBN bookISBN, ref int count, ref bool isDuplicateISBN)
         {
             IEnumerable<LoanSlip> loanSlipsBase = DatabaseFirst.Instance.db.LoanSlips.Local.Where(i => i.IdReader == reader.Id);
 
-            IsCheckLoanSlip(loanSlipsBase, bookISBN.Language, ref count, ref isDuplicateLanguage);
+            IsCheckLoanSlip(loanSlipsBase, bookISBN.ISBN, ref count, ref isDuplicateISBN);
             
             if(reader.ReaderType)
             {
@@ -74,7 +74,7 @@ namespace HungVuong_C5_Assignment
                 {
                     IEnumerable<LoanSlip> loanSlipsChild = DatabaseFirst.Instance.db.LoanSlips.Local.Where(i => i.IdReader == child.IdReader);
 
-                    IsCheckLoanSlip(loanSlipsChild, bookISBN.Language, ref count, ref isDuplicateLanguage);
+                    IsCheckLoanSlip(loanSlipsChild, bookISBN.ISBN, ref count, ref isDuplicateISBN);
                 }
 
                 if (count > int.Parse(_ParameterVM.GetValueByID("QD2").Split(':')[0]))
@@ -90,39 +90,42 @@ namespace HungVuong_C5_Assignment
                 foreach (var child in reader.Child.Adult.Children.Where(i => i.IdReader != reader.Id))
                 {
                     IEnumerable<LoanSlip> loanSlipsChild = DatabaseFirst.Instance.db.LoanSlips.Local.Where(i => i.IdReader == child.IdReader);
-                    IsCheckLoanSlip(loanSlipsChild, bookISBN.Language, ref count, ref isDuplicateLanguage);
+                    IsCheckLoanSlip(loanSlipsChild, bookISBN.ISBN, ref count, ref isDuplicateISBN);
                 }
 
-                IsCheckLoanSlip(loanSlipsAdult, bookISBN.Language, ref count, ref isDuplicateLanguage);
+                IsCheckLoanSlip(loanSlipsAdult, bookISBN.ISBN, ref count, ref isDuplicateISBN);
 
                 if (count > int.Parse(_ParameterVM.GetValueByID("QD2").Split(':')[0]))
                     return -1;
             }
 
-            if (isDuplicateLanguage)
+            if (isDuplicateISBN)
                 return 0;
 
             return 1;
         }
 
-        private int IsCheckEnroll(IEnumerable<Enroll> enrolls, string language, ref bool isDuplicateLanguage)
+        private int IsCheckEnroll(IEnumerable<Enroll> enrolls, string isbn, ref bool isDuplicateISBN)
         {
             foreach (var enroll in enrolls)
             {
-                if (enroll.BookISBN.Language == language)
+                if (enroll.BookISBN.ISBN == isbn)
                 {
-                    isDuplicateLanguage = true;
-                    break;
+                    if(enroll.IdBook == null)
+                    {
+                        isDuplicateISBN = true;
+                        break;
+                    }
                 }
             }
             return 1;
         }
 
-        private int IsCheckEnrolls(Reader reader, BookISBN bookISBN, ref bool isDuplicateLanguage)
+        private int IsCheckEnrolls(Reader reader, BookISBN bookISBN, ref bool isDuplicateISBN)
         {
             IEnumerable<Enroll> enrollsBase = DatabaseFirst.Instance.db.Enrolls.Local.Where(i => i.IdReader == reader.Id);
 
-            IsCheckEnroll(enrollsBase, bookISBN.Language, ref isDuplicateLanguage);
+            IsCheckEnroll(enrollsBase, bookISBN.ISBN, ref isDuplicateISBN);
 
             if(reader.ReaderType)
             {
@@ -130,7 +133,7 @@ namespace HungVuong_C5_Assignment
                 {
                     IEnumerable<Enroll> enrollsChild = DatabaseFirst.Instance.db.Enrolls.Local.Where(i => i.IdReader == child.IdReader);
 
-                    IsCheckEnroll(enrollsChild, bookISBN.Language, ref isDuplicateLanguage);
+                    IsCheckEnroll(enrollsChild, bookISBN.ISBN, ref isDuplicateISBN);
                 }
             }
             else
@@ -140,13 +143,13 @@ namespace HungVuong_C5_Assignment
                 foreach (var child in reader.Child.Adult.Children.Where(i => i.IdReader != reader.Id))
                 {
                     IEnumerable<Enroll> enrollsChild = DatabaseFirst.Instance.db.Enrolls.Local.Where(i => i.IdReader == child.IdReader);
-                    IsCheckEnroll(enrollsChild, bookISBN.Language, ref isDuplicateLanguage);
+                    IsCheckEnroll(enrollsChild, bookISBN.ISBN, ref isDuplicateISBN);
                 }
 
-                IsCheckEnroll(enrollsAdult, bookISBN.Language, ref isDuplicateLanguage);
+                IsCheckEnroll(enrollsAdult, bookISBN.ISBN, ref isDuplicateISBN);
             }
 
-            if (isDuplicateLanguage)
+            if (isDuplicateISBN)
                 return 0;
 
             return 1;
@@ -155,13 +158,13 @@ namespace HungVuong_C5_Assignment
         private int IsCheckLoanSlipsAndEnrolls(Reader reader, BookISBN bookISBN)
         {
             int count = 1;
-            bool isDuplicateLanguage = false;
-            int isCheck = IsCheckLoanSlips(reader, bookISBN, ref count, ref isDuplicateLanguage);
+            bool isDuplicateISBN = false;
+            int isCheck = IsCheckLoanSlips(reader, bookISBN, ref count, ref isDuplicateISBN);
 
             if (isCheck != 1)
                 return isCheck;
 
-            isCheck = IsCheckEnrolls(reader, bookISBN, ref isDuplicateLanguage);
+            isCheck = IsCheckEnrolls(reader, bookISBN, ref isDuplicateISBN);
 
             if (isCheck != 1)
                 return isCheck;
@@ -173,7 +176,7 @@ namespace HungVuong_C5_Assignment
         {
             if (isCheck == 0)
             {
-                MessageBox.Show($"{"'" + bookISBN.Language + "'"} language borrowers are limited to one book", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"{"'" + bookISBN.ISBN + "'"} ISBN borrowers are limited to one book", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return 0;
             }
             if (isCheck == -1)
@@ -211,32 +214,32 @@ namespace HungVuong_C5_Assignment
             // Loan
             else
             {
+                Book book = null;
+
                 var enrolls = _EnrollVM.enrolRepo.Items.Where(i => i.IdBook != null && i.ISBN == bookISBN.ISBN);
+                Enroll flagEnroll = null;
 
-                Book book = bookISBN.Books.FirstOrDefault(i => i.ISBN == bookISBN.ISBN && i.Status == true && !enrolls.Any(e => e.IdBook == i.Id));
+                foreach (var enroll in enrolls)
+                {
+                    if(enroll.ISBN == bookISBN.ISBN)
+                    {
+                        if(enroll.IdBook != null)
+                        {
+                            book = bookISBN.Books.FirstOrDefault(i => i.Id == enroll.IdBook);
+                            flagEnroll = enroll;
+                            break;
+                        }
+                    }
+                }
+                if(flagEnroll == null)
+                    book = bookISBN.Books.FirstOrDefault(i => i.ISBN == bookISBN.ISBN && i.Status == true && !enrolls.Any(e => e.IdBook == i.Id));
+                else
+                {
+                    var item = DatabaseFirst.Instance.db.Entry(flagEnroll);
+                    item.State = System.Data.Entity.EntityState.Modified;
+                }
 
-                //var enrolls = _EnrollVM.enrolRepo.Items.Where(i => i.IdBook != null && i.ISBN == bookISBN.ISBN);
-                
-                //Book book = null;
-                //foreach (var item in bookISBN.Books.Where(i => i.ISBN == bookISBN.ISBN && i.Status == true))
-                //{
-                //    bool flag = false;
-                //    foreach(var enroll in enrolls)
-                //    {
-                //        if(item.Id == enroll.IdBook)
-                //        {
-                //            flag = true;
-                //            break;
-                //        }
-                //    }
-                //    if(!flag)
-                //    {
-                //        book = item;
-                //        break;
-                //    }
-                //}
-
-                if(book == null)
+                if (book == null)
                 {
                     MessageBox.Show("Book not found!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return 0;
@@ -260,6 +263,9 @@ namespace HungVuong_C5_Assignment
                 LoanSlip.LoanPaid += book.DonGiaHienTai;
                 LoanSlip.LoanDetails.Add(newLoanDetail);
                 _LoanDetailVM.loanDetailRepo.Add(newLoanDetail);
+
+                if(flagEnroll != null)
+                    return 3;
             }
             return 2;
         }

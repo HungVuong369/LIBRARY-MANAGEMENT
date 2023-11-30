@@ -98,22 +98,33 @@ namespace HungVuong_C5_Assignment
         {
             if(_Parent.DialogResult == null || _Parent.DialogResult == false)
             {
-                ResetDatabase();
                 foreach (var enroll in DatabaseFirst.Instance.db.Enrolls.Local.ToList())
                 {
                     var item = DatabaseFirst.Instance.db.Entry(enroll);
 
                     if (item.State == EntityState.Added)
-                    {
                         item.State = EntityState.Detached;
-                    }
                 }
+                foreach(var enroll in DatabaseFirst.Instance.db.Enrolls.ToList())
+                {
+                    var item = DatabaseFirst.Instance.db.Entry(enroll);
+                    if (item.State == EntityState.Modified)
+                        item.State = EntityState.Unchanged;
+                }
+                ResetDatabase();
 
                 DatabaseFirst.Instance.SaveChanged();
             }
 
             else if(_Parent.DialogResult == true)
             {
+                foreach (var enroll in DatabaseFirst.Instance.db.Enrolls.ToList())
+                {
+                    var item = DatabaseFirst.Instance.db.Entry(enroll);
+                    if (item.State == EntityState.Modified)
+                        item.State = EntityState.Deleted;
+                }
+
                 if (IsFullEnroll())
                 {
                     ResetDatabase();
@@ -154,6 +165,8 @@ namespace HungVuong_C5_Assignment
 
             if (isCheck == 1)
                 status = "Enroll";
+            else if(isCheck == 3)
+                status = "Loan book have been enrolled";
 
             var newBorrowingDto = new BorrowingSlipDto()
             {
@@ -183,6 +196,8 @@ namespace HungVuong_C5_Assignment
             foreach(BorrowingSlipDto item in ucBorrowing.dgBorrowingDetail.Items)
             {
                 if (item.Status == "Loan")
+                    return false;
+                else if (item.Status == "Loan book have been enrolled")
                     return false;
             }
             return true;
