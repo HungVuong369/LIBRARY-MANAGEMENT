@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,26 @@ namespace HungVuong_C5_Assignment
         public Pagination()
         {
             InitializeComponent();
+        }
+
+        public void ReloadShowing<T>(List<T> list)
+        {
+            if (MaxPage == 0)
+                lblShowing.Content = $"Showing 0 to 0 entities";
+            else if (MaxPage == CurrentPage && list.Count % ItemPerPage != 0)
+                lblShowing.Content = $"Showing {(CurrentPage - 1) * ItemPerPage + 1} to {(CurrentPage - 1) * ItemPerPage + list.Count % ItemPerPage} entities";
+            else
+                lblShowing.Content = $"Showing {(CurrentPage - 1) * ItemPerPage + 1} to {(CurrentPage) * ItemPerPage} entities";
+        }
+
+        public void SetMaxPage<T>(List<T> list)
+        {
+            MaxPage = (list.Count / ItemPerPage);
+
+            if (list.Count % ItemPerPage != 0)
+            {
+                MaxPage += 1;
+            }
         }
 
         private void PreviousPage_Click(object sender, RoutedEventArgs e)
@@ -238,6 +259,11 @@ namespace HungVuong_C5_Assignment
         private void cbPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectionChangedComboBoxEvent?.Invoke(sender, e);
+        }
+
+        public void HideButton()
+        {
+            grdContainer.Visibility = Visibility.Collapsed;
         }
     }
 }

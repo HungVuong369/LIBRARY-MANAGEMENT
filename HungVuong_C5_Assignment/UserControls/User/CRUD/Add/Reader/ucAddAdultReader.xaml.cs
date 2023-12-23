@@ -62,7 +62,7 @@ namespace HungVuong_C5_Assignment
         {
             InitializeComponent();
             txtExpDate.Text = DateTime.Now.AddMonths(int.Parse(parameterVM.GetValueByID("QD8"))).ToString();
-            cbProvince.ItemsSource = DataAccess.GetListProvince();
+            cbProvince.ItemsSource = DatabaseFirst.Instance.db.Provinces.Where(i => i.Status).ToList();
             DataContext = this;
         }
 
@@ -161,7 +161,7 @@ namespace HungVuong_C5_Assignment
 
         private void txtPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (e.Text != null && !char.IsDigit(e.Text[0]))
+            if (e.Text != null && e.Text != string.Empty && !char.IsDigit(e.Text[0]))
             {
                 e.Handled = true;
             }

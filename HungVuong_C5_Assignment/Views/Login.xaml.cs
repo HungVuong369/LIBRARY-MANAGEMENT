@@ -19,12 +19,13 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class Login : Window
     {
+        private string password = "";
+
         private UserViewModel userVM = new UserViewModel();
         private UserRoleViewModel userRoleVM = new UserRoleViewModel();
         private RoleViewModel roleVM = new RoleViewModel();
         private UserInfoViewModel userInfoVM = new UserInfoViewModel();
 
-        private string password = "";
         public Login()
         {
             InitializeComponent();
@@ -32,9 +33,9 @@ namespace HungVuong_C5_Assignment
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            User user = userVM.userRepo.GetByUsernameAndPassword(txtUsername.Text, password);
+            DatabaseFirst.Instance.UserLoggedIn = userVM.userRepo.GetByUsernameAndPassword(txtUsername.Text, password);
 
-            if (user == null)
+            if (DatabaseFirst.Instance.UserLoggedIn == null)
             {
                 MessageBox.Show("Login failed!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 txtUsername.Text = txtPassword.Text = string.Empty;
@@ -42,7 +43,7 @@ namespace HungVuong_C5_Assignment
             }
             else
             {
-                UserRole userRole = userRoleVM.userRoleRepo.GetByIdUser(user.Id);
+                UserRole userRole = userRoleVM.userRoleRepo.GetByIdUser(DatabaseFirst.Instance.UserLoggedIn.Id);
 
                 if(userRole == null)
                 {
@@ -56,7 +57,7 @@ namespace HungVuong_C5_Assignment
 
                 if(role.Group == "librarian")
                 {
-                    UserMenu mainMenu = new UserMenu(role, userInfoVM.UserInfoRepo.Items.FirstOrDefault(i => i.IdUser == user.Id));
+                    UserMenu mainMenu = new UserMenu(role, userInfoVM.UserInfoRepo.Items.FirstOrDefault(i => i.IdUser == DatabaseFirst.Instance.UserLoggedIn.Id));
                     if (mainMenu.tvManagement.Items.Count == 0)
                     {
                         mainMenu.Close();
@@ -70,7 +71,7 @@ namespace HungVuong_C5_Assignment
                 }
                 else if(role.Group == "administration")
                 {
-                    AdminMenu adminMenu = new AdminMenu(role, userInfoVM.UserInfoRepo.Items.FirstOrDefault(i => i.IdUser == user.Id));
+                    AdminMenu adminMenu = new AdminMenu(role, userInfoVM.UserInfoRepo.Items.FirstOrDefault(i => i.IdUser == DatabaseFirst.Instance.UserLoggedIn.Id));
                     adminMenu.Show();
                     this.Close();
                 }
@@ -128,6 +129,15 @@ namespace HungVuong_C5_Assignment
             ConnectionWindow connectWindow = new ConnectionWindow(true);
             connectWindow.Show();
             this.Close();
+        }
+
+        private void txtPassword_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            // Ngăn chặn sự kiện paste
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && e.Key == Key.V)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

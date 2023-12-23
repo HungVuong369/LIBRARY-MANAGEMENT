@@ -42,38 +42,20 @@ namespace HungVuong_C5_Assignment
 
         private void FeatureAssignment_Loaded(object sender, RoutedEventArgs e)
         {
-            Grid grdMain = FindParent<Grid>(this);
+            Grid grdMain = Utilities.FindParent<Grid>(this);
 
-            Grid grd1 = FindParent<Grid>(grdMain);
+            Grid grd1 = Utilities.FindParent<Grid>(grdMain);
             _LstBox = grd1.Children[0] as ListBox;
-            Grid grd2 = FindParent<Grid>(grd1);
-            Grid grd3 = FindParent<Grid>(grd2);
-            Grid grd4 = FindParent<Grid>(grd3);
-            Grid grd5 = FindParent<Grid>(grd4);
+            Grid grd2 = Utilities.FindParent<Grid>(grd1);
+            Grid grd3 = Utilities.FindParent<Grid>(grd2);
+            Grid grd4 = Utilities.FindParent<Grid>(grd3);
+            Grid grd5 = Utilities.FindParent<Grid>(grd4);
 
 
             Grid menuGrid = grd5.Children[0] as Grid;
             TreeView treeView = menuGrid.Children[1] as TreeView;
             TreeViewItem treeViewItem = treeView.Items[0] as TreeViewItem;
             _TreeViewItem = treeViewItem;
-        }
-
-        private static T FindParent<T>(DependencyObject child) where T : DependencyObject
-        {
-            DependencyObject parentObject = VisualTreeHelper.GetParent(child);
-
-            if (parentObject == null)
-                return null;
-
-            T parent = parentObject as T;
-            if (parent != null)
-            {
-                return parent;
-            }
-            else
-            {
-                return FindParent<T>(parentObject);
-            }
         }
 
         public void Load()

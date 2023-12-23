@@ -60,7 +60,7 @@
 
             <TextBlock Grid.Row="4"
                        Grid.Column="0"
-                       Text="Return Date:"
+                       Text="Expire Date:"
                        FontSize="14"
                        FontWeight="SemiBold"/>
 
@@ -123,10 +123,10 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ISBN" Binding="{Binding Book.ISBN}"/>
                 <DataGridTextColumn Header="Name Book" Binding="{Binding Book.BookISBN.BookTitle.Name}"/>
-                <DataGridTextColumn Header="Author Name" Binding="{Binding Book.BookISBN.BookTitle.Author.Name}"/>
+                <DataGridTextColumn Header="Author Name" Binding="{Binding Book.BookISBN.Author.Name}"/>
                 <DataGridTextColumn Header="Translator Name" Binding="{Binding Book.BookISBN.Author.Name}"/>
-                <DataGridTextColumn Header="Language" Binding="{Binding Book.BookISBN.Language}"/>
-                <DataGridTextColumn Header="Book Price" Binding="{Binding Book.DonGiaHienTai}"/>
+                <DataGridTextColumn Header="Language" Binding="{Binding Book.BookISBN.OriginLanguage}"/>
+                <DataGridTextColumn Header="Book Price" Binding="{Binding Book.PriceCurrent}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

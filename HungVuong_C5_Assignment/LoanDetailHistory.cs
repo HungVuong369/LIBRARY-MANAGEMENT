@@ -18,8 +18,8 @@ namespace HungVuong_C5_Assignment
         public string IdLoanHistory { get; set; }
         public int IdBook { get; set; }
         public System.DateTime ExpDate { get; set; }
-        public string Note { get; set; }
         public decimal PaidMoney { get; set; }
+        public string Note { get; set; }
     
         public virtual Book Book { get; set; }
         public virtual LoanHistory LoanHistory { get; set; }

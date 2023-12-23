@@ -19,8 +19,10 @@
                             <StackPanel Orientation="Vertical"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        MouseLeftButtonUp="StackPanel_MouseLeftButtonUp">
+                                        Name="spHeader"
+                                        Background="Transparent">
                                 <StackPanel Orientation="Horizontal"
+                                            Name="spAdmin"
                                             HorizontalAlignment="Right">
                                     <Image Source="/Images/User.png" Width="50" Height="30" Margin="10"
                                        HorizontalAlignment="Right"
@@ -30,13 +32,14 @@
                                            FontWeight="SemiBold"
                                                Loaded="TextBlock_Loaded"/>
                                 </StackPanel>
-                                <Grid Background="LightGray" Visibility="Collapsed">
+                                <Grid Name="userInfoGrid" Background="LightGray" Visibility="Collapsed">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <local:ucUserInfoShow x:Name="ucUserInfo"/>
+                                    <local:ucUserInfoShow x:Name="ucUserInfo"
+                                                          Loaded="ucUserInfo_Loaded"/>
 
                                     <Button Grid.Row="1"
                                             Content="Logout"
@@ -52,6 +55,26 @@
                                 </Grid>
                             </StackPanel>
                         </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="spHeader" Property="IsMouseOver" Value="True">
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+
+                            <Trigger SourceName="spHeader" Property="IsMouseOver" Value="False">
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition SourceName="spAdmin" Property="IsMouseOver" Value="False"/>
+                                    <Condition SourceName="spHeader" Property="IsMouseOver" Value="False"/>
+                                    <Condition SourceName="userInfoGrid" Property="IsMouseOver" Value="False"/>
+                                </MultiTrigger.Conditions>
+
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Collapsed"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

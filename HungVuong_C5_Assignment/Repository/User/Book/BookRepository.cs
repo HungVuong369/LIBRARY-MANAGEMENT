@@ -20,7 +20,7 @@ namespace HungVuong_C5_Assignment
         {
             Items.Clear();
 
-            Items.AddRange(DatabaseFirst.Instance.db.Books);
+            Items.AddRange(DatabaseFirst.Instance.db.Books.Include("Translator"));
 
             return Items;
         }
@@ -48,7 +48,7 @@ namespace HungVuong_C5_Assignment
         {
             string id = string.Empty;
 
-            var number = DatabaseFirst.Instance.db.Books.Select(book => book.Id).Max() + 1;
+            var number = DatabaseFirst.Instance.db.Books.Local.Select(book => book.Id).Max() + 1;
 
             if (number <= 9)
                 id += "0" + number;
@@ -59,23 +59,32 @@ namespace HungVuong_C5_Assignment
         }
 
 
-        public void Add(string isbn, decimal bookPrice)
+        public void Add(string isbn, string publisherID, string translatorID, string language, DateTime publishDate, decimal price, int quantity)
         {
-            int newID = GetNewID();
-
-            var newBook = new Book()
+            for(int index = 0; index < quantity; index++)
             {
-                Id = newID,
-                ISBN = isbn,
-                CreatedAt = DateTime.Now,
-                ModifiedAt = DateTime.Now,
-                Status = true,
-                DonGia = bookPrice,
-                DonGiaHienTai = bookPrice
-            };
-            Items.Add(newBook);
+                int newID = GetNewID();
 
-            DatabaseFirst.Instance.db.Books.Add(newBook);
+                var newBook = new Book()
+                {
+                    Id = newID,
+                    ISBN = isbn,
+                    PublishDate = publishDate,
+                    IdPublisher = publisherID,
+                    IdTranslator = translatorID,
+                    Language = language,
+                    Price = price,
+                    PriceCurrent = price,
+                    IdBookStatus = "BS1",
+
+                    CreatedAt = DateTime.Now,
+                    ModifiedAt = DateTime.Now,
+                    Status = true,
+                };
+                Items.Add(newBook);
+
+                DatabaseFirst.Instance.db.Books.Add(newBook);
+            }
         }
 
         public Book GetById(string id) => Items.Find(e => e.Id.CompareTo(id) == 0);

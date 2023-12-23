@@ -5,81 +5,204 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0 5 0 5"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Margin="10"
-              Width="300">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+        <TextBlock Text="Book ISBN Detail"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
 
-            <Label Content="Book ISBN Detail"
-                   FontSize="18"
-                   Grid.Row="0"
-                   Margin="5 5 5 0"
-                   FontWeight="SemiBold"
-                   HorizontalAlignment="Center"></Label>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="1"
-                            Margin="5 0 5 5">
-                <TextBlock Text="{Binding BookTitle.Name, StringFormat='Book title name: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Category.Name, StringFormat='Category: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding BookTitle.Summary, StringFormat='Book title summary: {0}'}"  Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                
-                <TextBlock Text="{Binding BookISBN.Publisher.Name, StringFormat='Publisher Name: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding BookISBN.BookPrice, StringFormat='Book Price: {0} VND'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
+                <GroupBox Header="Book ISBN" BorderBrush="Black"
+                          FontSize="15"
+                          FontWeight="SemiBold"
+                          Margin="5 0 5 0">
+                    <StackPanel Orientation="Vertical"
+                                Margin="5">
+                        <TextBlock Text="ISBN:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
 
-                <TextBlock Text="{Binding QuantityBook, StringFormat='Quantity Book: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-            </StackPanel>
-        </Grid>
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 Name="txtISBN"
+                                 FontWeight="Bold"/>
+                        
+                        <TextBlock Text="Language:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
 
-        <Grid Grid.Column="1" Margin="10"
-              Width="300">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtLanguage"/>
+                        
+                        <TextBlock Text="Status:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
 
-            <Label Content="Translator"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                       Margin="5 5 5 0"
-                               HorizontalAlignment="Center"></Label>
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtISBNStatus"/>
+                    </StackPanel>
+                </GroupBox>
 
-            <StackPanel Grid.Row="1"
-                            Margin="5 0 5 5">
-                <TextBlock Text="{Binding Translator.Name, StringFormat='Name: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Translator.boF, StringFormat='Date Of Birth: {0:dd/MM/yyyy}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Translator.Description, StringFormat='Description: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-                <TextBlock Text="{Binding Translator.Summary, StringFormat='Summary: {0}'}" Margin="5"
-                                       FontSize="14" FontWeight="SemiBold"
-                                       TextWrapping="Wrap"/>
-            </StackPanel>
+                <GroupBox Header="Book Title" Grid.Row="1"
+                          FontSize="15"
+                          FontWeight="SemiBold"
+                          Margin="5 0 5 5"
+                          BorderBrush="Black">
+                    <ScrollViewer>
+                        <StackPanel Orientation="Vertical"
+                                Margin="5">
+                            <TextBlock Text="Id:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                            <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtBookTitleID"/>
+
+                            <TextBlock Text="Name:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                            <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtBookTitleName"/>
+
+                            <TextBlock Text="Category:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                            <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtCategory"/>
+
+                            <TextBlock Text="Summary:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                            <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 Name="txtSummary"
+                                 TextWrapping="Wrap"
+                                 FontWeight="Bold"
+                                 Height="auto"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+
+            <GroupBox Grid.Column="1"
+                      Header="Author"
+                      FontSize="15"
+                      FontWeight="SemiBold"
+                      BorderBrush="Black"
+                      Margin="5 0 5 5">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical"
+                                Margin="5">
+                        <TextBlock Text="Id:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtAuthorID"/>
+
+                        <TextBlock Text="Name:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtAuthorName"/>
+
+                        <TextBlock Text="Date Of Birth:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 FontWeight="Bold"
+                                 Name="txtAuthorBoF"/>
+
+                        <TextBlock Text="Description:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 Name="txtDescription"
+                                 TextWrapping="Wrap"
+                                 FontWeight="Bold"
+                                 Height="auto"/>
+
+                        <TextBlock Text="Summary:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 Name="txtAuthorSummary"
+                                 TextWrapping="Wrap"
+                                 FontWeight="Bold"
+                                 Height="auto"/>
+
+                        <TextBlock Text="Status:"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBox Background="LightGray"
+                                 IsEnabled="False"
+                                 Foreground="Black"
+                                 Name="txtAuthorStatus"
+                                 TextWrapping="Wrap"
+                                 FontWeight="Bold"
+                                 Height="auto"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
         </Grid>
     </Grid>
 </UserControl>

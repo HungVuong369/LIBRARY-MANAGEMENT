@@ -41,13 +41,12 @@ namespace HungVuong_C5_Assignment
             return id;
         }
 
-        public void Add(string categoryID, string name, string authorID, string summary)
+        public void Add(string categoryID, string name, string summary)
         {
             string newID = GetNewID();
 
             var newBookTitle = new BookTitle()
             {
-                IdAuthor = authorID,
                 Id = newID,
                 IdCategory = categoryID,
                 Name = name,

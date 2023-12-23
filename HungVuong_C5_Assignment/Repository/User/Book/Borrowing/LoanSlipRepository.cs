@@ -43,6 +43,13 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.LoanSlips.Add(newLoanSlip);
         }
 
+        public void Remove(LoanSlip loanSlip)
+        {
+            Items.Remove(loanSlip);
+
+            DatabaseFirst.Instance.db.LoanSlips.Remove(loanSlip);
+        }
+
         public LoanSlip GetByID(string id) => Items.Find(e => e.Id.CompareTo(id) == 0);
     }
 

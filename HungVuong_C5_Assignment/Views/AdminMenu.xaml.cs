@@ -36,7 +36,7 @@ namespace HungVuong_C5_Assignment
             UserInfo = userInfo;
 
             this._Role = role;
-            //LoadMenu();
+            LoadMenu();
         }
 
         private TreeViewItem CreateTreeViewItem(string header, string urlImage)
@@ -116,6 +116,21 @@ namespace HungVuong_C5_Assignment
                     case "F12":
                         grdMain.Children.Add(new RoleManagement());
                         break;
+                    case "F45":
+                        grdMain.Children.Add(new CategoryManagement());
+                        break;
+                    case "F50":
+                        grdMain.Children.Add(new ucPublisherManagement());
+                        break;
+                    case "F54":
+                        grdMain.Children.Add(new ucAuthorManagement());
+                        break;
+                    case "F59":
+                        grdMain.Children.Add(new ucTranslatorManagement());
+                        break;
+                    case "F64":
+                        grdMain.Children.Add(new ucProvinceManagement());
+                        break;
                     default:
                         isOpenFeature = false;
                         break;
@@ -170,14 +185,6 @@ namespace HungVuong_C5_Assignment
             storyboard.Begin();
         }
 
-        private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (grdContainer.Visibility == Visibility.Visible)
-                grdContainer.Visibility = Visibility.Collapsed;
-            else
-                grdContainer.Visibility = Visibility.Visible;
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -185,76 +192,60 @@ namespace HungVuong_C5_Assignment
             this.Close();
         }
 
-        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-            TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
-            TreeViewItem treeViewParent = selectedItem.Parent as TreeViewItem;
+        //private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        //{
+        //    TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
+        //    TreeViewItem treeViewParent = selectedItem.Parent as TreeViewItem;
 
-            Animation();
+        //    Animation();
 
-            if (selectedItem.IsHitTestVisible == false)
-            {
-                return;
-            }
+        //    if (selectedItem.IsHitTestVisible == false)
+        //    {
+        //        return;
+        //    }
 
 
-            if (isOpenFeature == true)
-            {
-                if (grdMain.Children[1] is FeatureManagement)
-                    _FunctionVM.functionRepo.Load(true);
-                grdMain.Children.RemoveAt(1);
-            }
-            else
-                isOpenFeature = true;
+        //    if (isOpenFeature == true)
+        //    {
+        //        if (grdMain.Children[1] is FeatureManagement)
+        //            _FunctionVM.functionRepo.Load(true);
+        //        grdMain.Children.RemoveAt(1);
+        //    }
+        //    else
+        //        isOpenFeature = true;
 
-            if (treeViewParent != null)
-            {
-                switch (selectedItem.Header.ToString())
-                {
-                    case "User":
-                        grdMain.Children.Add(new UserManagement());
-                        isOpenFeature = true;
-                        return;
-                    case "Feature":
-                        grdMain.Children.Add(new FeatureManagement());
-                        isOpenFeature = true;
-                        return;
-                    case "Role":
-                        grdMain.Children.Add(new RoleManagement());
-                        isOpenFeature = true;
-                        return;
-                }
-            }
-            else
-                isOpenFeature = false;
-        }
-
-        private void StackPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            foreach(var item in sp.Children)
-            {
-                if(item is Grid)
-                {
-                    if ((item as Grid).Visibility == Visibility.Collapsed)
-                        (item as Grid).Visibility = Visibility.Visible;
-                    else
-                        (item as Grid).Visibility = Visibility.Collapsed;
-                    if ((item as Grid).Children[0] is ucUserInfoShow)
-                    {
-                        var userInfoShow = (item as Grid).Children[0] as ucUserInfoShow;
-
-                        userInfoShow.DataContext = UserInfo;
-                        userInfoShow.lblHeader.Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
-        }
+        //    if (treeViewParent != null)
+        //    {
+        //        switch (selectedItem.Header.ToString())
+        //        {
+        //            case "User":
+        //                grdMain.Children.Add(new UserManagement());
+        //                isOpenFeature = true;
+        //                return;
+        //            case "Feature":
+        //                grdMain.Children.Add(new FeatureManagement());
+        //                isOpenFeature = true;
+        //                return;
+        //            case "Role":
+        //                grdMain.Children.Add(new RoleManagement());
+        //                isOpenFeature = true;
+        //                return;
+        //        }
+        //    }
+        //    else
+        //        isOpenFeature = false;
+        //}
 
         private void TextBlock_Loaded(object sender, RoutedEventArgs e)
         {
             TextBlock textBlock = sender as TextBlock;
             textBlock.Text = UserInfo.FName;
+        }
+
+        private void ucUserInfo_Loaded(object sender, RoutedEventArgs e)
+        {
+            ucUserInfoShow userInfo = sender as ucUserInfoShow;
+            userInfo.DataContext = UserInfo;
         }
     }
 }

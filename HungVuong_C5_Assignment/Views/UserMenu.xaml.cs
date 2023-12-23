@@ -97,7 +97,7 @@ namespace HungVuong_C5_Assignment
             }
         }
 
-        private void OpenFeature(string IdFunction)
+        public void OpenFeature(string IdFunction)
         {
             TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
             TreeViewItem treeViewParent = selectedItem.Parent as TreeViewItem;
@@ -109,6 +109,9 @@ namespace HungVuong_C5_Assignment
                     _ChildVM.childRepo.Load(true);
                     _AdultVM.adultRepo.Load(true);
                     _ReaderVM.readerRepo.Load(true);
+                }
+                if(grdMain.Children[1] is ucLoanSlipManagement)
+                {
                 }
                 grdMain.Children.RemoveAt(1);
             }
@@ -135,40 +138,23 @@ namespace HungVuong_C5_Assignment
                         ucReaderInformation ucReader = new ucReaderInformation();
                         grdMain.Children.Add(ucReader);
                         break;
-                    //case "F17":
-                    //    grdMain.Children.Add(new ucAddAdultReader());
-                    //    break;
-                    //case "F18":
-                    //    grdMain.Children.Add(new ucAddChildReader());
-                    //    break;
-                    case "F24":
-                        ucDeleteReader ucDeleteReader = new ucDeleteReader();
-                        grdMain.Children.Add(ucDeleteReader);
-                        break;
-                    case "F25":
-                        grdMain.Children.Add(new ucRestoreReader());
-                        break;
-                    case "F42":
-                        grdMain.Children.Add(new ucSearchByIdentify());
-                        break;
-                    case "F28":
-                        grdMain.Children.Add(new ucTransitioningChild());
-                        break;
-
-                    case "F30":
-                        grdMain.Children.Add(new ucBookTitleInformation());
-                        break;
-                    case "F33":
-                        grdMain.Children.Add(new ucBookISBNInformation());
-                        break;
-                    case "F31":
-                        break;
-                    case "F34":
-                        break;
-                    case "F38":
-                        break;
                     case "F41":
-                        grdMain.Children.Add(new ucSearchBook());
+                        ShowBooksViewModel.Instance.ReloadStorage();
+                        ShowBooksViewModel.Instance.LstLoaningBook.Clear();
+                        ShowBooksViewModel.Instance.UpdateViewBooks("None", "None", "");
+                        LoanDetailDataGridViewModel.Instance.UpdateLoanDetailsByReaderID(string.Empty);
+                        grdMain.Children.Add(new ucLoanSlipManagement());
+                        break;
+                    case "F43":
+                        foreach(TreeViewItem item in tvManagement.Items)
+                        {
+                            if(item.Header.ToString() == DatabaseFirst.Instance.db.Functions.FirstOrDefault(i => i.Id == "F43").Name)
+                            {
+                                item.IsSelected = true;
+                                break;
+                            }
+                        }
+                        grdMain.Children.Add(new LoanHistoryManagement());
                         break;
                     default:
                         isOpenFeature = false;
@@ -179,7 +165,7 @@ namespace HungVuong_C5_Assignment
                 isOpenFeature = false;
         }
 
-        private void Animation()
+        public void Animation()
         {
             if(!flag)
             {
@@ -225,14 +211,6 @@ namespace HungVuong_C5_Assignment
             storyboard.Begin();
         }
 
-        private void Path_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (grdContainer.Visibility == Visibility.Visible)
-                grdContainer.Visibility = Visibility.Collapsed;
-            else
-                grdContainer.Visibility = Visibility.Visible;
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
@@ -240,32 +218,16 @@ namespace HungVuong_C5_Assignment
             this.Close();
         }
 
-        private void StackPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            StackPanel sp = sender as StackPanel;
-            foreach (var item in sp.Children)
-            {
-                if (item is Grid)
-                {
-                    if ((item as Grid).Visibility == Visibility.Collapsed)
-                        (item as Grid).Visibility = Visibility.Visible;
-                    else
-                        (item as Grid).Visibility = Visibility.Collapsed;
-                    if ((item as Grid).Children[0] is ucUserInfoShow)
-                    {
-                        var userInfoShow = (item as Grid).Children[0] as ucUserInfoShow;
-
-                        userInfoShow.DataContext = UserInfo;
-                        userInfoShow.lblHeader.Visibility = Visibility.Collapsed;
-                    }
-                }
-            }
-        }
-
         private void TextBlock_Loaded(object sender, RoutedEventArgs e)
         {
             TextBlock textBlock = sender as TextBlock;
             textBlock.Text = UserInfo.FName;
+        }
+
+        private void ucUserInfo_Loaded(object sender, RoutedEventArgs e)
+        {
+            ucUserInfoShow userInfo = sender as ucUserInfoShow;
+            userInfo.DataContext = UserInfo;
         }
     }
 }

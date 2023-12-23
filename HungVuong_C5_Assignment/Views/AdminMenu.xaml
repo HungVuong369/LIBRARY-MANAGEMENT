@@ -14,12 +14,14 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Control">
-                        <Grid>
-                            <StackPanel Orientation="Vertical"
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Name="spHeader"
+                                        Orientation="Vertical"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
-                                        MouseLeftButtonUp="StackPanel_MouseLeftButtonUp">
-                                <StackPanel Orientation="Horizontal"
+                                        Background="Transparent">
+                                <StackPanel Name="spAdmin"
+                                            Orientation="Horizontal"
                                             HorizontalAlignment="Right">
                                     <Image Source="/Images/User.png" Width="50" Height="30" Margin="10"
                                        HorizontalAlignment="Right"
@@ -29,13 +31,15 @@
                                            FontWeight="SemiBold"
                                                Loaded="TextBlock_Loaded"/>
                                 </StackPanel>
-                                <Grid Background="LightGray" Visibility="Collapsed">
+
+                                <Grid Name="userInfoGrid" Background="LightGray" Visibility="Visible">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
 
-                                    <local:ucUserInfoShow x:Name="ucUserInfo"/>
+                                    <local:ucUserInfoShow x:Name="ucUserInfo"
+                                                          Loaded="ucUserInfo_Loaded"/>
 
                                     <Button Grid.Row="1"
                                             Content="Logout"
@@ -50,12 +54,33 @@
                                             Foreground="#0C1C2F"/>
                                 </Grid>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger SourceName="spHeader" Property="IsMouseOver" Value="True">
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+
+                            <Trigger SourceName="spHeader" Property="IsMouseOver" Value="False">
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition SourceName="spAdmin" Property="IsMouseOver" Value="False"/>
+                                    <Condition SourceName="spHeader" Property="IsMouseOver" Value="False"/>
+                                    <Condition SourceName="userInfoGrid" Property="IsMouseOver" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                
+                                <Setter TargetName="userInfoGrid" Property="Visibility" Value="Collapsed"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
@@ -76,17 +101,16 @@
 
             <TreeView Name="TreeView"
                       Grid.Row="1"
-                      BorderThickness="0"
-                      SelectedItemChanged="TreeView_SelectedItemChanged">
+                      BorderThickness="0">
                 <TreeViewItem Header="Management"
                               Tag="/Images/5.png" IsExpanded="True"
                               Background="#0C1C2F"
                               Name="tvManagement">
-                    <TreeViewItem Header="User" Tag="/Images/13.png"
+                    <!--<TreeViewItem Header="User" Tag="/Images/13.png"
                                   Padding="0 5 0 5"
                                   Background="#0C1C2F"
                                   Foreground="#7D84AB">
-                        <!--<TreeViewItem Header="View"
+                        --><!--<TreeViewItem Header="View"
                                       Background="#0C1C2F"
                                       Tag="/Images/6.png"
                                       Padding="0 5 0 5"/>
@@ -101,13 +125,13 @@
                         <TreeViewItem Header="Delete"
                                       Background="#0C1C2F"
                                       Tag="/Images/8.png"
-                                      Padding="0 5 0 5"/>-->
-                    </TreeViewItem>
+                                      Padding="0 5 0 5"/>--><!--
+                    </TreeViewItem>-->
 
-                    <TreeViewItem Header="Feature" Tag="/Images/18.png"
+                    <!--<TreeViewItem Header="Feature" Tag="/Images/18.png"
                                   Background="#0C1C2F"
                                   Padding="0 5 0 5">
-                        <!--<TreeViewItem Header="View"
+                        --><!--<TreeViewItem Header="View"
                                       Tag="/Images/6.png"
                                       Background="#0C1C2F"
                                       Padding="0 5 0 5"/>
@@ -127,13 +151,13 @@
                         <TreeViewItem Header="Restore"
                                       Tag="/Images/9.png"
                                       Padding="0 5 0 5"
-                                      Background="#0C1C2F"/>-->
-                    </TreeViewItem>
+                                      Background="#0C1C2F"/>--><!--
+                    </TreeViewItem>-->
 
-                    <TreeViewItem Header="Role" Tag="/Images/19.png"
+                    <!--<TreeViewItem Header="Role" Tag="/Images/19.png"
                                   Background="#0C1C2F"
                                   Padding="0 5 0 5">
-                        <!--<TreeViewItem Header="Add"
+                        --><!--<TreeViewItem Header="Add"
                                       Tag="/Images/7.png"
                                       Background="#0C1C2F"
                                       Padding="0 5 0 5"/>
@@ -148,8 +172,8 @@
                         <TreeViewItem Header="Modify User Role"
                                       Tag="/Images/17.png"
                                       Padding="0 5 0 5"
-                                      Background="#0C1C2F"/>-->
-                    </TreeViewItem>
+                                      Background="#0C1C2F"/>--><!--
+                    </TreeViewItem>-->
                 </TreeViewItem>
             </TreeView>
         </Grid>

@@ -17,7 +17,6 @@ namespace HungVuong_C5_Assignment
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Reader()
         {
-            this.Enrolls = new HashSet<Enroll>();
             this.LoanHistories = new HashSet<LoanHistory>();
             this.LoanSlips = new HashSet<LoanSlip>();
         }
@@ -33,8 +32,6 @@ namespace HungVuong_C5_Assignment
     
         public virtual Adult Adult { get; set; }
         public virtual Child Child { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Enroll> Enrolls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanHistory> LoanHistories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

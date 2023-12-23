@@ -22,7 +22,34 @@ namespace HungVuong_C5_Assignment
             return Items;
         }
 
-        public string GetNewID()
+        public void Add(Publisher newPublisher)
+        {
+            Items.Add(newPublisher);
+
+            DatabaseFirst.Instance.db.Publishers.Add(newPublisher);
+        }
+
+        public void Remove(Publisher publisher)
+        {
+            Items.Remove(publisher);
+
+            DatabaseFirst.Instance.db.Publishers.Remove(publisher);
+        }
+
+        public void Update(Publisher publisher, Publisher newPublisher)
+        {
+            publisher.Name = newPublisher.Name;
+            publisher.Phone = newPublisher.Phone;
+            publisher.Address = newPublisher.Address;
+
+            var item = DatabaseFirst.Instance.db.Publishers.FirstOrDefault(i => i.Id == publisher.Id);
+
+            item.Name = newPublisher.Name;
+            item.Phone = newPublisher.Phone;
+            item.Address = newPublisher.Address;
+        }
+
+        public static string GetNewID()
         {
             string id = "P";
 

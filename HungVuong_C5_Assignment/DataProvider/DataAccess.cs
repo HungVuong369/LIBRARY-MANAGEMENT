@@ -83,7 +83,16 @@ namespace HungVuong_C5_Assignment
 
                 foreach (var item in db.BookISBNs.Include("Author"))
                 {
-                    bookISBNsInformation.Add(new BookISBNInformation(item.ISBN, item.PublishDate, item.Language, item.Author.Name, item.Author.boF, decimal.Parse(item.BookPrice.ToString()), bookVM.GetQuantityBookByISBN(item.ISBN, true) != 0));
+                    var newBookISBNInformation = new BookISBNInformation()
+                    {
+                        ISBN = item.ISBN,
+                        AuthorBoF = item.Author.boF,
+                        AuthorID = item.Author.Id,
+                        AuthorName = item.Author.Name,
+                        Language = item.OriginLanguage,
+                        Status = item.Status
+                    };
+                    bookISBNsInformation.Add(newBookISBNInformation);
                 }
             }
 
@@ -102,7 +111,7 @@ namespace HungVuong_C5_Assignment
 
                 foreach (var item in db.BookISBNs.Include("Author"))
                 {
-                    BookISBNStatus bookISBNStatus = new BookISBNStatus(item.ISBN, item.PublishDate, item.Language, item.Author.Name, item.Author.boF);
+                    BookISBNStatus bookISBNStatus = new BookISBNStatus(item.ISBN, item.OriginLanguage, item.Author.Name, item.Author.boF);
 
                     if (bookVM.GetQuantityBookByISBN(item.ISBN, true) == 0)
                         bookISBNStatus.Status = "No";
@@ -190,7 +199,6 @@ namespace HungVuong_C5_Assignment
         {
             List<Language> languages = new List<Language>();
             CultureInfo[] cultureInfos = CultureInfo.GetCultures(CultureTypes.AllCultures);
-
             Language vietnamese1 = null;
             Language vietnamese2 = null;
 
@@ -198,7 +206,7 @@ namespace HungVuong_C5_Assignment
             {
                 try
                 {
-                    if(cultureInfo.DisplayName == "Vietnamese")
+                    if (cultureInfo.DisplayName == "Vietnamese")
                     {
                         vietnamese1 = new Language(cultureInfo.Name, cultureInfo.DisplayName);
                         continue;

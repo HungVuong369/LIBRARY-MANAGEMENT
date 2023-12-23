@@ -21,13 +21,13 @@ namespace HungVuong_C5_Assignment
         }
     
         public string Id { get; set; }
+        public string IdUser { get; set; }
         public string IdReader { get; set; }
         public int Quantity { get; set; }
         public System.DateTime LoanDate { get; set; }
         public System.DateTime ExpDate { get; set; }
         public decimal LoanPaid { get; set; }
         public decimal Deposit { get; set; }
-        public decimal RemainPaid { get; set; }
         public decimal FineMoney { get; set; }
         public decimal Total { get; set; }
         public string Note { get; set; }
@@ -36,5 +36,6 @@ namespace HungVuong_C5_Assignment
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanDetailHistory> LoanDetailHistories { get; set; }
         public virtual Reader Reader { get; set; }
+        public virtual User User { get; set; }
     }
 }

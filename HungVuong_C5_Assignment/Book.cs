@@ -17,22 +17,28 @@ namespace HungVuong_C5_Assignment
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Book()
         {
-            this.Enrolls = new HashSet<Enroll>();
             this.LoanDetails = new HashSet<LoanDetail>();
             this.LoanDetailHistories = new HashSet<LoanDetailHistory>();
         }
     
         public int Id { get; set; }
         public string ISBN { get; set; }
+        public string IdPublisher { get; set; }
+        public string IdTranslator { get; set; }
+        public string Language { get; set; }
+        public System.DateTime PublishDate { get; set; }
+        public decimal Price { get; set; }
+        public decimal PriceCurrent { get; set; }
+        public string Note { get; set; }
+        public string IdBookStatus { get; set; }
         public bool Status { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime ModifiedAt { get; set; }
-        public decimal DonGia { get; set; }
-        public decimal DonGiaHienTai { get; set; }
     
+        public virtual BookStatu BookStatu { get; set; }
+        public virtual Publisher Publisher { get; set; }
+        public virtual Translator Translator { get; set; }
         public virtual BookISBN BookISBN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Enroll> Enrolls { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanDetail> LoanDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

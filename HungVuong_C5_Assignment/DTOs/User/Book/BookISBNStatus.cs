@@ -32,10 +32,9 @@ namespace HungVuong_C5_Assignment
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public BookISBNStatus(string isbn, DateTime publishDate, string language, string authorName, DateTime AuthorBoF)
+        public BookISBNStatus(string isbn, string language, string authorName, DateTime AuthorBoF)
         {
             this.ISBN = isbn;
-            this.PublishDate = publishDate;
             this.Language = language;
             this.AuthorName = authorName;
             this.AuthorBoF = AuthorBoF;

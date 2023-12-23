@@ -20,7 +20,7 @@ namespace HungVuong_C5_Assignment
             : base(GetConnection())
         {
         }
-
+        
         private static string GetConnection()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -38,21 +38,23 @@ namespace HungVuong_C5_Assignment
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<BookISBN> BookISBNs { get; set; }
+        public virtual DbSet<BookStatu> BookStatus { get; set; }
         public virtual DbSet<BookTitle> BookTitles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Child> Children { get; set; }
-        public virtual DbSet<Enroll> Enrolls { get; set; }
         public virtual DbSet<Function> Functions { get; set; }
         public virtual DbSet<LoanDetail> LoanDetails { get; set; }
         public virtual DbSet<LoanDetailHistory> LoanDetailHistories { get; set; }
         public virtual DbSet<LoanHistory> LoanHistories { get; set; }
         public virtual DbSet<LoanSlip> LoanSlips { get; set; }
         public virtual DbSet<Parameter> Parameters { get; set; }
+        public virtual DbSet<PenaltyReason> PenaltyReasons { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<Reader> Readers { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<RoleFunction> RoleFunctions { get; set; }
+        public virtual DbSet<Translator> Translators { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }

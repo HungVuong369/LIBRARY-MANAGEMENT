@@ -19,15 +19,21 @@
                       IsReadOnly="True" SelectionMode="Single"
                       Grid.Row="0">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"
+                                    Visibility="Collapsed"/>
                 <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
-                <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+                <!--<DataGridTextColumn Header="Author ID" Binding="{Binding BookAuthor.Id}"/>-->
+                <DataGridTextColumn Header="Author" Binding="{Binding BookAuthor.Name}"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
-                <DataGridTextColumn Header="Translator" Binding="{Binding Translator}"/>
+                <!--<DataGridTextColumn Header="Translator ID" Binding="{Binding BookTranslator.Id}"/>-->
+                <DataGridTextColumn Header="Translator" Binding="{Binding BookTranslator.Name}"/>
+                <!--<DataGridTextColumn Header="Publisher ID" Binding="{Binding BookPublisher.Id}"/>-->
+                <DataGridTextColumn Header="Publisher Name" Binding="{Binding BookPublisher.Name}"/>
                 <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Quantity Book" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status,Converter={StaticResource convertTrueFalse}}" Visibility="Collapsed">
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status,Converter={StaticResource convertTrueFalse}}">
                     <DataGridTextColumn.CellStyle>
                         <Style TargetType="DataGridCell" BasedOn="{StaticResource CellDefault}">
                             <Style.Triggers>

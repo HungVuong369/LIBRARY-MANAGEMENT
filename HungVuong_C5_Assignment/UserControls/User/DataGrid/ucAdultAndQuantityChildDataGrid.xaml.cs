@@ -25,12 +25,13 @@ namespace HungVuong_C5_Assignment
         private ChildViewModel childVM = new ChildViewModel();
         private List<Guardian> _Guardians;
         private List<Guardian> _GuardiansUpdate = new List<Guardian>();
+        private ParameterViewModel _ParameterVM = new ParameterViewModel();
 
         public ucAdultAndQuantityChildDataGrid()
         {
             InitializeComponent();
 
-            UpdateDataGridByQuantityChild(2);
+            UpdateDataGridByQuantityChild(int.Parse(_ParameterVM.GetValueByID("QU1")));
         }
 
         public void RemoveGuardianByQuantityChild(int quantity)

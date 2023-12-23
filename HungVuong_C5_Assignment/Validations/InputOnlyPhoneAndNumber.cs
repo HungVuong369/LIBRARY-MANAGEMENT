@@ -18,11 +18,6 @@ namespace HungVuong_C5_Assignment
                 return new ValidationResult(false, "Value is required");
             }
 
-            //if (!Regex.IsMatch(value.ToString(), @"^(?=.*[A-Za-zÀ-ỸẠ-Ỿ])(?=.*\d).+$"))
-            //{
-            //    return new ValidationResult(false, $"Only Text and Number");
-            //}
-
             if (Regex.IsMatch(value.ToString(), @"^\d+$"))
             {
                 return new ValidationResult(false, $"Please enter letters");

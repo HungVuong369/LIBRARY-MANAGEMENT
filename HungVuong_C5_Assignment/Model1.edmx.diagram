@@ -4,53 +4,55 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="228b6ab0d4c74fd1b12c68a56b3f135e" Name="Diagram1">
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Adult" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Author" Width="1.5" PointX="1.5" PointY="20.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Book" Width="1.5" PointX="3.75" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.BookISBN" Width="1.5" PointX="1.5" PointY="24.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.BookTitle" Width="1.5" PointX="1.5" PointY="29.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Category" Width="1.5" PointX="1.5" PointY="33.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Child" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Enroll" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Function" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanDetail" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanDetailHistory" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanHistory" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanSlip" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Parameter" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Province" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Publisher" Width="1.5" PointX="1.5" PointY="36.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Reader" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.Role" Width="1.5" PointX="5.75" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.RoleFunction" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.User" Width="1.5" PointX="5.75" PointY="29.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.UserInfo" Width="1.5" PointX="8" PointY="29.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyThuVienModel.UserRole" Width="1.5" PointX="8" PointY="21.5" IsExpanded="true" />
+      <Diagram DiagramId="4187fa4c7c5e4cf88df3f2cf3c5b76dc" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Adult" Width="1.5" PointX="7.5" PointY="26.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Author" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Book" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.BookISBN" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.BookStatu" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.BookTitle" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Category" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Child" Width="1.5" PointX="9.75" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Function" Width="1.5" PointX="7.75" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanDetail" Width="1.5" PointX="9.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanDetailHistory" Width="1.5" PointX="12.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanHistory" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.LoanSlip" Width="1.5" PointX="7.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Parameter" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.PenaltyReason" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Province" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Publisher" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Reader" Width="1.5" PointX="5.25" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Role" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.RoleFunction" Width="1.5" PointX="10" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.Translator" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.User" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.UserInfo" Width="1.5" PointX="7.5" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyThuVienModel.UserRole" Width="1.5" PointX="10" PointY="15.125" IsExpanded="true" />
         <AssociationConnector Association="QuanLyThuVienModel.FK__Adult__IdReader__07020F21" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyThuVienModel.FK__Child__IdAdult__0DAF0CB0" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__BookISBN__IdAuth__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__BookTitle__IdAut__20C1E124" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__Book__ISBN__2E1BDC42" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__Enroll__IdBook__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdBoo__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__BookISBN__IdAuth__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__Book__IdBookStat__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__Book__IdPublishe__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__Book__IdTranslat__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__Book__ISBN__3A81B327" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdBoo__73BA3083" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__BookISBN__IdBook__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__BookISBN__IdPubl__286302EC" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__Enroll__ISBN__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__BookTitle__IdCat__1FCDBCEB" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdBoo__7F2BE32F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__BookISBN__IdBook__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__BookTitle__IdCat__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyThuVienModel.FK__Child__IdReader__0CBAE877" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__Enroll__IdReader__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__Function__IdPare__52593CB8" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__RoleFunct__IdFun__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdLoa__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__Function__IdPare__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__RoleFunct__IdFun__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdLoa__72C60C4A" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanHisto__IdRea__6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanSlip__IdRead__6383C8BA" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__RoleFunct__IdRol__571DF1D5" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__UserRole__IdRole__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__UserInfo__IdUser__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="QuanLyThuVienModel.FK__UserRole__IdUser__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanDetai__IdLoa__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanHisto__IdRea__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanHisto__IdUse__797309D9" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanSlip__IdRead__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__LoanSlip__IdUser__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__RoleFunct__IdRol__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__UserRole__IdRole__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__UserInfo__IdUser__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyThuVienModel.FK__UserRole__IdUser__5AEE82B9" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -48,20 +48,18 @@ namespace HungVuong_C5_Assignment
             return id;
         }
 
-        public void Add(string language, DateTime publishDate, string authorID, string bookTitleID, string publisherID, decimal bookPrice)
+        public void Add(string language, string authorID, string bookTitleID)
         {
             string newISBN = GetNewISBN();
 
             var newBookISBN = new BookISBN()
             {
                 ISBN = newISBN,
-                IdAuthor = authorID,
                 IdBookTitle = bookTitleID,
-                Status = false,
-                Language = language,
-                PublishDate = publishDate,
-                IdPublisher = publisherID,
-                BookPrice = bookPrice
+                IdAuthor = authorID,
+                OriginLanguage = language,
+
+                Status = false
             };
 
             DatabaseFirst.Instance.db.BookISBNs.Add(newBookISBN);

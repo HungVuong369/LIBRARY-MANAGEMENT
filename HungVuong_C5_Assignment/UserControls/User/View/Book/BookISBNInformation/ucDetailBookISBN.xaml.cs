@@ -20,33 +20,35 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class ucDetailBookISBN : UserControl
     {
-        private CategoryViewModel _CategoryVM = new CategoryViewModel();
         private BookISBNViewModel _BookIsbnVM = new BookISBNViewModel();
-        private BookTitleViewModel _BookTitleVM = new BookTitleViewModel();
-        private AuthorViewModel _AuthorVM = new AuthorViewModel();
-        private BookViewModel _BookVM = new BookViewModel();
-
-        public BookTitle BookTitle { get; set; }
-        public Author Translator { get; set; }
-        public Category Category { get; set; }
         public BookISBN BookISBN { get; set; }
-        public int QuantityBook { get; set; }
 
         public ucDetailBookISBN(string isbn)
         {
             InitializeComponent();
 
-            BookISBN = this._BookIsbnVM.bookISBNRepo.GetByISBN(isbn);
+            BookISBN = _BookIsbnVM.bookISBNRepo.Items.FirstOrDefault(i => i.ISBN == isbn);
 
-            this.BookTitle = BookISBN.BookTitle;
+            // ISBN
+            txtISBN.Text = BookISBN.ISBN;
+            txtLanguage.Text = BookISBN.OriginLanguage;
+            txtISBNStatus.Text = BookISBN.Status == true ? "Available" : "Unavailable";
+            txtISBNStatus.Foreground = BookISBN.Status == true ? Brushes.Green : Brushes.Red;
 
-            this.Category = BookISBN.BookTitle.Category;
+            // Title
+            txtBookTitleID.Text = BookISBN.BookTitle.Id;
+            txtBookTitleName.Text = BookISBN.BookTitle.Name;
+            txtCategory.Text = BookISBN.BookTitle.Category.Name;
+            txtSummary.Text = BookISBN.BookTitle.Summary;
 
-            this.Translator = BookISBN.Author;
-
-            this.QuantityBook = _BookVM.GetQuantityBookByISBN(isbn, true);
-
-            DataContext = this;
+            // Author
+            txtAuthorBoF.Text = BookISBN.Author.boF.ToString("dd/MM/yyyy");
+            txtAuthorID.Text = BookISBN.Author.Id;
+            txtAuthorName.Text = BookISBN.Author.Name;
+            txtAuthorSummary.Text = BookISBN.Author.Summary;
+            txtDescription.Text = BookISBN.Author.Description;
+            txtAuthorStatus.Text = BookISBN.Author.Status == true ? "Available" : "Unavailable";
+            txtAuthorStatus.Foreground = BookISBN.Author.Status == true ? Brushes.Green : Brushes.Red;
         }
     }
 }

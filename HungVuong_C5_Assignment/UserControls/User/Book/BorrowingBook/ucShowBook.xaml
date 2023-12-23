@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucShowBook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <GroupBox BorderBrush="Black"
+              Margin="5 0"
+              Width="230"
+              Cursor="Hand"
+              FontSize="14"
+              Name="gbContainer"
+              Tag="{Binding SelectedShowBook, Mode=TwoWay}"
+              MouseLeftButtonDown="GroupBox_MouseLeftButtonDown">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseLeftButtonDown">
+                <i:InvokeCommandAction Command="{Binding AddBookCommand}" 
+                                       CommandParameter="{Binding}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
+        <Grid x:Name="grdContainer">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Book: "
+                       FontWeight="SemiBold"
+                       FontSize="14"/>
+
+            <TextBlock Text="Category: "
+                       Grid.Row="1"
+                       FontWeight="SemiBold"
+                       FontSize="14"/>
+
+            <TextBlock Text="Author: "
+                       Grid.Row="2"
+                       FontWeight="SemiBold"
+                       FontSize="14"/>
+
+            <TextBlock Text="Language: "
+                       Grid.Row="3"
+                       FontWeight="SemiBold"
+                       FontSize="14"/>
+            
+            <TextBlock Text="Quantity: "
+                       Grid.Row="4"
+                       FontWeight="SemiBold"
+                       FontSize="14"/>
+
+            <TextBlock Grid.Column="1"
+                       Text="{Binding BookTitle.Name}"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+
+            <TextBlock Grid.Column="1"
+                       Grid.Row="1"
+                       Text="{Binding BookTitle.Category.Name}"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+
+            <TextBlock Grid.Column="1"
+                       Grid.Row="2"
+                       Text="{Binding Author.Name}"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+
+            <TextBlock Grid.Column="1"
+                       Grid.Row="3"
+                       Text="{Binding OriginLanguage}"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"
+                       FontSize="13"/>
+            
+            <TextBlock Grid.Column="1"
+                       Grid.Row="4"
+                       Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                       TextWrapping="Wrap"
+                       FontSize="13"
+                       VerticalAlignment="Center"
+                       Name="tbQuantity"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

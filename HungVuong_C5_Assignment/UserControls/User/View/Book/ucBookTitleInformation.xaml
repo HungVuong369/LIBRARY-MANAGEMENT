@@ -15,11 +15,10 @@
                   IsReadOnly="True" SelectionMode="Single"
                   Grid.Row="0">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}"/>
-                <DataGridTextColumn Header="Author Name" Binding="{Binding Author.Name}"/>
-                <DataGridTextColumn Header="Author BoF" Binding="{Binding Author.boF, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Book Title Summary" Binding="{Binding Summary}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
+                <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -5,201 +5,282 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1000">
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             d:DesignHeight="600" d:DesignWidth="900">
+    <UserControl.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="Loan Books"
-               FontSize="20"
-               FontWeight="Bold"
-               HorizontalAlignment="Center"/>
-        
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0"
+                  Margin="5"
+                  Header="Reader Information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0"
-                        Margin="10"
-                        Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Borrowing Slip ID:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtBorrowingSlipID"
-                             Width="300"
-                             IsEnabled="False"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    <TextBlock Text="Reader ID:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-
+                <GroupBox Header="Search Reader"
+                          Margin="5"
+                          Width="320">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
                         <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBox Name="txtReaderID"
-                             Width="300"
-                             TextChanged="txtReaderID_TextChanged"/>
-
-                        <ComboBox Width="0" IsDropDownOpen="False"
-                                  Grid.Row="1"
-                                  Height="0"
-                              Name="cbReaderID"
-                              DisplayMemberPath="Id"
-                                  HorizontalAlignment="Left"
-                              SelectionChanged="cbReaderID_SelectionChanged"
-                              SelectedValuePath="Id"
-                              DropDownClosed="cbReaderID_DropDownClosed">
-                        </ComboBox>
-                    </Grid>
-                    
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    
-                    <TextBlock Text="Book ISBN:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <Grid>
-                        <Grid.RowDefinitions>
                             <RowDefinition/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <TextBox Name="txtBookISBN"
-                             Width="300"
-                             TextChanged="txtBookISBN_TextChanged"/>
+                        <TextBlock Text="Reader ID:"
+                                   Margin="5"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Name="txtReaderID"
+                                     Margin="5"
+                                     IsEnabled="{Binding ShowBookVM.IsInputReader}"
+                                     Text="{Binding ReaderID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding TextChangedReaderIDCommand}" 
+                                                               CommandParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
 
-                        <ComboBox Width="0" 
-                                  Height="0"
-                                  HorizontalAlignment="Left"
-                                  IsDropDownOpen="False"
-                              Name="cbBookISBN"
-                                  Grid.Row="1"
-                              DisplayMemberPath="ISBN"
-                              SelectionChanged="cbBookISBN_SelectionChanged"
-                              SelectedValuePath="ISBN"
-                              StaysOpenOnEdit="True"
-                              DropDownClosed="cbBookISBN_DropDownClosed">
-                        </ComboBox>
+                            <ComboBox Width="0"
+                                      Height="0"
+                                      Grid.Column="1"
+                                      Name="cbReaderID"
+                                      DropDownClosed="cbReaderID_DropDownClosed"
+                                      DisplayMemberPath="Id"
+                                      SelectedValuePath="Id"
+                                      HorizontalAlignment="Left"
+                                      ItemsSource="{Binding FilterReaders}"
+                                      SelectedItem="{Binding SelectedReader, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                      IsDropDownOpen="{Binding IsDropDownReaderID}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectionChangedReaderIDCommand}"
+                                                               CommandParameter="{Binding}">
+                                            
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <ComboBox.Style>
+                                    <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBoxUsedStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsDropDownOpen" Value="True">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.Style>
+                            </ComboBox>
+                        </Grid>
+
+                        <TextBlock Text="Name:"
+                                   Grid.Row="1"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding ReaderName}"
+                                 Background="LightGray"
+                                 IsReadOnly="True"
+                                 Margin="5"/>
+
+                        <TextBlock Text="Reader Type:"
+                                   Grid.Row="2"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 Text="{Binding ReaderType}"
+                                 Background="LightGray"
+                                 IsReadOnly="True"
+                                 Margin="5">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ReaderType}" Value="Người lớn">
+                                            <Setter Property="Foreground" Value="DarkMagenta"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding ReaderType}" Value="Trẻ em">
+                                            <Setter Property="Foreground" Value="DarkBlue"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+
+                        <TextBlock Text="Status:"
+                                   Grid.Row="3"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="3" Grid.Column="1"
+                                 Background="LightGray"
+                                 Text="{Binding Status}"
+                                 IsReadOnly="True"
+                                 Margin="5">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Status}" Value="Available">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding Status}" Value="Unavailable">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+
+                        <TextBlock Text="Loaned Quantity:"
+                                   Grid.Row="4"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="4" Grid.Column="1"
+                                 Background="LightGray"
+                                 Text="{Binding Quantity}"
+                                 IsReadOnly="True"
+                                 Margin="5"
+                                 Foreground="{Binding ForegroundQuantity}">
+                        </TextBox>
                     </Grid>
-                </StackPanel>
+                </GroupBox>
 
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    <TextBlock Text="Reader Expire Date:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtExpireReader"
-                             Width="300"
-                             IsEnabled="False"
-                             Text="None"/>
-                </StackPanel>
-            </StackPanel>
+                <GroupBox Grid.Column="1"
+                          Margin="5"
+                          Header="List Loan Detail">
+                    <local:ucLoanDetailDataGrid x:Name="ucLoanDetail"
+                                                Margin="5"
+                                                Height="150"/>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
 
-            <StackPanel Grid.Column="1"
-                        Margin="10">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Loan Paid:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtLoanPaid"
-                             Width="300"
-                             IsEnabled="False"
-                             Text="0 VND"/>
-                </StackPanel>
+        <GroupBox Grid.Row="1"
+                  Header="Search Book"
+                  Margin="5"
+                  IsHitTestVisible="{Binding IsAllowLoanBooks}"
+                  Opacity="{Binding Opacity}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    <TextBlock Text="Deposit:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtDeposit"
-                             Width="300"
-                             TextChanged="txtDeposit_TextChanged"
-                             PreviewTextInput="txtDeposit_PreviewTextInput"/>
-                </StackPanel>
-                
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    <TextBlock Text="Borrowing Date:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtBorrowingDate"
-                             Width="300"
-                             IsEnabled="False"/>
-                </StackPanel>
+                <!-- Search -->
+                <Grid Grid.Row="0"
+                      Margin="5 0"
+                      Name="grdSearch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal"
-                            Margin="0 10 0 0">
-                    <TextBlock Text="Return Date:" VerticalAlignment="Center"
-                               FontSize="14"
-                               FontWeight="SemiBold"
-                               Width="130"/>
-                    <TextBox Name="txtReturnDate"
-                             Width="300"
-                             IsEnabled="False"/>
-                </StackPanel>
-            </StackPanel>
-        </Grid>
+                    <TextBlock Text="Book"
+                               VerticalAlignment="Center"/>
+                    <TextBox Margin="5 0"
+                             Grid.Column="1"
+                             VerticalAlignment="Center"
+                             Text="{Binding BookName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding BookNameTextChangedCommand}" 
+                                            CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
 
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="350"/>
-            </Grid.RowDefinitions>
+                    <TextBlock Text="Category"
+                               Grid.Column="2"
+                               VerticalAlignment="Center"/>
+                    <ComboBox Margin="5 0"
+                              Grid.Column="3"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding LstCategory}"
+                              SelectedItem="{Binding SelectedCategory}"
+                              DisplayMemberPath="Name">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding CategorySelectionChangedCommand}" 
+                                                       CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
 
-            <Button Content="Add Detail Borrowing"
-                        Margin="10 0 10 10"
-                    Width="160"
-                        Name="btnAddDetailBorrowing"
-                        Click="btnAddDetailBorrowing_Click"
-                    HorizontalAlignment="Left"/>
-            
-            <local:ucBorrowingDataGrid Grid.Row="1"
-                                   Height="350"
-                                       Margin="10 0"
-                                   x:Name="ucBorrowing"/>
-        </Grid>
+                    <TextBlock Text="Author"
+                               Grid.Column="4"
+                               VerticalAlignment="Center"/>
+                    <ComboBox Margin="5 0"
+                              Grid.Column="5"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding LstAuthor}"
+                              SelectedItem="{Binding SelectedAuthor}"
+                              DisplayMemberPath="Name">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AuthorSelectionChangedCommand}" 
+                                                       CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
 
-        
+                    <Button Grid.Column="6"
+                            Content="Create Loan Slip"
+                            Margin="5 0"
+                            Name="btnCreate"
+                            IsEnabled="{Binding ShowBookVM.IsCreateLoanSlip}"
+                            Command="{Binding CreateLoanSlipCommand}"/>
 
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+                </Grid>
 
-            <Button Content="Confirm Loan"
-                    Margin="10"
-                    Name="btnConfirmBorrowing"
-                    Click="btnConfirmBorrowing_Click"/>
-            
-            <Button Content="Cancel"
-                    Grid.Column="1"
-                    Margin="10"
-                    Name="btnCancel"
-                    Click="btnCancel_Click"/>
-        </Grid>
+                <!-- View Book and View Loaning Book -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="List Book"
+                              Margin="5 0">
+                        <local:ucShowBooks/>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="1"
+                              Margin="5 0"
+                              Header="List Book Loaning">
+                        <local:ucLoanBooks x:Name="ucLoanBooks"/>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

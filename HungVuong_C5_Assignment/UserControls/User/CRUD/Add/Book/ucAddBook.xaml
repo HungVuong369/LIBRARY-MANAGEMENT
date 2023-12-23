@@ -6,102 +6,228 @@
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
              Padding="5"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="600" d:DesignWidth="850">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0 5 0 5"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Label Content="Add Book"
-               FontSize="20"
-               FontWeight="Bold"
-               HorizontalAlignment="Center"/>
+        <TextBlock Text="Add Book"
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Bold"/>
 
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Book Price"
-                       FontSize="14"
-                       FontWeight="SemiBold"
-                       Margin="10 5"/>
-            <TextBox Style="{StaticResource PlaceHolderTextStyle}"
-                     Tag="Price Output"
-                     Margin="10 0 10 10"
-                     Name="txtBookPrice"
-                     PreviewTextInput="txtBookPrice_PreviewTextInput"
-                     TextChanged="txtBookPrice_TextChanged"/>
-            <TextBox Name="txtSearch"
-                     Margin="10 0 10 0"
-                     TextChanged="txtSearch_TextChanged"
-                     Style="{StaticResource PlaceHolderTextStyle}"
-                     Tag="Search by ISBN"
-                     BorderBrush="Blue"
-                     HorizontalAlignment="Left"
-                     Width="105"/>
-        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition></RowDefinition>
-            </Grid.RowDefinitions>
+            <GroupBox Grid.Column="0"
+                          BorderBrush="Black"
+                          Header="Book Information"
+                          FontSize="15"
+                          FontWeight="SemiBold"
+                          Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Margin="5">
+                        <TextBlock Text="Id"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+                        <TextBox Name="txtId"
+                                 IsEnabled="False"
+                                 Text="{Binding NewID}"/>
 
-            <TextBlock Name="tbSelectBookISBN"
-                           Text="Please select a Book ISBN" 
-                           HorizontalAlignment="Left"
-                           FontSize="12"
-                           FontWeight="SemiBold"
-                           Foreground="Red"
-                           Margin="10 5 5 5"/>
+                        <TextBlock Text="Language"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
 
-            <DataGrid Name="dgBookISBN" AutoGenerateColumns="False"
-                          IsReadOnly="True" SelectionMode="Single"
+                        <ComboBox Name="cbLanguage"
+                                  Margin="0 5"
+                                  ItemsSource="{Binding LstLanguage}"
+                                  SelectedItem="{Binding SelectedLanguage, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Publish Date"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+
+                        <DatePicker Name="dpPublishDate"
+                                    Margin="0 5"
+                                    SelectedDate="{Binding SelectedPublishDate, UpdateSourceTrigger=PropertyChanged}"
+                                    Language="vi-VN"/>
+
+                        <TextBlock Text="Price"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+                        <TextBox Name="txtPrice"
+                                 Text="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                                 TextChanged="txtBookPrice_TextChanged"
+                                 PreviewTextInput="txtBookPrice_PreviewTextInput"/>
+
+                        <TextBlock Text="Quantity"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"/>
+                        <TextBox Name="txtQuantity"
+                                 Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                 TextChanged="txtQuantity_TextChanged"
+                                 PreviewTextInput="txtBookPrice_PreviewTextInput"/>
+
+                        <Button Content="Add"
+                                Margin="0 10"
+                                Name="btnAdd"
+                                IsEnabled="False"
+                                Command="{Binding AddCommand}"/>
+                        <Button Content="Cancel"
+                                Margin="0 5"
+                                Name="btnCancel"
+                                Command="{Binding CancelCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Select publisher"
+                              Grid.Column="0"
+                              BorderBrush="Black"
+                              FontSize="15"
+                              FontWeight="SemiBold"
+                              Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Grid.Row="0"
+                                     Style="{StaticResource PlaceHolderTextStyle}"
+                                     Tag="Search here..."
+                                     Margin="0 5"
+                                     Name="txtSearchPublisher"
+                                     TextChanged="txtSearchPublisher_TextChanged"/>
+
+                            <DataGrid Name="dgPublisher" AutoGenerateColumns="False"
+                                      IsReadOnly="True" SelectionMode="Single"
+                                      Grid.Row="1"
+                                      SelectedValuePath="ISBN"
+                                      FontSize="14"
+                                      FontWeight="SemiBold"
+                                      ItemsSource="{Binding LstPublisher}"
+                                      SelectedItem="{Binding SelectedPublisher}"
+                                      SelectionChanged="dgBookISBN_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Select translator"
+                              Grid.Column="1"
+                              BorderBrush="Black"
+                              FontSize="15"
+                              FontWeight="SemiBold"
+                              Margin="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Grid.Row="0"
+                                 Style="{StaticResource PlaceHolderTextStyle}"
+                                 Tag="Search here..."
+                                     Margin="0 5"
+                                     Name="txtSearchTranslator"
+                                     TextChanged="txtSearchTranslator_TextChanged"/>
+
+                            <DataGrid Name="dgTranslator" AutoGenerateColumns="False"
+                                      IsReadOnly="True" SelectionMode="Single"
+                                      Grid.Row="1"
+                                      FontSize="14"
+                                      FontWeight="SemiBold"
+                                      SelectedValuePath="ISBN"
+                                      ItemsSource="{Binding LstTranslator}"
+                                      SelectedItem="{Binding SelectedTranslator}"
+                                      SelectionChanged="dgBookISBN_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                                    <DataGridTextColumn Header="BoF" Binding="{Binding boF, StringFormat='dd/MM/yyyy'}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+                <GroupBox Header="Select Book ISBN"
+                          FontSize="15"
+                          FontWeight="SemiBold"
                           Grid.Row="1"
-                          Margin="10 0 10 0"
-                          SelectedValuePath="ISBN"
-                          SelectionChanged="dgBookISBN_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
-                    <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
-                    <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
-                    <DataGridTextColumn Header="Author Name" Binding="{Binding AuthorName}"/>
-                    <DataGridTextColumn Header="Author BoF" Binding="{Binding AuthorBoF, StringFormat='dd/MM/yyyy'}"/>
+                          BorderBrush="Black"
+                          Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
 
-                    <DataGridTemplateColumn Header="Action">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="btnDetail"
+                        <TextBox Grid.Row="0"
+                                 Style="{StaticResource PlaceHolderTextStyle}"
+                                 Tag="Search here..."
+                                 Margin="0 5"
+                                 Name="txtSearchBookISBN"
+                                 TextChanged="txtSearchBookISBN_TextChanged"/>
+
+                        <DataGrid Name="dgBookISBN" AutoGenerateColumns="False"
+                                  IsReadOnly="True" SelectionMode="Single"
+                                  Grid.Row="1"
+                                  FontSize="14"
+                                  FontWeight="SemiBold"
+                                  SelectedValuePath="ISBN"
+                                  SelectedItem="{Binding SelectedBookISBN}"
+                                  SelectionChanged="dgBookISBN_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
+                                <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
+                                <DataGridTextColumn Header="Author Name" Binding="{Binding AuthorName}"/>
+                                <DataGridTextColumn Header="Author BoF" Binding="{Binding AuthorBoF, StringFormat='dd/MM/yyyy'}"/>
+
+                                <DataGridTemplateColumn Header="Action">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Name="btnDetail"
                                             Content="Detail"
                                             Tag="{Binding ISBN}"
                                             Click="btnDetail_Click"
                                             Width="100"
                                             Margin="10 0"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-
-        <Grid Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Button Name="btnAdd"
-                        Content="Add Book"
-                        Grid.Row="1"
-                        Margin="10"
-                        Click="btnAdd_Click"
-                        IsEnabled="False"></Button>
-
-            <Button Name="btnCancel"
-                        Content="Cancel"
-                        Grid.Column="1"
-                        Margin="10"
-                        Click="btnCancel_Click"></Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </GroupBox>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

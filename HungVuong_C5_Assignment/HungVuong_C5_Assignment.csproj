@@ -43,12 +43,22 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,6 +89,9 @@
     <Compile Include="BookISBN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookStatu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="BookTitle.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -88,12 +101,12 @@
     <Compile Include="Child.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Converter\IdBookToEnrollAlreadyLoan.cs" />
-    <Compile Include="DTOs\User\Book\EnrollDto.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converter\Book\IdBookToEnrollAlreadyLoan.cs" />
+    <Compile Include="Converter\Book\LoanBook\ExpiredDateConverter.cs" />
+    <Compile Include="Converter\ConvertIdPenaltyReasonToName.cs" />
+    <Compile Include="DTOs\User\Book\LoanDetailDto.cs" />
     <Compile Include="DTOs\User\Book\LoanSlipDto.cs" />
-    <Compile Include="Enroll.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Function.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -127,6 +140,9 @@
     <Compile Include="Parameter.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PenaltyReason.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Province.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -141,27 +157,32 @@
     <Compile Include="Repository\Admin\Management\FeatureManagementRepository.cs" />
     <Compile Include="Repository\Admin\Management\RoleManagementRepository.cs" />
     <Compile Include="Repository\Admin\Management\UserManagementRepository.cs" />
+    <Compile Include="Repository\Admin\Province\ProvinceRepository.cs" />
     <Compile Include="Repository\Admin\Role\RoleRepository.cs" />
+    <Compile Include="Repository\Admin\Translator\TranslatorRepository.cs" />
     <Compile Include="Repository\Admin\User\UserInfoRepository.cs" />
     <Compile Include="Repository\Admin\User\UserRepository.cs" />
     <Compile Include="Repository\Admin\User\UserRoleRepository.cs" />
     <Compile Include="Repository\ParameterRepository.cs" />
     <Compile Include="Repository\RepositoryBase\IRepositoryBase.cs" />
     <Compile Include="Repository\RepositoryBase\RepositoryBase.cs" />
-    <Compile Include="Repository\User\Book\AuthorRepository.cs" />
+    <Compile Include="Repository\Admin\Author\AuthorRepository.cs" />
     <Compile Include="Repository\User\Book\BookISBNRepository.cs" />
     <Compile Include="Repository\User\Book\BookRepository.cs" />
     <Compile Include="Repository\User\Book\BookTitleRepository.cs" />
-    <Compile Include="Repository\User\Book\Borrowing\EnrolRepository.cs" />
     <Compile Include="Repository\User\Book\Borrowing\LoanDetailRepository.cs" />
+    <Compile Include="Repository\User\Book\LoanHistory\LoanDetailHistoryRepository.cs" />
+    <Compile Include="Repository\User\Book\LoanHistory\LoanHistoryRepository.cs" />
+    <Compile Include="Repository\User\Management\LoanHistoryManagementRepository.cs" />
     <Compile Include="Repository\User\Management\LoanManagementRepository.cs" />
     <Compile Include="Repository\User\Book\Borrowing\LoanSlipRepository.cs" />
-    <Compile Include="Repository\User\Book\CategoryRepository.cs" />
+    <Compile Include="Repository\Admin\Category\CategoryRepository.cs" />
     <Compile Include="Repository\User\Book\PublisherRepository.cs" />
     <Compile Include="Repository\User\Management\BookISBNManagementRepository.cs" />
     <Compile Include="Repository\User\Management\BookManagementRepository.cs" />
     <Compile Include="Repository\User\Management\BookTitleManagementRepository.cs" />
     <Compile Include="Repository\User\Management\ReaderManagementRepository.cs" />
+    <Compile Include="Repository\User\Book\PenaltyReasonRepository.cs" />
     <Compile Include="Repository\User\Reader\AdultRepository.cs" />
     <Compile Include="Repository\User\Reader\ChildRepository.cs" />
     <Compile Include="Repository\User\Reader\ReaderRepository.cs" />
@@ -171,9 +192,33 @@
     <Compile Include="RoleFunction.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Translator.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Author\DataGrid\ucAuthorDataGrid.xaml.cs">
+      <DependentUpon>ucAuthorDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Author\ucAddAuthor.xaml.cs">
+      <DependentUpon>ucAddAuthor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Author\ucAuthorManagement.xaml.cs">
+      <DependentUpon>ucAuthorManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Author\ucUpdateAuthor.xaml.cs">
+      <DependentUpon>ucUpdateAuthor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Category\CategoryManagement.xaml.cs">
+      <DependentUpon>CategoryManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Category\DataGrid\ucCategoryDataGrid.xaml.cs">
+      <DependentUpon>ucCategoryDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Category\ucUpdateCategory.xaml.cs">
+      <DependentUpon>ucUpdateCategory.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Admin\DataGrid\Function\ucFunctionDataGrid.xaml.cs">
       <DependentUpon>ucFunctionDataGrid.xaml</DependentUpon>
@@ -217,6 +262,30 @@
     <Compile Include="UserControls\Admin\Function\ucViewFeature.xaml.cs">
       <DependentUpon>ucViewFeature.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Admin\Province\DataGrid\ucProvinceDataGrid.xaml.cs">
+      <DependentUpon>ucProvinceDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Province\ucAddProvince.xaml.cs">
+      <DependentUpon>ucAddProvince.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Province\ucProvinceManagement.xaml.cs">
+      <DependentUpon>ucProvinceManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Province\ucUpdateProvince.xaml.cs">
+      <DependentUpon>ucUpdateProvince.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Publisher\DataGrid\ucPublisherDataGrid.xaml.cs">
+      <DependentUpon>ucPublisherDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Publisher\ucAddPublisher.xaml.cs">
+      <DependentUpon>ucAddPublisher.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Publisher\ucPublisherManagement.xaml.cs">
+      <DependentUpon>ucPublisherManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Publisher\ucUpdatePublisher.xaml.cs">
+      <DependentUpon>ucUpdatePublisher.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Admin\Role\FeatureAssignment.xaml.cs">
       <DependentUpon>FeatureAssignment.xaml</DependentUpon>
     </Compile>
@@ -231,6 +300,18 @@
     </Compile>
     <Compile Include="UserControls\Admin\Role\UserAssignment\ucUserAssignmentView.xaml.cs">
       <DependentUpon>ucUserAssignmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Translator\DataGrid\ucTranslatorDataGrid.xaml.cs">
+      <DependentUpon>ucTranslatorDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Translator\ucAddTranslator.xaml.cs">
+      <DependentUpon>ucAddTranslator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Translator\ucTranslatorManagement.xaml.cs">
+      <DependentUpon>ucTranslatorManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Translator\ucUpdateTranslator.xaml.cs">
+      <DependentUpon>ucUpdateTranslator.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Admin\User\CRUD\ucAddUser.xaml.cs">
       <DependentUpon>ucAddUser.xaml</DependentUpon>
@@ -261,6 +342,33 @@
     </Compile>
     <Compile Include="UserControls\ucLine.xaml.cs">
       <DependentUpon>ucLine.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ConfirmLoanBooks.xaml.cs">
+      <DependentUpon>ConfirmLoanBooks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\DataGrid\ucLoanDetailDataGrid.xaml.cs">
+      <DependentUpon>ucLoanDetailDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ucLoanBook.xaml.cs">
+      <DependentUpon>ucLoanBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ucLoanBooks.xaml.cs">
+      <DependentUpon>ucLoanBooks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ucSelectBookByISBN.xaml.cs">
+      <DependentUpon>ucSelectBookByISBN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ucShowBook.xaml.cs">
+      <DependentUpon>ucShowBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\BorrowingBook\ucShowBooks.xaml.cs">
+      <DependentUpon>ucShowBooks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\ReturnBook\DataGrid\ucLoanSlipDataGrid.xaml.cs">
+      <DependentUpon>ucLoanSlipDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Book\ReturnBook\ucReturnBook.xaml.cs">
+      <DependentUpon>ucReturnBook.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\CRUD\Add\Book\ucAddBook.xaml.cs">
       <DependentUpon>ucAddBook.xaml</DependentUpon>
@@ -301,17 +409,17 @@
     <Compile Include="UserControls\User\CRUD\Update\ucTransitioningChild.xaml.cs">
       <DependentUpon>ucTransitioningChild.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\User\View\Book\ucDetailLoanHistory.xaml.cs">
+      <DependentUpon>ucDetailLoanHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\User\DataGrid\ucAdultAndQuantityChildDataGrid.xaml.cs">
       <DependentUpon>ucAdultAndQuantityChildDataGrid.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\User\DataGrid\ucBorrowingDataGrid.xaml.cs">
-      <DependentUpon>ucBorrowingDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\DataGrid\ucChildDataGrid.xaml.cs">
       <DependentUpon>ucChildDataGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\User\DataGrid\ucEnrollDataGrid.xaml.cs">
-      <DependentUpon>ucEnrollDataGrid.xaml</DependentUpon>
+    <Compile Include="UserControls\User\DataGrid\LoanHistory\ucLoanHistoryDataGrid.xaml.cs">
+      <DependentUpon>ucLoanHistoryDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\DataGrid\ucLoanSlipsDataGrid.xaml.cs">
       <DependentUpon>ucLoanSlipsDataGrid.xaml</DependentUpon>
@@ -327,6 +435,12 @@
     </Compile>
     <Compile Include="UserControls\User\Management\Book\BookTitleManagement.xaml.cs">
       <DependentUpon>BookTitleManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Management\Book\LoanHistoryManagement.xaml.cs">
+      <DependentUpon>LoanHistoryManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Management\Book\ucLoanSlipManagement.xaml.cs">
+      <DependentUpon>ucLoanSlipManagement.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\Management\Reader\ReaderManagement.xaml.cs">
       <DependentUpon>ReaderManagement.xaml</DependentUpon>
@@ -374,22 +488,39 @@
     <Compile Include="Validations\InputTextAndNumber.cs" />
     <Compile Include="Validations\InputTextRule.cs" />
     <Compile Include="Validations\StaticValidation.cs" />
+    <Compile Include="UserControls\Admin\Category\ucAddCategory.xaml.cs">
+      <DependentUpon>ucAddCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Admin\Author\CRUDAuthorViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Category\CRUDCategoryViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\FunctionViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\RoleFunctionViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Province\CRUDProvinceViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Province\ProvinceViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Publisher\CRUDPublisherViewModel.cs" />
     <Compile Include="ViewModels\Admin\Role\RoleViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Translator\CRUDTranslatorViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Translator\TranslatorViewModel.cs" />
     <Compile Include="ViewModels\Admin\User\UserInfoViewModel.cs" />
     <Compile Include="ViewModels\Admin\User\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\User\UserViewModel.cs" />
+    <Compile Include="ViewModels\Base\BaseViewModel.cs" />
     <Compile Include="ViewModels\ParameterViewModel.cs" />
-    <Compile Include="ViewModels\User\Book\AuthorViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Author\AuthorViewModel.cs" />
     <Compile Include="ViewModels\User\Book\BookISBNViewModel.cs" />
     <Compile Include="ViewModels\User\Book\BookTitleViewModel.cs" />
     <Compile Include="ViewModels\User\Book\BookViewModel.cs" />
-    <Compile Include="ViewModels\User\Book\Borrowing\EnrolViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\Borrowing\LoanDetailDataGridViewModel.cs" />
     <Compile Include="ViewModels\User\Book\Borrowing\LoanDetailViewModel.cs" />
     <Compile Include="ViewModels\User\Book\Borrowing\LoanSlipViewModel.cs" />
-    <Compile Include="ViewModels\User\Book\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\User\Book\PublisherViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Category\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\PenaltyReasonViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Publisher\PublisherViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\Borrowing\SearchBookViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\Borrowing\ShowBooksViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\ReturnBook\LoanDetailHistoryViewModel.cs" />
+    <Compile Include="ViewModels\User\Book\ReturnBook\LoanHistoryDataGrid.cs" />
+    <Compile Include="ViewModels\User\Book\ReturnBook\LoanHistoryViewModel.cs" />
     <Compile Include="ViewModels\User\Reader\AdultViewModel.cs" />
     <Compile Include="ViewModels\User\Reader\ChildViewModel.cs" />
     <Compile Include="ViewModels\User\Reader\ReaderViewModel.cs" />
@@ -422,7 +553,7 @@
     <Compile Include="Class\Language.cs" />
     <Compile Include="Converter\Function\ParentIDToParentName.cs" />
     <Compile Include="Converter\TrueFalseToAvailableUnavailable.cs" />
-    <Compile Include="Converter\TrueFalseToReaderType.cs" />
+    <Compile Include="Converter\Reader\TrueFalseToReaderType.cs" />
     <Compile Include="DataProvider\DataAccess.cs" />
     <Compile Include="DataProvider\DatabaseFirst.cs" />
     <Compile Include="DataProvider\DataProvider.cs" />
@@ -431,7 +562,6 @@
     <Compile Include="DTOs\User\Book\BookISBNInformation.cs" />
     <Compile Include="DTOs\User\Book\BookISBNStatus.cs" />
     <Compile Include="DTOs\User\Book\BookTitleInformation.cs" />
-    <Compile Include="DTOs\User\Book\BorrowingSlipDto.cs" />
     <Compile Include="DTOs\User\Reader\AdultReader.cs" />
     <Compile Include="DTOs\User\Reader\ChildInformation.cs" />
     <Compile Include="DTOs\User\Reader\Guardian.cs" />
@@ -469,6 +599,34 @@
     <Page Include="Styles\TreeViews.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Admin\Author\DataGrid\ucAuthorDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Author\ucAddAuthor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Author\ucAuthorManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Author\ucUpdateAuthor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Category\CategoryManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Category\DataGrid\ucCategoryDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Category\ucUpdateCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Admin\DataGrid\Function\ucFunctionDataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -526,6 +684,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\Admin\Province\DataGrid\ucProvinceDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Province\ucAddProvince.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Province\ucProvinceManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Province\ucUpdateProvince.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Publisher\DataGrid\ucPublisherDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Publisher\ucAddPublisher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Publisher\ucPublisherManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Publisher\ucUpdatePublisher.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Admin\Role\FeatureAssignment.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -545,6 +735,22 @@
     <Page Include="UserControls\Admin\Role\UserAssignment\ucUserAssignmentView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Admin\Translator\DataGrid\ucTranslatorDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Translator\ucAddTranslator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Translator\ucTranslatorManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Translator\ucUpdateTranslator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Admin\User\CRUD\ucAddUser.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -585,6 +791,42 @@
     <Page Include="UserControls\ucLine.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ConfirmLoanBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\DataGrid\ucLoanDetailDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ucLoanBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ucLoanBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ucSelectBookByISBN.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ucShowBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\BorrowingBook\ucShowBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\ReturnBook\DataGrid\ucLoanSlipDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Book\ReturnBook\ucReturnBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\User\CRUD\Add\Book\ucAddBook.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -638,11 +880,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\User\DataGrid\ucAdultAndQuantityChildDataGrid.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UserControls\User\View\Book\ucDetailLoanHistory.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\User\DataGrid\ucBorrowingDataGrid.xaml">
+    <Page Include="UserControls\User\DataGrid\ucAdultAndQuantityChildDataGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -650,7 +892,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\User\DataGrid\ucEnrollDataGrid.xaml">
+    <Page Include="UserControls\User\DataGrid\LoanHistory\ucLoanHistoryDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -673,6 +915,14 @@
     <Page Include="UserControls\User\Management\Book\BookTitleManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\User\Management\Book\LoanHistoryManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Management\Book\ucLoanSlipManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\User\Management\Reader\ReaderManagement.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -717,6 +967,10 @@
     <Page Include="UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Admin\Category\ucAddCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AdminMenu.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -822,6 +1076,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,20 +11,15 @@ namespace HungVuong_C5_Assignment
     {
         private BookISBNViewModel _BookISBNVM = new BookISBNViewModel();
 
-        public bool Add(string language, string bookTitleName, DateTime publishDate, string authorID, string bookTitleID, string publisherID, decimal bookPrice)
+        public bool Add(string language, string bookTitleName, string authorID, string bookTitleID)
         {
-            if(bookPrice <= 0)
-            {
-                MessageBox.Show("Invalid book price!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            if (this._BookISBNVM.isExist(language, bookTitleName))
+            if (this._BookISBNVM.isExist(bookTitleName, authorID))
             {
                 MessageBox.Show("Book ISBN Existed!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 
-            this._BookISBNVM.bookISBNRepo.Add(language, publishDate, authorID, bookTitleID, publisherID, bookPrice);
+            this._BookISBNVM.bookISBNRepo.Add(language, authorID, bookTitleID);
 
             DatabaseFirst.Instance.SaveChanged();
 

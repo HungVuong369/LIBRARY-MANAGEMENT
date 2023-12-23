@@ -23,5 +23,13 @@ namespace HungVuong_C5_Assignment
         {
             InitializeComponent();
         }
+
+        public WindowDefault(int width, int height)
+        {
+            InitializeComponent();
+            this.SizeToContent = SizeToContent.Manual;
+            this.Width = width;
+            this.Height = height;
+        }
     }
 }

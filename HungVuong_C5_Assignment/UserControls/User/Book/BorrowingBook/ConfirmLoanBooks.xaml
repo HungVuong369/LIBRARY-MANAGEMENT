@@ -1,0 +1,218 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ConfirmLoanBooks"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Add Loan Slip"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Header="Loan Slip Information"
+                      BorderBrush="Black"
+                      FontSize="15"
+                      FontWeight="SemiBold"
+                      Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="ID: "/>
+
+                    <TextBlock Text="Quantity: "
+                               Grid.Row="1"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Loan Paid: "
+                               Grid.Row="2"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Deposit: "
+                               Grid.Row="3"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Loan Date: "
+                               Grid.Row="4"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Expire Date: "
+                               Grid.Row="5"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="{Binding LoanSlip.Id}"
+                               Grid.Column="1"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding LoanSlip.Quantity}"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding LoanSlip.LoanPaid}"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding LoanSlip.Deposit}"
+                               Grid.Column="1"
+                               Grid.Row="3"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding LoanSlip.LoanDate, StringFormat='dd/MM/yyyy'}"
+                               Grid.Column="1"
+                               Grid.Row="4"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding LoanSlip.ExpDate, StringFormat='dd/MM/yyyy'}"
+                               Grid.Column="1"
+                               Grid.Row="5"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Reader Information"
+                      BorderBrush="Black"
+                      FontSize="15"
+                      FontWeight="SemiBold"
+                      Grid.Column="1"
+                      Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Id: "
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Name: "
+                               Grid.Row="1"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="Reader Type: "
+                               Grid.Row="2"
+                               FontSize="14"
+                               FontWeight="SemiBold"/>
+
+                    <TextBlock Text="{Binding Reader.Id}"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Grid.Column="1"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding FullName}"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               VerticalAlignment="Center"/>
+
+                    <TextBlock Text="{Binding ReaderType}"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Grid.Column="1"
+                               Grid.Row="2"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+
+        <GroupBox Header="Loan Detail"
+                  Grid.Row="2"
+                  FontSize="15"
+                  FontWeight="SemiBold"
+                  BorderBrush="Black"
+                  Margin="5">
+            <DataGrid Name="dgLoanDetails" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      Height="300"
+                      Margin="5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
+                    <DataGridTextColumn Header="Name Book" Binding="{Binding BookISBN.BookTitle.Name}"/>
+                    <DataGridTextColumn Header="Author Name" Binding="{Binding BookISBN.Author.Name}"/>
+                    <DataGridTextColumn Header="Translator Name" Binding="{Binding BookISBN.Author.Name}"/>
+                    <DataGridTextColumn Header="Language" Binding="{Binding BookISBN.OriginLanguage}"/>
+                    <DataGridTextColumn Header="Book Price" Binding="{Binding PriceCurrent}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+
+        <Grid Grid.Row="3"
+              Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Confirm"
+                    Margin="5"
+                    Name="btnConfirm"
+                    Click="btnConfirm_Click"/>
+            <Button Grid.Column="1"
+                    Content="Cancel"
+                    Margin="5"
+                    Name="btnCancel"
+                    Click="btnCancel_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -18,124 +18,80 @@
                FontWeight="Bold"
                HorizontalAlignment="Center"/>
 
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
+            <TextBlock Text="Name: "
+                               FontSize="14" FontWeight="SemiBold"
+                               Margin="0 0 0 5"
+                       Grid.Row="0"/>
+
+            <TextBox Name="txtBookTitleName"
+                                 PreviewTextInput="txtBookTitleName_PreviewTextInput"
+                                 TextChanged="txtBookTitleName_TextChanged"
+                     Grid.Row="1">
+                <TextBox.Text>
+                    <Binding Path="Name" 
+                             Mode="TwoWay"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:InputTextAndNumber />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <TextBlock Text="Category"
+                               FontSize="14" FontWeight="SemiBold"
+                               Margin="0 10 0 5"
+                       Grid.Row="2"/>
+            <ComboBox Name="cbCategory"
+                      ItemsSource="{Binding Categories}"
+                      SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Name"
+                      Grid.Row="3"/>
+
+            <TextBlock Text="Summary: "
+                               FontSize="14" FontWeight="SemiBold"
+                               Margin="0 10 0 5"
+                       Grid.Row="4"/>
+            <TextBox Name="txtSummary" MaxLength="255"
+                                 TextChanged="txtBookTitleName_TextChanged"
+                     Grid.Row="5">
+                <TextBox.Text>
+                    <Binding Path="Summary" 
+                             Mode="TwoWay"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:InputTextAndNumber />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="1">
             <Grid Grid.Column="0" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Label Content="Book Title Information"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               HorizontalAlignment="Center"></Label>
-
-
                 <StackPanel Grid.Row="1"
                             Margin="5">
-                    <TextBlock Text="Name: "
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 0 0 5"/>
-                    <TextBox Name="txtBookTitleName"
-                                 PreviewTextInput="txtBookTitleName_PreviewTextInput"
-                                 TextChanged="txtBookTitleName_TextChanged"
-                                 Width="200"
-                             Style="{StaticResource PlaceHolderTextStyle}"
-                             Tag="Name Book Title">
-                        <TextBox.Text>
-                            <Binding Path="Name" 
-                                         UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <local:InputTextAndNumber />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    
+                    
 
-                    <TextBlock Text="Category"
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 10 0 5"/>
-                    <ComboBox Name="cbCategory"
-                              DisplayMemberPath="Name"
-                              SelectedIndex="0"
-                              Width="200"/>
-
-                    <TextBlock Text="Summary: "
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 10 0 5"/>
-                    <TextBox Name="txtSummary" MaxLength="255"
-                                 TextChanged="txtBookTitleName_TextChanged"
-                                 Width="200"
-                             Tag="Summary Book Title"
-                             Style="{StaticResource PlaceHolderTextStyle}">
-                        <TextBox.Text>
-                            <Binding Path="Summary" 
-                                         UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <local:InputTextAndNumber />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    
                 </StackPanel>
-            </Grid>
-
-            <Grid Grid.Column="1" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-
-
-                <Label Content="Select An Author"
-                               FontSize="18"
-                               FontWeight="SemiBold"
-                               HorizontalAlignment="Center"></Label>
-
-
-                <Grid Grid.Row="1" Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <StackPanel>
-                        <TextBlock
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 0 0 5"/>
-                        <TextBox Name="txtSearch"
-                                     Margin="10 0 10 0"
-                                     TextChanged="txtSearch_TextChanged"
-                                 Style="{StaticResource PlaceHolderTextStyle}"
-                                 Tag="Search by Name and Id"/>
-                        <TextBlock Name="tbAuthor"
-                                       Text="Please select an author!"
-                                       FontSize="12"
-                                       Foreground="Red"
-                                       Margin="10 0"/>
-                    </StackPanel>
-
-                    <DataGrid Name="dgAuthor" 
-                                  AutoGenerateColumns="False" 
-                                  IsReadOnly="True" 
-                                  SelectionMode="Single" 
-                                  Margin="10 5 10 5"
-                                  Grid.Row="1"
-                                  SelectionChanged="dgAuthor_SelectionChanged">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="BoF" Binding="{Binding boF, StringFormat='dd/MM/yyyy'}"/>
-                            <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"/>
-                            <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
             </Grid>
         </Grid>
         <StackPanel Grid.Row="2" Orientation="Horizontal"
@@ -145,13 +101,13 @@
                     Content="Add"
                     Width="250"
                     Margin="0 0 10 0"
-                    Click="btnAdd_Click"
+                    Command="{Binding AddCommand}"
                     IsEnabled="{Binding isEnabled, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button Name="btnCancel"
                     Content="Cancel"
                     Width="250"
-                    Click="btnCancel_Click"/>
+                    Command="{Binding CancelCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -32,7 +32,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookISBNInfo = new ObservableCollection<BookISBNInformation>(this._StorageLstBookISBNInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
 
             dgBookISBN.ItemsSource = null;
             dgBookISBN.ItemsSource = _LstBookISBNInfo.Take(pagination.ItemPerPage);
@@ -42,21 +42,11 @@ namespace HungVuong_C5_Assignment
             dgBookISBN.ItemsSource = _LstBookISBNInfo;
         }
 
-        public void ReloadShowing()
-        {
-            if (pagination.MaxPage == 0)
-                pagination.lblShowing.Content = $"Showing 0 to 0 entities";
-            else if (pagination.MaxPage == pagination.CurrentPage && _LstBookISBNInfo.Count() % pagination.ItemPerPage != 0)
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage - 1) * pagination.ItemPerPage + _LstBookISBNInfo.Count % pagination.ItemPerPage} entities";
-            else
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage) * pagination.ItemPerPage} entities";
-        }
-
         public void ReloadDataGrid()
         {
             dgBookISBN.ItemsSource = null;
             dgBookISBN.ItemsSource = _LstBookISBNInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            ReloadShowing();
+            pagination.ReloadShowing<BookISBNInformation>(_LstBookISBNInfo.ToList());
         }
 
         public void ReloadStorage()
@@ -65,19 +55,9 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookISBNInfo = new ObservableCollection<BookISBNInformation>(this._StorageLstBookISBNInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
 
             dgBookISBN.ItemsSource = _LstBookISBNInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-        }
-
-        private void SetMaxPage()
-        {
-            pagination.MaxPage = (_LstBookISBNInfo.Count / pagination.ItemPerPage);
-
-            if (_LstBookISBNInfo.Count % pagination.ItemPerPage != 0)
-            {
-                pagination.MaxPage += 1;
-            }
         }
 
         public void Search(string search)
@@ -90,14 +70,12 @@ namespace HungVuong_C5_Assignment
                     this._LstBookISBNInfo.Add(item);
                 else if(item.Language.ToLower().Contains(search.ToLower()))
                     this._LstBookISBNInfo.Add(item);
-                else if(item.PublishDate.ToString("dd/MM/yyyy").Contains(search))
-                    this._LstBookISBNInfo.Add(item);
                 else if(item.AuthorName.ToLower().Contains(search.ToLower()))
                     this._LstBookISBNInfo.Add(item);
                 else if(item.AuthorBoF.ToString("dd/MM/yyyy").Contains(search))
                     this._LstBookISBNInfo.Add(item);
             }
-            SetMaxPage();
+            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }
@@ -107,6 +85,9 @@ namespace HungVuong_C5_Assignment
             Button button = sender as Button;
 
             WindowDefault window = new WindowDefault();
+            window.SizeToContent = SizeToContent.Manual;
+            window.Width = 750;
+            window.Height = 550;
             window.Content = new ucDetailBookISBN(button.Tag.ToString());
             window.ShowDialog();
         }

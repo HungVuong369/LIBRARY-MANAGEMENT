@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         <DataGrid Name="dgLoanSlips" 
                   AutoGenerateColumns="False" 
                   IsReadOnly="True"
@@ -18,7 +22,7 @@
                 <DataGridTextColumn Header="Loan Paid" Binding="{Binding LoanPaid}"/>
                 <DataGridTextColumn Header="Deposit" Binding="{Binding Deposit}"/>
                 <DataGridTextColumn Header="Loan Date" Binding="{Binding LoanDate, StringFormat='dd/MM/yyyy'}"/>
-                <DataGridTextColumn Header="Return Date" Binding="{Binding ReturnDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Expire Date" Binding="{Binding ReturnDate, StringFormat='dd/MM/yyyy'}"/>
 
                 <DataGridTemplateColumn Header="Action">
                     <DataGridTemplateColumn.CellTemplate>
@@ -34,5 +38,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <local:Pagination Grid.Row="1"
+                          x:Name="pagination"
+                          Height="45"/>
     </Grid>
 </UserControl>

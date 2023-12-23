@@ -11,9 +11,9 @@ namespace HungVuong_C5_Assignment
     {
         private BookTitleViewModel _BookTitleVM = new BookTitleViewModel();
 
-        public bool Add(string bookTitleName, string categoryID, string summary, string authorID)
+        public bool Add(string bookTitleName, string categoryID, string summary)
         {
-            if (_BookTitleVM.isExist(bookTitleName.Trim().ToLower(), categoryID, summary.Trim().ToLower(), authorID))
+            if (_BookTitleVM.isExist(bookTitleName.Trim().ToLower(), categoryID, summary.Trim().ToLower()))
             {
                 MessageBox.Show("Book title already exists!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
@@ -22,7 +22,6 @@ namespace HungVuong_C5_Assignment
             _BookTitleVM.bookTitleRepo.Add(
                 categoryID,
                 bookTitleName,
-                authorID,
                 summary
             );
 

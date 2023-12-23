@@ -18,24 +18,18 @@ namespace HungVuong_C5_Assignment
         public BookISBN()
         {
             this.Books = new HashSet<Book>();
-            this.Enrolls = new HashSet<Enroll>();
         }
     
         public string ISBN { get; set; }
         public string IdBookTitle { get; set; }
         public string IdAuthor { get; set; }
-        public System.DateTime PublishDate { get; set; }
-        public string Language { get; set; }
+        public string OriginLanguage { get; set; }
+        public string Description { get; set; }
         public bool Status { get; set; }
-        public decimal BookPrice { get; set; }
-        public string IdPublisher { get; set; }
     
         public virtual Author Author { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Books { get; set; }
         public virtual BookTitle BookTitle { get; set; }
-        public virtual Publisher Publisher { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Enroll> Enrolls { get; set; }
     }
 }

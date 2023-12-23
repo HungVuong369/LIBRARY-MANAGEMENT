@@ -12,6 +12,7 @@ namespace HungVuong_C5_Assignment
         private static DatabaseFirst _Instance;
         private static readonly object _LockObject = new object();
         public QuanLyThuVienEntities db;
+        public User UserLoggedIn;
 
         private DatabaseFirst()
         {

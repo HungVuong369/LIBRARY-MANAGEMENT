@@ -18,7 +18,6 @@ namespace HungVuong_C5_Assignment
         public Author()
         {
             this.BookISBNs = new HashSet<BookISBN>();
-            this.BookTitles = new HashSet<BookTitle>();
         }
     
         public string Id { get; set; }
@@ -32,7 +31,5 @@ namespace HungVuong_C5_Assignment
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookISBN> BookISBNs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BookTitle> BookTitles { get; set; }
     }
 }

@@ -11,25 +11,7 @@ namespace HungVuong_C5_Assignment
     {
         private BookViewModel _BookVM = new BookViewModel();
         private BookISBNViewModel _BookISBNVM = new BookISBNViewModel();
-        private EnrolViewModel _EnrollVM = new EnrolViewModel();
         private ParameterViewModel _ParameterVM = new ParameterViewModel();
-
-        private void UpdateEnroll(string isbn)
-        {
-            // Duyệt xem có Enroll nào có cùng ISBN, có được danh sách Enrolls
-            // Duyệt xem Enroll nào có EnrolDate sớm nhất
-            // Tiến hành gán IdBook, ExpiryDate cho Enroll đó
-            // Save changed
-
-            var enroll = _EnrollVM.enrolRepo.Items.Where(i => i.ISBN == isbn && i.IdBook == null).OrderBy(i => i.EnrolDate).FirstOrDefault();
-
-            if (enroll == null)
-                return;
-
-            enroll.IdBook = _BookVM.bookRepo.Items.LastOrDefault().Id;
-            enroll.ExpiryDate = DateTime.Now.AddDays(int.Parse(_ParameterVM.GetValueByID("QD10")));
-            DatabaseFirst.Instance.SaveChanged();
-        }
 
         private void UpdateStatusBookISBN(string isbn)
         {
@@ -40,23 +22,19 @@ namespace HungVuong_C5_Assignment
             }
         }
 
-        public bool Add(string isbn, decimal bookPrice)
+        public bool Add(string isbn, string publisherID, string translatorID, string language, DateTime publishDate, decimal price, int quantity)
         {
-            decimal priceBookISBN = _BookISBNVM.bookISBNRepo.GetByISBN(isbn).BookPrice;
-
-            if (bookPrice <= priceBookISBN)
+            BookISBNViewModel bookISBNVM = new BookISBNViewModel();
+            if(bookISBNVM.bookISBNRepo.Items.FirstOrDefault(i => i.ISBN == isbn).OriginLanguage == language)
             {
-                MessageBox.Show("Invalid Book Price", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("The language already exists in the Book ISBN", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
-
-            this._BookVM.bookRepo.Add(isbn, bookPrice);
+            this._BookVM.bookRepo.Add(isbn, publisherID, translatorID, language, publishDate, price, quantity);
 
             DatabaseFirst.Instance.SaveChanged();
 
             UpdateStatusBookISBN(isbn);
-
-            UpdateEnroll(isbn);
 
             return true;
         }

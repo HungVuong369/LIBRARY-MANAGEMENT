@@ -22,7 +22,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
-                <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Author ID" Binding="{Binding AuthorID}"/>
                 <DataGridTextColumn Header="Author Name" Binding="{Binding AuthorName}"/>
                 <DataGridTextColumn Header="Author BoF" Binding="{Binding AuthorBoF, StringFormat='dd/MM/yyyy'}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status, Converter={StaticResource ConvertTrueFalseToAvailableUnavailable}}">

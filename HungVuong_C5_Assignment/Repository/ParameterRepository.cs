@@ -20,7 +20,7 @@ namespace HungVuong_C5_Assignment
         {
             Items.Clear();
 
-            Items.AddRange(DatabaseFirst.Instance.db.Parameters);
+            Items.AddRange(DatabaseFirst.Instance.db.Parameters.Where(i => i.Status));
 
             return Items;
         }

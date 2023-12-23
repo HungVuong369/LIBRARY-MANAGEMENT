@@ -47,6 +47,7 @@
                          Margin="5 20 5 0"
                          CaretBrush="White"
                          TextChanged="txtPassword_TextChanged"
+                         PreviewKeyDown="txtPassword_PreviewKeyDown"
                          PreviewTextInput="txtPassword_PreviewTextInput"/>
                 <Button Name="btnLogin"
                         Content="Login"

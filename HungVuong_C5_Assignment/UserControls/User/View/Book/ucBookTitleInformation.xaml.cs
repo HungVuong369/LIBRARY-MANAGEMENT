@@ -31,11 +31,12 @@ namespace HungVuong_C5_Assignment
         public ucBookTitleInformation()
         {
             InitializeComponent();
+
             this._StorageLstBookTitleInfo = new ObservableCollection<BookTitleInformation>(this.GetListBookTitleInformation());
 
             this._LstBookTitleInfo = new ObservableCollection<BookTitleInformation>(this._StorageLstBookTitleInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookTitleInformation>(_LstBookTitleInfo.ToList());
 
             dgBookTitleInfo.ItemsSource = null;
             dgBookTitleInfo.ItemsSource = _LstBookTitleInfo.Take(pagination.ItemPerPage);
@@ -43,26 +44,6 @@ namespace HungVuong_C5_Assignment
             pagination.LoadPage();
 
             dgBookTitleInfo.ItemsSource = _LstBookTitleInfo;
-        }
-
-        public void ReloadShowing()
-        {
-            if (pagination.MaxPage == 0)
-                pagination.lblShowing.Content = $"Showing 0 to 0 entities";
-            else if (pagination.MaxPage == pagination.CurrentPage && _LstBookTitleInfo.Count() % pagination.ItemPerPage != 0)
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage - 1) * pagination.ItemPerPage + _LstBookTitleInfo.Count % pagination.ItemPerPage} entities";
-            else
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage) * pagination.ItemPerPage} entities";
-        }
-
-        private void SetMaxPage()
-        {
-            pagination.MaxPage = (_LstBookTitleInfo.Count / pagination.ItemPerPage);
-
-            if (_LstBookTitleInfo.Count % pagination.ItemPerPage != 0)
-            {
-                pagination.MaxPage += 1;
-            }
         }
 
         public void Search(string search)
@@ -73,14 +54,13 @@ namespace HungVuong_C5_Assignment
             {
                 if (item.Name.ToLower().Contains(search.ToLower()))
                     this._LstBookTitleInfo.Add(item);
-                else if(item.Category.Name.ToLower().Contains(search.ToLower()))
+                else if(item.Category.ToLower().Contains(search.ToLower()))
                     this._LstBookTitleInfo.Add(item);
-                else if(item.Author.Name.ToLower().Contains(search.ToLower()))
-                    this._LstBookTitleInfo.Add(item);
-                else if(item.Author.boF.ToString("dd/MM/yyyy").Contains(search.ToLower()))
+                else if(item.Id.ToLower().Contains(search.ToLower()))
                     this._LstBookTitleInfo.Add(item);
             }
-            SetMaxPage();
+
+            pagination.SetMaxPage<BookTitleInformation>(_LstBookTitleInfo.ToList());
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }
@@ -89,7 +69,7 @@ namespace HungVuong_C5_Assignment
         {
             dgBookTitleInfo.ItemsSource = null;
             dgBookTitleInfo.ItemsSource = _LstBookTitleInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            ReloadShowing();
+            pagination.ReloadShowing<BookTitleInformation>(_LstBookTitleInfo.ToList());
         }
 
         public void ReloadStorage()
@@ -98,11 +78,10 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookTitleInfo = new ObservableCollection<BookTitleInformation>(this._StorageLstBookTitleInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookTitleInformation>(_LstBookTitleInfo.ToList());
 
             dgBookTitleInfo.ItemsSource = _LstBookTitleInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
-
 
         private List<BookTitleInformation> GetListBookTitleInformation()
         {
@@ -112,9 +91,8 @@ namespace HungVuong_C5_Assignment
             {
                 lstBookTitleInfo.Add(new BookTitleInformation(
                     item.Id,
-                    this._CategoryVM.categoryRepo.GetById(item.IdCategory),
+                    item.Category.Name,
                     item.Name,
-                    this._AuthorVM.authorRepo.GetById(item.IdAuthor),
                     item.Summary
                 ));
             }

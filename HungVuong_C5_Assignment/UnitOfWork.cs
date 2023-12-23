@@ -8,6 +8,7 @@ namespace HungVuong_C5_Assignment
 {
     class UnitOfWork
     {
+        #region Declare
         private ReaderRepository _ListReader;
         private AdultRepository _ListAdult;
         private ChildRepository _ListChild;
@@ -25,9 +26,15 @@ namespace HungVuong_C5_Assignment
         private RoleRepository _ListRole;
         private LoanSlipRepository _ListLoanSlip;
         private LoanDetailRepository _ListLoanDetail;
-        private EnrolRepository _ListEnrol;
         private PublisherRepository _ListPublisher;
+        private PenaltyReasonRepository _ListPenaltyReason;
+        private LoanDetailHistoryRepository _ListLoanDetailHistory;
+        private LoanHistoryRepository _ListLoanHistory;
+        private TranslatorRepository _ListTranslator;
+        private ProvinceRepository _ListProvince;
+        #endregion
 
+        #region Properties
         public ReaderRepository Readers
         {
             get
@@ -198,16 +205,6 @@ namespace HungVuong_C5_Assignment
             }
         }
 
-        public EnrolRepository Enrols
-        {
-            get
-            {
-                if (this._ListEnrol == null)
-                    this._ListEnrol = new EnrolRepository();
-                return this._ListEnrol;
-            }
-        }
-
         public PublisherRepository Publishers
         {
             get
@@ -218,7 +215,59 @@ namespace HungVuong_C5_Assignment
             }
         }
 
+        public PenaltyReasonRepository PenaltyReasons
+        {
+            get
+            {
+                if (this._ListPenaltyReason == null)
+                    this._ListPenaltyReason = new PenaltyReasonRepository();
+                return this._ListPenaltyReason;
+            }
+        }
+
+        public LoanDetailHistoryRepository LoanDetailHistories
+        {
+            get
+            {
+                if (this._ListLoanDetailHistory == null)
+                    this._ListLoanDetailHistory = new LoanDetailHistoryRepository();
+                return this._ListLoanDetailHistory;
+            }
+        }
+
+        public LoanHistoryRepository LoanHistories
+        {
+            get
+            {
+                if (this._ListLoanHistory == null)
+                    this._ListLoanHistory = new LoanHistoryRepository();
+                return this._ListLoanHistory;
+            }
+        }
+
+        public TranslatorRepository Translators
+        {
+            get
+            {
+                if (this._ListTranslator == null)
+                    this._ListTranslator = new TranslatorRepository();
+                return this._ListTranslator;
+            }
+        }
+
+        public ProvinceRepository Provinces
+        {
+            get
+            {
+                if (this._ListProvince == null)
+                    this._ListProvince = new ProvinceRepository();
+                return this._ListProvince;
+            }
+        }
+        #endregion
+
         public UnitOfWork() {
+            #region Instantiation
             _ListReader = new ReaderRepository();
 
             _ListUserInfo = new UserInfoRepository();
@@ -238,9 +287,15 @@ namespace HungVuong_C5_Assignment
             _ListParameter = new ParameterRepository();
             _ListLoanSlip = new LoanSlipRepository();
             _ListLoanDetail = new LoanDetailRepository();
-            _ListEnrol = new EnrolRepository();
             _ListPublisher = new PublisherRepository();
+            _ListPenaltyReason = new PenaltyReasonRepository();
+            _ListLoanDetailHistory = new LoanDetailHistoryRepository();
+            _ListLoanHistory = new LoanHistoryRepository();
+            _ListTranslator = new TranslatorRepository();
+            _ListProvince = new ProvinceRepository();
+            #endregion
 
+            #region Load
             _ListCategory.Load();
             _ListReader.Load(true);
 
@@ -274,9 +329,18 @@ namespace HungVuong_C5_Assignment
 
             _ListLoanDetail.Load();
 
-            _ListEnrol.Load();
-
             _ListPublisher.Load();
+
+            _ListPenaltyReason.Load();
+
+            _ListLoanHistory.Load();
+
+            _ListLoanDetailHistory.Load();
+
+            _ListTranslator.Load();
+
+            _ListProvince.Load();
+            #endregion
         }
     }
 }

@@ -26,7 +26,7 @@ namespace HungVuong_C5_Assignment
         private List<BookISBNInformation> _BookISBNInformation = DataAccess.GetListBookISBNInformation();
         private ObservableCollection<BookISBNInformation> _BookISBNTemp;
 
-        private BookViewModel _BookVM = new BookViewModel();
+        private BookViewModel _BookVM;
 
         public ucAddBook(WindowDefault window)
         {
@@ -35,21 +35,15 @@ namespace HungVuong_C5_Assignment
             _Parent = window;
 
             this._BookISBNTemp = new ObservableCollection<BookISBNInformation>(_BookISBNInformation);
-
             dgBookISBN.ItemsSource = _BookISBNTemp;
-        }
 
-        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            this._BookISBNTemp.Clear();
-
-            foreach (var item in this._BookISBNInformation)
-            {
-                if (item.ISBN.ToLower().Contains(txtSearch.Text.ToLower()))
-                {
-                    this._BookISBNTemp.Add(item);
-                }
-            }
+            _BookVM = new BookViewModel(
+                _Parent, 
+                DataAccess.GetListLanguage().Select(i => i.Name).ToList(), 
+                DatabaseFirst.Instance.db.Publishers.ToList(), 
+                DatabaseFirst.Instance.db.Translators.Where(i => i.Status).ToList()
+            );
+            this.DataContext = _BookVM;
         }
 
         private void btnDetail_Click(object sender, RoutedEventArgs e)
@@ -61,57 +55,9 @@ namespace HungVuong_C5_Assignment
             window.ShowDialog();
         }
 
-        private void UpdateIsEnabled()
-        {
-            bool isCheck = true;
-
-            if(dgBookISBN.SelectedItem == null)
-            {
-                tbSelectBookISBN.Foreground = Brushes.Red;
-                isCheck = false;
-            }
-            else
-            {
-                tbSelectBookISBN.Foreground = Brushes.White;
-            }
-            if (txtBookPrice.Text == string.Empty)
-                isCheck = false;
-
-            btnAdd.IsEnabled = isCheck;
-        }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            BookManagementRepository bookManagementRepo = new BookManagementRepository();
-
-            bool isCheck = bookManagementRepo.Add(dgBookISBN.SelectedValue.ToString(), decimal.Parse(txtBookPrice.Text.Replace(",", ".")));
-
-            if (!isCheck)
-                return;
-
-            MessageBox.Show("Book successfully added!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            _Parent.DialogResult = true;
-            _Parent.Close();
-        }
-
         private void dgBookISBN_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UpdateIsEnabled();
-            try
-            {
-                txtBookPrice.Text = (dgBookISBN.SelectedItem as BookISBNInformation).BookPrice.ToString().Replace(".", ",");
-            }
-            catch(Exception)
-            {
-
-            }
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            _Parent.DialogResult = false;
-            _Parent.Close();
+            btnAdd.IsEnabled = _BookVM.IsEnabledAdd;
         }
 
         private void txtBookPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -122,11 +68,93 @@ namespace HungVuong_C5_Assignment
 
         private void txtBookPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtBookPrice.Text == string.Empty)
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == string.Empty)
                 return;
-            txtBookPrice.Text = double.Parse(txtBookPrice.Text.Replace(",", "")).ToString("N0");
-            txtBookPrice.SelectionStart = txtBookPrice.Text.Length;
-            UpdateIsEnabled();
+            textBox.Text = double.Parse(textBox.Text.Replace(",", "")).ToString("N0");
+            textBox.SelectionStart = textBox.Text.Length;
+
+            btnAdd.IsEnabled = _BookVM.IsEnabledAdd;
+        }
+
+        private void txtSearchPublisher_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _BookVM.LstPublisher.Clear();
+
+            if (txtSearchPublisher.Text == string.Empty)
+            {
+                foreach(var item in DatabaseFirst.Instance.db.Publishers.ToList())
+                {
+                    _BookVM.LstPublisher.Add(item);
+                }
+            }
+            else
+            {
+                foreach (var item in DatabaseFirst.Instance.db.Publishers.ToList())
+                {
+                    if (item.Id.ToLower().Contains(txtSearchPublisher.Text.ToLower()))
+                        _BookVM.LstPublisher.Add(item);
+                    else if(item.Name.ToLower().Contains(txtSearchPublisher.Text.ToLower()))
+                        _BookVM.LstPublisher.Add(item);
+                }
+            }
+        }
+
+        private void txtSearchTranslator_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _BookVM.LstTranslator.Clear();
+
+            if (txtSearchTranslator.Text == string.Empty)
+            {
+                foreach (var item in DatabaseFirst.Instance.db.Translators.Where(i => i.Status).ToList())
+                {
+                    _BookVM.LstTranslator.Add(item);
+                }
+            }
+            else
+            {
+                foreach (var item in DatabaseFirst.Instance.db.Translators.Where(i => i.Status).ToList())
+                {
+                    if (item.Id.ToLower().Contains(txtSearchTranslator.Text.ToLower()))
+                        _BookVM.LstTranslator.Add(item);
+                    else if (item.Name.ToLower().Contains(txtSearchTranslator.Text.ToLower()))
+                        _BookVM.LstTranslator.Add(item);
+                    else if(item.boF.ToString("dd/MM/yyyy").Contains(txtSearchTranslator.Text))
+                        _BookVM.LstTranslator.Add(item);
+                }
+            }
+        }
+
+        private void txtSearchBookISBN_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            this._BookISBNTemp.Clear();
+
+            foreach (var item in this._BookISBNInformation)
+            {
+                if (item.ISBN.ToLower().Contains(txtSearchBookISBN.Text.ToLower()))
+                {
+                    this._BookISBNTemp.Add(item);
+                }
+                else if(item.Language.ToLower().Contains(txtSearchBookISBN.Text.ToLower()))
+                    this._BookISBNTemp.Add(item);
+                else if(item.AuthorName.ToLower().Contains(txtSearchBookISBN.Text.ToLower()))
+                    this._BookISBNTemp.Add(item);
+            }
+        }
+
+        private void txtQuantity_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == string.Empty)
+                return;
+            textBox.Text = double.Parse(textBox.Text.Replace(",", "")).ToString("N0");
+            textBox.SelectionStart = textBox.Text.Length;
+            btnAdd.IsEnabled = _BookVM.IsEnabledAdd;
+            string id = txtId.Text.Split('-')[0].Trim();
+            id += " - " + (int.Parse(id) + int.Parse(textBox.Text.Replace(",", "")));
+            txtId.Text = id;
         }
     }
 }

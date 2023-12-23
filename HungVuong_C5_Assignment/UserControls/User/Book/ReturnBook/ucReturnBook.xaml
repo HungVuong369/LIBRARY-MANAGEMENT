@@ -1,0 +1,379 @@
+﻿<UserControl x:Class="HungVuong_C5_Assignment.ucReturnBook"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HungVuong_C5_Assignment"
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             d:DesignHeight="500" d:DesignWidth="700">
+    <UserControl.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Margin="5"
+                  Header="Reader Information">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <GroupBox Header="Search Reader"
+                          Margin="5"
+                          Width="320">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Reader ID:"
+                                   Margin="5"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Name="txtReaderID"
+                                     Margin="5"
+                                     Text="{Binding LoanHistoryVM.ReaderID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding LoanHistoryVM.TextChangedReaderIDCommand}" 
+                                                               CommandParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+
+                            <ComboBox Width="0"
+                                      Height="0"
+                                      Grid.Column="1"
+                                      Name="cbReaderID"
+                                      DropDownClosed="cbReaderID_DropDownClosed"
+                                      DisplayMemberPath="Id"
+                                      SelectedValuePath="Id"
+                                      HorizontalAlignment="Left"
+                                      ItemsSource="{Binding LoanHistoryVM.FilterReaders}"
+                                      SelectedItem="{Binding LoanHistoryVM.SelectedReader, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                      IsDropDownOpen="{Binding LoanHistoryVM.IsDropDownReaderID}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding LoanHistoryVM.SelectionChangedReaderIDCommand}"
+                                                               CommandParameter="{Binding}">
+
+                                        </i:InvokeCommandAction>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                                <ComboBox.Style>
+                                    <Style TargetType="ComboBox" BasedOn="{StaticResource ComboBoxUsedStyle}">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsDropDownOpen" Value="True">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.Style>
+                            </ComboBox>
+                        </Grid>
+
+                        <TextBlock Text="Name:"
+                                   Grid.Row="1"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="1" Grid.Column="1"
+                                 Text="{Binding LoanHistoryVM.ReaderName}"
+                                 Background="LightGray"
+                                 IsReadOnly="True"
+                                 Margin="5"/>
+
+                        <TextBlock Text="Reader Type:"
+                                   Grid.Row="2"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"
+                                 Text="{Binding LoanHistoryVM.ReaderType}"
+                                 Background="LightGray"
+                                 IsReadOnly="True"
+                                 Margin="5">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoanHistoryVM.ReaderType}" Value="Người lớn">
+                                            <Setter Property="Foreground" Value="DarkMagenta"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding LoanHistoryVM.ReaderType}" Value="Trẻ em">
+                                            <Setter Property="Foreground" Value="DarkBlue"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+
+                        <TextBlock Text="Status:"
+                                   Grid.Row="3"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="3" Grid.Column="1"
+                                 Background="LightGray"
+                                 Text="{Binding LoanHistoryVM.Status}"
+                                 IsReadOnly="True"
+                                 Margin="5">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding LoanHistoryVM.Status}" Value="Available">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding LoanHistoryVM.Status}" Value="Unavailable">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+
+                        <TextBlock Text="Loaned Quantity:"
+                                   Grid.Row="4"
+                                   Margin="5"/>
+                        <TextBox Grid.Row="4" Grid.Column="1"
+                                 Background="LightGray"
+                                 Text="{Binding LoanHistoryVM.Quantity}"
+                                 IsReadOnly="True"
+                                 Margin="5"
+                                 Foreground="{Binding LoanHistoryVM.ForegroundQuantity}">
+                        </TextBox>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Column="1"
+                          Margin="5"
+                          Header="List Loan Slip">
+                    <local:ucLoanSlipDataGrid x:Name="ucLoanSlipDataGrid"
+                                              Margin="5"
+                                              Height="150"/>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1"
+                  Header="Return Book"
+                  Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Loan Details"
+                              Margin="5">
+                        <local:ucLoanBooks/>
+                    </GroupBox>
+
+                    <GroupBox Header="Payment"
+                              Margin="5"
+                              Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Loan Paid: "
+                                       VerticalAlignment="Center"
+                                       Margin="5"/>
+
+                            <TextBlock Text="Loan Period: "
+                                       VerticalAlignment="Center"
+                                       Margin="5"
+                                       Grid.Row="1"/>
+
+                            <TextBlock Text="Late Fee: "
+                                       Grid.Row="2"
+                                       Margin="5"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Other Fee: "
+                                       Grid.Row="3"
+                                       Margin="5"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Deposit: "
+                                       Grid.Row="4"
+                                       Margin="5"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Payment: "
+                                       Grid.Row="5"
+                                       Margin="5"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Note: "
+                                       Grid.Row="6"
+                                       Margin="5"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBox Grid.Column="1"
+                                     IsReadOnly="True"
+                                     Background="LightGray"
+                                     Margin="5"
+                                     Text="{Binding LoanHistoryVM.SelectedLoanHistory.LoanPaid}"/>
+                            
+                            <TextBox Grid.Column="1"
+                                     IsReadOnly="True"
+                                     Background="LightGray"
+                                     Grid.Row="1"
+                                     Margin="5"
+                                     Text="{Binding LoanHistoryVM.LoanPeriod}"/>
+
+                            <TextBox Grid.Column="1"
+                                     IsReadOnly="True"
+                                     Margin="5"
+                                     Grid.Row="2"
+                                     Background="LightGray"
+                                     Text="{Binding LoanHistoryVM.LateFee}"/>
+
+                            <TextBox Grid.Column="1"
+                                     IsReadOnly="True"
+                                     Background="LightGray"
+                                     Grid.Row="3"
+                                     Margin="5"
+                                     Text="{Binding LoanHistoryVM.OtherFee}"/>
+
+                            <TextBox Grid.Column="1"
+                                     IsReadOnly="True"
+                                     Grid.Row="4"
+                                     Margin="5"
+                                     Background="LightGray"
+                                     Text="{Binding LoanHistoryVM.SelectedLoanHistory.Deposit, TargetNullValue=0}"/>
+
+                            <TextBox Grid.Column="1"
+                                     Margin="5"
+                                     IsReadOnly="True"
+                                     Grid.Row="5"
+                                     Background="LightGray"
+                                     Text="{Binding LoanHistoryVM.Payment}"/>
+
+                            <TextBox Grid.Column="1"
+                                     Grid.Row="6"
+                                     Margin="5"
+                                     Text="{Binding LoanHistoryVM.SelectedLoanHistory.Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <GroupBox Header="Note"
+                              Grid.Row="1"
+                              Margin="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Book"
+                                       VerticalAlignment="Center"
+                                       Margin="5"/>
+                            <TextBox Grid.Column="1"
+                                     Margin="5"
+                                     VerticalAlignment="Center"
+                                     IsEnabled="False"
+                                     Text="{Binding LoanHistoryDataGrid.SelectedLoanDetailHistory.Book.BookISBN.BookTitle.Name}"/>
+
+                            <TextBlock Text="Reason"
+                                       VerticalAlignment="Center"
+                                       Grid.Column="2"
+                                       Margin="5"/>
+                            <ComboBox Grid.Column="3"
+                                      Margin="5"
+                                      VerticalAlignment="Center"
+                                      ItemsSource="{Binding LoanHistoryVM.PenaltyReason}"
+                                      SelectedItem="{Binding LoanHistoryVM.SelectedPenaltyReason, UpdateSourceTrigger=PropertyChanged}"
+                                      DisplayMemberPath="Name"
+                                      SelectedIndex="0">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding LoanHistoryVM.ReasonSelectionChanged}" 
+                                                               CommandParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+
+                            <TextBlock Text="Price"
+                                       VerticalAlignment="Center"
+                                       Grid.Column="4"
+                                       Margin="5"/>
+                            <TextBox Grid.Column="5"
+                                     Margin="5"
+                                     Name="txtPrice"
+                                     VerticalAlignment="Center"
+                                     IsEnabled="{Binding LoanHistoryVM.IsEnabledPrice}"
+                                     Text="{Binding LoanHistoryVM.Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     PreviewTextInput="txtPrice_PreviewTextInput"
+                                     TextChanged="txtPrice_TextChanged">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding LoanHistoryVM.PriceTextChangedCommand}" 
+                                                               CommandParameter="{Binding}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
+                            
+                            <Button Content="OK"
+                                    Grid.Column="6"
+                                    Margin="5"
+                                    IsEnabled="{Binding LoanHistoryVM.IsReturnBook}"
+                                    Command="{Binding LoanHistoryVM.ReturnBookCommand}"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

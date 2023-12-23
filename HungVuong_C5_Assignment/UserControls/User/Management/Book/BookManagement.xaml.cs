@@ -28,13 +28,6 @@ namespace HungVuong_C5_Assignment
             ucBook.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             ucBook.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             ucBook.pagination.cbPage.SelectedIndex = 1;
-
-            Loaded += BookManagement_Loaded;
-        }
-
-        private void BookManagement_Loaded(object sender, RoutedEventArgs e)
-        {
-            lbTabMenu.SelectedIndex = 0;
         }
 
         private void ReloadDataGrid()
@@ -72,8 +65,8 @@ namespace HungVuong_C5_Assignment
             WindowDefault window = new WindowDefault();
             window.Content = new ucAddBook(window);
             window.SizeToContent = SizeToContent.Manual;
-            window.Height = 500;
-            window.Width = 650;
+            window.Height = 600;
+            window.Width = 850;
             window.ShowDialog();
 
             if (window.DialogResult == true)
@@ -89,10 +82,6 @@ namespace HungVuong_C5_Assignment
                 ucBook.ReloadDataGrid();
 
                 ucBook.pagination.LoadPage();
-
-                ucLoanSlips.ReloadDataGrid();
-
-                ucEnroll.ReloadDataGrid();
             }
         }
 
@@ -105,23 +94,22 @@ namespace HungVuong_C5_Assignment
         {
             ucBook.ReloadStorageInfo();
             ReloadDataGrid();
-            ucBook.dgBookInfo.Columns[7].Visibility = Visibility.Visible;
-            ucBook.dgBookInfo.Columns[8].Visibility = Visibility.Collapsed;
+            ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Visible;
+            ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Collapsed;
         }
 
         private void toggleButton_Checked(object sender, RoutedEventArgs e)
         {
             ucBook.ReloadStorageAll();
             ReloadDataGrid();
-            ucBook.dgBookInfo.Columns[7].Visibility = Visibility.Collapsed;
-            ucBook.dgBookInfo.Columns[8].Visibility = Visibility.Visible;
-
+            ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Collapsed;
+            ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Visible;
         }
 
-        private void btnBorrowingBook_Click(object sender, RoutedEventArgs e)
+        private void btnReturnBook_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucBorrowingBook(window);
+            window.Content = new ucReturnBook();
             window.ShowDialog();
 
             if (window.DialogResult == true)
@@ -137,37 +125,6 @@ namespace HungVuong_C5_Assignment
                 ucBook.ReloadDataGrid();
 
                 ucBook.pagination.LoadPage();
-
-                ucLoanSlips.ReloadDataGrid();
-
-                ucEnroll.ReloadDataGrid();
-            }
-        }
-
-        private void lbTabMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string tab = (lbTabMenu.SelectedValue as ListBoxItem).Content.ToString();
-
-            switch (tab)
-            {
-                case "Management":
-                    ucLoanSlips.Visibility = Visibility.Collapsed;
-                    ucEnroll.Visibility = Visibility.Collapsed;
-                    grdTabMenuBookManagement.Visibility = Visibility.Visible;
-                    ucBook.Visibility = Visibility.Visible;
-                    break;
-                case "View Loan Slips":
-                    ucLoanSlips.Visibility = Visibility.Visible;
-                    ucEnroll.Visibility = Visibility.Collapsed;
-                    grdTabMenuBookManagement.Visibility = Visibility.Collapsed;
-                    ucBook.Visibility = Visibility.Collapsed;
-                    break;
-                case "View Enrolls":
-                    ucLoanSlips.Visibility = Visibility.Collapsed;
-                    ucEnroll.Visibility = Visibility.Visible;
-                    grdTabMenuBookManagement.Visibility = Visibility.Collapsed;
-                    ucBook.Visibility = Visibility.Collapsed;
-                    break;
             }
         }
     }

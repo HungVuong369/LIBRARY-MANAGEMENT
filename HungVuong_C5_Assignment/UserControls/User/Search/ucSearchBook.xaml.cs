@@ -38,7 +38,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
 
             dgBookInfo.ItemsSource = null;
             dgBookInfo.ItemsSource = _LstBookInfo.Take(pagination.ItemPerPage);
@@ -48,21 +48,11 @@ namespace HungVuong_C5_Assignment
             dgBookInfo.ItemsSource = _LstBookInfo;
         }
 
-        public void ReloadShowing()
-        {
-            if (pagination.MaxPage == 0)
-                pagination.lblShowing.Content = $"Showing 0 to 0 entities";
-            else if (pagination.MaxPage == pagination.CurrentPage && _LstBookInfo.Count() % pagination.ItemPerPage != 0)
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage - 1) * pagination.ItemPerPage + _LstBookInfo.Count % pagination.ItemPerPage} entities";
-            else
-                pagination.lblShowing.Content = $"Showing {(pagination.CurrentPage - 1) * pagination.ItemPerPage + 1} to {(pagination.CurrentPage) * pagination.ItemPerPage} entities";
-        }
-
         public void ReloadDataGrid()
         {
             dgBookInfo.ItemsSource = null;
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            ReloadShowing();
+            pagination.ReloadShowing<BookInformation>(_LstBookInfo.ToList());
         }
 
         public void ReloadStorageInfo()
@@ -71,7 +61,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
 
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
@@ -82,19 +72,20 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            SetMaxPage();
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
 
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
 
-        private void SetMaxPage()
+        public void ReloadStorageAllByISBN(string isbn)
         {
-            pagination.MaxPage = (_LstBookInfo.Count / pagination.ItemPerPage);
+            this._StorageBookInfo = new ObservableCollection<BookInformation>(this.GetListBookInfoShowAll().Where(i => i.ISBN.ToLower() == isbn.ToLower() && i.Status == true));
 
-            if (_LstBookInfo.Count % pagination.ItemPerPage != 0)
-            {
-                pagination.MaxPage += 1;
-            }
+            this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
+
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+
+            dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
 
         public void Search(string search)
@@ -109,18 +100,24 @@ namespace HungVuong_C5_Assignment
                     this._LstBookInfo.Add(item);
                 else if(item.Category.ToLower().Contains(search.ToLower()))
                     this._LstBookInfo.Add(item);
-                else if(item.Author.ToLower().Contains(search.ToLower()))
-                    this._LstBookInfo.Add(item);
                 else if(item.Language.ToLower().Contains(search.ToLower()))
-                    this._LstBookInfo.Add(item);
-                else if(item.Translator.ToLower().Contains(search.ToLower()))
                     this._LstBookInfo.Add(item);
                 else if(item.PublishDate.ToString("dd/MM/yyyy").Contains(search)) 
                     this._LstBookInfo.Add(item);
                 else if(item.Quantity.ToString().Contains(search))
                     this._LstBookInfo.Add(item);
+                else if(item.BookAuthor.Name.ToLower().Contains(search.ToLower()))
+                    this._LstBookInfo.Add(item);
+                else if(item.BookPublisher.Name.ToLower().Contains(search.ToLower()))
+                    this._LstBookInfo.Add(item);
+                else if(item.BookTranslator.Name.ToLower().Contains(search.ToLower()))
+                    this._LstBookInfo.Add(item);
+                else if(item.Id.ToString().Contains(search))
+                    this._LstBookInfo.Add(item);
             }
-            SetMaxPage();
+
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }
@@ -129,23 +126,37 @@ namespace HungVuong_C5_Assignment
         {
             List<BookInformation> lstBookInfo = new List<BookInformation>();
 
-            foreach(var item in this._BookISBNVM.bookISBNRepo.Items)
+            foreach(var item in this._BookVM.bookRepo.Items)
             {
-                BookTitle bookTitle = this._BookTitleVM.bookTitleRepo.GetById(item.IdBookTitle);
-                Author author = this._AuthorVM.authorRepo.GetById(bookTitle.IdAuthor);
-                Author translator = this._AuthorVM.authorRepo.GetById(item.IdAuthor);
-
-                lstBookInfo.Add(new BookInformation(
-                    item.ISBN,
-                    bookTitle.Name,
-                    this._CategoryVM.categoryRepo.GetById(bookTitle.IdCategory).Name,
-                    author.Name,
-                    item.Language,
-                    translator.Name,
-                    item.PublishDate,
-                    this._BookVM.GetQuantityBookByISBN(item.ISBN, true),
-                    item.Status
-                ));
+                if(lstBookInfo.Any(i => i.ISBN == item.ISBN))
+                {
+                    if (!item.Status)
+                        continue;
+                    lstBookInfo[lstBookInfo.FindIndex(i => i.ISBN == item.ISBN)].Quantity++;
+                }
+                else
+                {
+                    int quantity = 1;
+                    if (!item.BookISBN.Status)
+                    {
+                        quantity = 0;
+                    }
+                    var newBookInfo = new BookInformation()
+                    {
+                        Id = item.Id,
+                        BookAuthor = item.BookISBN.Author,
+                        BookPublisher = item.Publisher,
+                        PublishDate = item.PublishDate,
+                        BookTranslator = item.Translator,
+                        ISBN = item.ISBN,
+                        Category = item.BookISBN.BookTitle.Category.Name,
+                        Name = item.BookISBN.BookTitle.Name,
+                        Language = item.Language,
+                        Quantity = quantity,
+                        Status = item.BookISBN.Status
+                    };
+                    lstBookInfo.Add(newBookInfo);
+                }
             }
 
             return lstBookInfo;
@@ -155,10 +166,24 @@ namespace HungVuong_C5_Assignment
         {
             List<BookInformation> lstBookInfo = new List<BookInformation>();
             
-            foreach(var item in DatabaseFirst.Instance.db.Books.Include("BookISBN").Include("BookISBN.BookTitle").Include("BookISBN.BookTitle.Category").Include("BookISBN.BookTitle.Author"))
+            foreach(var item in DatabaseFirst.Instance.db.Books)
             {
-                var bookInfo = new BookInformation(item.ISBN, item.BookISBN.BookTitle.Name, item.BookISBN.BookTitle.Category.Name, item.BookISBN.BookTitle.Author.Name, item.BookISBN.Language, item.BookISBN.BookTitle.Author.Name, item.BookISBN.PublishDate, -1, item.Status);
-                lstBookInfo.Add(bookInfo);
+                var newBookInfo = new BookInformation()
+                {
+                    Id = item.Id,
+                    Quantity = -1,
+                    BookAuthor = item.BookISBN.Author,
+                    Name = item.BookISBN.BookTitle.Name,
+                    BookPublisher = item.Publisher,
+                    PublishDate = item.PublishDate,
+                    BookTranslator = item.Translator,
+                    Category = item.BookISBN.BookTitle.Category.Name,
+                    ISBN = item.ISBN,
+                    Language = item.Language,
+                    Status = item.Status
+                };
+
+                lstBookInfo.Add(newBookInfo);
             }
 
             return lstBookInfo;
