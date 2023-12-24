@@ -177,12 +177,12 @@
     <Compile Include="Repository\User\Management\LoanManagementRepository.cs" />
     <Compile Include="Repository\User\Book\Borrowing\LoanSlipRepository.cs" />
     <Compile Include="Repository\Admin\Category\CategoryRepository.cs" />
-    <Compile Include="Repository\User\Book\PublisherRepository.cs" />
+    <Compile Include="Repository\Admin\Publisher\PublisherRepository.cs" />
     <Compile Include="Repository\User\Management\BookISBNManagementRepository.cs" />
     <Compile Include="Repository\User\Management\BookManagementRepository.cs" />
     <Compile Include="Repository\User\Management\BookTitleManagementRepository.cs" />
     <Compile Include="Repository\User\Management\ReaderManagementRepository.cs" />
-    <Compile Include="Repository\User\Book\PenaltyReasonRepository.cs" />
+    <Compile Include="Repository\Admin\PenaltyReason\PenaltyReasonRepository.cs" />
     <Compile Include="Repository\User\Reader\AdultRepository.cs" />
     <Compile Include="Repository\User\Reader\ChildRepository.cs" />
     <Compile Include="Repository\User\Reader\ReaderRepository.cs" />
@@ -261,6 +261,18 @@
     </Compile>
     <Compile Include="UserControls\Admin\Function\ucViewFeature.xaml.cs">
       <DependentUpon>ucViewFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\PenaltyReason\DataGrid\ucPenaltyReasonDataGrid.xaml.cs">
+      <DependentUpon>ucPenaltyReasonDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\PenaltyReason\ucAddPenaltyReason.xaml.cs">
+      <DependentUpon>ucAddPenaltyReason.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\PenaltyReason\ucPenaltyReasonManagement.xaml.cs">
+      <DependentUpon>ucPenaltyReasonManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\PenaltyReason\ucUpdatePenaltyReason.xaml.cs">
+      <DependentUpon>ucUpdatePenaltyReason.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Admin\Province\DataGrid\ucProvinceDataGrid.xaml.cs">
       <DependentUpon>ucProvinceDataGrid.xaml</DependentUpon>
@@ -495,6 +507,7 @@
     <Compile Include="ViewModels\Admin\Category\CRUDCategoryViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\FunctionViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\RoleFunctionViewModel.cs" />
+    <Compile Include="ViewModels\Admin\PenaltyReason\CRUDPenaltyReasonViewModel.cs" />
     <Compile Include="ViewModels\Admin\Province\CRUDProvinceViewModel.cs" />
     <Compile Include="ViewModels\Admin\Province\ProvinceViewModel.cs" />
     <Compile Include="ViewModels\Admin\Publisher\CRUDPublisherViewModel.cs" />
@@ -514,7 +527,7 @@
     <Compile Include="ViewModels\User\Book\Borrowing\LoanDetailViewModel.cs" />
     <Compile Include="ViewModels\User\Book\Borrowing\LoanSlipViewModel.cs" />
     <Compile Include="ViewModels\Admin\Category\CategoryViewModel.cs" />
-    <Compile Include="ViewModels\User\Book\PenaltyReasonViewModel.cs" />
+    <Compile Include="ViewModels\Admin\PenaltyReason\PenaltyReasonViewModel.cs" />
     <Compile Include="ViewModels\Admin\Publisher\PublisherViewModel.cs" />
     <Compile Include="ViewModels\User\Book\Borrowing\SearchBookViewModel.cs" />
     <Compile Include="ViewModels\User\Book\Borrowing\ShowBooksViewModel.cs" />
@@ -683,6 +696,22 @@
     <Page Include="UserControls\Admin\Function\ucViewFeature.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Admin\PenaltyReason\DataGrid\ucPenaltyReasonDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\PenaltyReason\ucAddPenaltyReason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\PenaltyReason\ucPenaltyReasonManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\PenaltyReason\ucUpdatePenaltyReason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Admin\Province\DataGrid\ucProvinceDataGrid.xaml">
       <SubType>Designer</SubType>

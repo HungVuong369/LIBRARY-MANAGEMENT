@@ -90,6 +90,8 @@ namespace HungVuong_C5_Assignment
 
         public void LoadPage()
         {
+            if (CurrentPage == 0)
+                CurrentPage = 1;
             btnOne.IsEnabled = btnTwo.IsEnabled = btnThree.IsEnabled = btnFour.IsEnabled = btnFive.IsEnabled = true;
 
             btnOne.Visibility = btnTwo.Visibility = btnThree.Visibility = btnFour.Visibility = btnFive.Visibility = Visibility.Visible;

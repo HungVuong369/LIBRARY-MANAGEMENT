@@ -11,26 +11,26 @@ namespace HungVuong_C5_Assignment
 {
     public class PublisherViewModel
     {
+        #region Pagination Code
         public string Search { get; set; } = string.Empty;
-
-        private static readonly UnitOfWork unitOfWork = new UnitOfWork();
-        public PublisherRepository PublisherRepo { get; set; }
 
         private ObservableCollection<Publisher> _StorageLstPublisher;
         private ObservableCollection<Publisher> _LstPublisher;
 
-        public Publisher SelectedPublisher { get; set; }
-
         public ucPublisherDataGrid PublisherDataGrid { get; set; }
 
         public RelayCommand<object> SearchTextChangedCommand { get; private set; }
+        #endregion
+
+        private static readonly UnitOfWork unitOfWork = new UnitOfWork();
+        public PublisherRepository PublisherRepo { get; set; }
+
+        public Publisher SelectedPublisher { get; set; }
 
         public RelayCommand<object> AddCommand { get; private set; }
-
         public RelayCommand<object> DeleteCommand { get; private set; }
         public RelayCommand<object> UpdateCommand { get; private set; }
         
-
         public PublisherViewModel()
         {
             PublisherRepo = unitOfWork.Publishers;
