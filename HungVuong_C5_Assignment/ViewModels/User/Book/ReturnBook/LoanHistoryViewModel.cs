@@ -480,7 +480,7 @@ namespace HungVuong_C5_Assignment
             else
             {
                 LoanPeriod = day;
-                LateFee = decimal.Parse((day * 5.000).ToString("N3"));
+                LateFee = decimal.Parse((SelectedLoanHistory.LoanDetailHistories.Count * (day * 5.000)).ToString("N3"));
                 Payment += LateFee;
             }
         }

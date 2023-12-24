@@ -51,6 +51,7 @@ namespace HungVuong_C5_Assignment
                 {
                     Deposit = loanSlip.Deposit,
                     FullName = loanSlip.Reader.LName + " " + loanSlip.Reader.FName,
+                    ReaderID = loanSlip.Reader.Id,
                     Id = loanSlip.Id,
                     LoanDate = loanSlip.LoanDate,
                     LoanPaid = loanSlip.LoanPaid,
@@ -65,6 +66,17 @@ namespace HungVuong_C5_Assignment
         public void ReloadStorage()
         {
             this._StorageLstLoanSlip = new ObservableCollection<LoanSlipDto>(this.GetLoanSlipDto());
+
+            this._LstLoanSlip = new ObservableCollection<LoanSlipDto>(this._StorageLstLoanSlip);
+
+            pagination.SetMaxPage<LoanSlipDto>(_LstLoanSlip.ToList());
+
+            dgLoanSlips.ItemsSource = _LstLoanSlip.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
+        }
+
+        public void ReloadStorageByReaderID(string readerID)
+        {
+            this._StorageLstLoanSlip = new ObservableCollection<LoanSlipDto>(this.GetLoanSlipDto().Where(i => i.ReaderID == readerID));
 
             this._LstLoanSlip = new ObservableCollection<LoanSlipDto>(this._StorageLstLoanSlip);
 

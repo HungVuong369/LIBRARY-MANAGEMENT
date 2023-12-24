@@ -211,5 +211,20 @@ namespace HungVuong_C5_Assignment
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }
+
+        private void btnHistory_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            AdultReader reader = button.Tag as AdultReader;
+
+            ucDetailLoanAndLoanHistory detail = new ucDetailLoanAndLoanHistory(DatabaseFirst.Instance.db.Readers.FirstOrDefault(i => i.Id == reader.Id));
+
+            WindowDefault window = new WindowDefault();
+
+            window.Content = detail;
+
+            window.ShowDialog();
+        }
     }
 }

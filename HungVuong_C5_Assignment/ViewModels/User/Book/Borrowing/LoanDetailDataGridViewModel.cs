@@ -40,6 +40,7 @@ namespace HungVuong_C5_Assignment
         public void UpdateLoanDetailsByReaderID(string readerID, ucBorrowingBook borrowingBook = null)
         {
             LoanDetails.Clear();
+
             var reader = DatabaseFirst.Instance.db.Readers.FirstOrDefault(i => i.Id == readerID);
             if (reader == null)
                 return;

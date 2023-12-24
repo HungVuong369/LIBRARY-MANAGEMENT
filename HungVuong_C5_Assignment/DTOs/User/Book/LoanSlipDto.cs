@@ -9,6 +9,7 @@ namespace HungVuong_C5_Assignment
     public class LoanSlipDto
     {
         public string Id { get; set; }
+        public string ReaderID { get; set; }
         public string FullName { get; set; }
         public int Quantity { get; set; }
         public DateTime LoanDate { get; set; }

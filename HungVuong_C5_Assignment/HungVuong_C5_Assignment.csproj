@@ -421,6 +421,12 @@
     <Compile Include="UserControls\User\CRUD\Update\ucTransitioningChild.xaml.cs">
       <DependentUpon>ucTransitioningChild.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\User\DataGrid\ucLoanDetailHistoriesDataGrid.xaml.cs">
+      <DependentUpon>ucLoanDetailHistoriesDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\DataGrid\ucLoanDetailsDataGrid.xaml.cs">
+      <DependentUpon>ucLoanDetailsDataGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\User\View\Book\ucDetailLoanHistory.xaml.cs">
       <DependentUpon>ucDetailLoanHistory.xaml</DependentUpon>
     </Compile>
@@ -430,10 +436,10 @@
     <Compile Include="UserControls\User\DataGrid\ucChildDataGrid.xaml.cs">
       <DependentUpon>ucChildDataGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\User\DataGrid\LoanHistory\ucLoanHistoryDataGrid.xaml.cs">
+    <Compile Include="UserControls\User\Book\ReturnBook\DataGrid\ucLoanHistoryDataGrid.xaml.cs">
       <DependentUpon>ucLoanHistoryDataGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\User\DataGrid\ucLoanSlipsDataGrid.xaml.cs">
+    <Compile Include="UserControls\User\Book\BorrowingBook\DataGrid\ucLoanSlipsDataGrid.xaml.cs">
       <DependentUpon>ucLoanSlipsDataGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\DataGrid\ucReaderAndIdentifyDataGrid.xaml.cs">
@@ -477,6 +483,9 @@
     </Compile>
     <Compile Include="UserControls\User\View\Book\ucStatusBookISBN.xaml.cs">
       <DependentUpon>ucStatusBookISBN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\View\LoanAndLoanHistory\ucDetailLoanAndLoanHistory.xaml.cs">
+      <DependentUpon>ucDetailLoanAndLoanHistory.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\View\Reader\ReaderInformation\ucAdultInformation.xaml.cs">
       <DependentUpon>ucAdultInformation.xaml</DependentUpon>
@@ -909,6 +918,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\User\DataGrid\ucLoanDetailHistoriesDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\DataGrid\ucLoanDetailsDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\User\View\Book\ucDetailLoanHistory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -921,11 +938,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\User\DataGrid\LoanHistory\ucLoanHistoryDataGrid.xaml">
+    <Page Include="UserControls\User\Book\ReturnBook\DataGrid\ucLoanHistoryDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\User\DataGrid\ucLoanSlipsDataGrid.xaml">
+    <Page Include="UserControls\User\Book\BorrowingBook\DataGrid\ucLoanSlipsDataGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -984,6 +1001,10 @@
     <Page Include="UserControls\User\View\Book\ucStatusBookISBN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\User\View\LoanAndLoanHistory\ucDetailLoanAndLoanHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\User\View\Reader\ReaderInformation\ucAdultInformation.xaml">
       <Generator>MSBuild:Compile</Generator>

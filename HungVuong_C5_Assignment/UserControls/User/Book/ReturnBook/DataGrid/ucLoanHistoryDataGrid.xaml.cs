@@ -87,5 +87,16 @@ namespace HungVuong_C5_Assignment
 
             dgLoanHistories.ItemsSource = _LstLoanHistory.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
+
+        public void ReloadStorageByReaderID(string readerID)
+        {
+            this._StorageLstLoanHistory = new ObservableCollection<LoanHistory>(DatabaseFirst.Instance.db.LoanHistories.Where(i => i.IdReader == readerID));
+
+            this._LstLoanHistory = new ObservableCollection<LoanHistory>(this._StorageLstLoanHistory);
+
+            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());
+
+            dgLoanHistories.ItemsSource = _LstLoanHistory.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
+        }
     }
 }
