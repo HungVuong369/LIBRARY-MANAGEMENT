@@ -92,6 +92,11 @@ namespace HungVuong_C5_Assignment
                p => true,
                p =>
                {
+                   if(int.Parse(SelectedPenaltyReason.Id.Substring(2)) <= 3)
+                   {
+                       MessageBox.Show("Cannot delete default Penalty Reason!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                       return;
+                   }
                    if (MessageBox.Show($"Are you sure you want to delete PenaltyReason '{SelectedPenaltyReason.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                    {
                        string name = SelectedPenaltyReason.Name;

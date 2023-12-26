@@ -141,6 +141,7 @@ namespace HungVuong_C5_Assignment
             UpdateAuthor = author;
             Description = author.Description;
             Summary = author.Summary;
+            BoF = author.boF;
 
             OnPropertyChanged(nameof(AuthorName));
             OnPropertyChanged(nameof(Description));
