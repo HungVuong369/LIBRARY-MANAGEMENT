@@ -244,7 +244,7 @@ namespace HungVuong_C5_Assignment
                 int quantityLoanSlipAdult = SelectedReader.LoanSlips.Select(i => i.Quantity).Sum();
                 int quantityLoanSlipChild = SelectedReader.Adult.Children.Select(i => i.Reader.LoanSlips.Select(item => item.Quantity).Sum()).Sum();
 
-                if ((quantityLoanSlipAdult + quantityLoanSlipChild) >= int.Parse(_ParameterVM.GetValueByID("QD2").Split(':')[0]))
+                if ((quantityLoanSlipAdult + quantityLoanSlipChild) >= int.Parse(_ParameterVM.GetValueByID("QD2")))
                 {
                     SetValueReader(SelectedReader.LName + " " + SelectedReader.FName, "Người lớn", DateTime.Now.Date > SelectedReader.Adult.ExpireDate ? "Unavailable" : "Available", (quantityLoanSlipAdult + quantityLoanSlipChild) + " (MAX)");
                     IsAllowLoanBooks = false;
@@ -282,7 +282,7 @@ namespace HungVuong_C5_Assignment
                 int quantityBookChild = SelectedReader.Child.Adult.Children.Select(i => i.Reader.LoanSlips.Select(item => item.Quantity).Sum()).Sum();
                 int quantityBookAdult = SelectedReader.Child.Adult.Reader.LoanSlips.Select(i => i.Quantity).Sum();
 
-                if((quantityBookAdult + quantityBookChild) == int.Parse(_ParameterVM.GetValueByID("QD2").Split(':')[0]))
+                if((quantityBookAdult + quantityBookChild) == int.Parse(_ParameterVM.GetValueByID("QD2")))
                 {
                     SetValueReader(SelectedReader.LName + " " + SelectedReader.FName, "Trẻ em", DateTime.Now.Date > SelectedReader.Child.Adult.ExpireDate ? "Unavailable" : "Available", quantity + " (MAX)");
                     Opacity = 0.5m;

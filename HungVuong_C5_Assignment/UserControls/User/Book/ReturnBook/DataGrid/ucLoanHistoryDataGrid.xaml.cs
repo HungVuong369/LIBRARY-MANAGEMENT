@@ -29,7 +29,6 @@ namespace HungVuong_C5_Assignment
             InitializeComponent();
 
             this._StorageLstLoanHistory = new ObservableCollection<LoanHistory>(DatabaseFirst.Instance.db.LoanHistories.ToList());
-
             this._LstLoanHistory = new ObservableCollection<LoanHistory>(this._StorageLstLoanHistory);
 
             pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());

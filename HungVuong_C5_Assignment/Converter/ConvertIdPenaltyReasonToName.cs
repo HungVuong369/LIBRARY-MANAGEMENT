@@ -13,7 +13,7 @@ namespace HungVuong_C5_Assignment
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
-                return "Note";
+                return "None";
 
             var PenaltyReason = DatabaseFirst.Instance.db.PenaltyReasons.FirstOrDefault(i => i.Id == value.ToString());
 

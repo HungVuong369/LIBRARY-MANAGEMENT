@@ -11,6 +11,7 @@ namespace HungVuong_C5_Assignment
         public string Id { get; set; }
         public string ReaderID { get; set; }
         public string FullName { get; set; }
+        public string CreatedBy { get; set; }
         public int Quantity { get; set; }
         public DateTime LoanDate { get; set; }
         public DateTime ReturnDate { get; set; }

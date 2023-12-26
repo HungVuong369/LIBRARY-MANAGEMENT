@@ -19,6 +19,7 @@ namespace HungVuong_C5_Assignment
         public DateTime PublishDate { get; set; }
         public int Quantity { get; set; }
         public bool Status { get; set; }
+        public string BookStatus { get; set; }
 
         public BookInformation() {
             

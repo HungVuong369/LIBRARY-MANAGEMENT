@@ -153,7 +153,8 @@ namespace HungVuong_C5_Assignment
                         Name = item.BookISBN.BookTitle.Name,
                         Language = item.Language,
                         Quantity = quantity,
-                        Status = item.BookISBN.Status
+                        Status = item.BookISBN.Status,
+                        BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
                     };
                     lstBookInfo.Add(newBookInfo);
                 }
@@ -180,7 +181,8 @@ namespace HungVuong_C5_Assignment
                     Category = item.BookISBN.BookTitle.Category.Name,
                     ISBN = item.ISBN,
                     Language = item.Language,
-                    Status = item.Status
+                    Status = item.Status,
+                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
                 };
 
                 lstBookInfo.Add(newBookInfo);

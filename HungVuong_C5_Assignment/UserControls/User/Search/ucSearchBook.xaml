@@ -47,6 +47,9 @@
                         </Style>
                     </DataGridTextColumn.CellStyle>
                 </DataGridTextColumn>
+                
+                <DataGridTextColumn Header="Book Status" Binding="{Binding BookStatus}"
+                                    Visibility="Collapsed"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -56,7 +56,8 @@ namespace HungVuong_C5_Assignment
                     LoanDate = loanSlip.LoanDate,
                     LoanPaid = loanSlip.LoanPaid,
                     Quantity = loanSlip.Quantity,
-                    ReturnDate = loanSlip.ExpDate
+                    ReturnDate = loanSlip.ExpDate,
+                    CreatedBy = loanSlip.User.Username
                 };
                 loanSlipsDto.Add(newLoanSlipDto);
             }

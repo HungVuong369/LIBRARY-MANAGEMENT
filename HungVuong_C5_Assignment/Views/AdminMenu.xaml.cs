@@ -134,6 +134,9 @@ namespace HungVuong_C5_Assignment
                     case "F69":
                         grdMain.Children.Add(new ucPenaltyReasonManagement());
                         break;
+                    case "F73":
+                        grdMain.Children.Add(new ParameterManagement());
+                        break;
                     default:
                         isOpenFeature = false;
                         break;

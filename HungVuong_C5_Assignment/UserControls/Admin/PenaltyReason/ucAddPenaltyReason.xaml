@@ -145,7 +145,7 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="TextChanged">
-                            <i:InvokeCommandAction Command="{Binding PriceTextChanged}" 
+                            <i:InvokeCommandAction Command="{Binding ValueTextChanged}" 
                                                    CommandParameter="{Binding}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>

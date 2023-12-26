@@ -118,7 +118,9 @@ namespace HungVuong_C5_Assignment
                 /// Book Management
                 /// Book Title Management
                 /// Book ISBN Management
-                var mainItems = this._FunctionVM.functionRepo.Items.Where(i => i.IdParent == null && (i.Id == "F21" || i.Id == "F36" || i.Id == "F29" || i.Id == "F32")).ToList();
+                /// Loan Slip Management
+                /// Loan History Management
+                var mainItems = this._FunctionVM.functionRepo.Items.Where(i => i.IdParent == null && (i.Id == "F21" || i.Id == "F36" || i.Id == "F29" || i.Id == "F32" || i.Id == "F41" || i.Id == "F43")).ToList();
 
                 foreach (var mainItem in mainItems)
                 {

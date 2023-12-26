@@ -130,6 +130,11 @@
 
             <Button Content="Update"
                     Margin="5"
+                    Style="{StaticResource ButtonBasicStyle}"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="Orange"
+                    Foreground="DarkBlue"
                     Command="{Binding UpdateCommand}"
                     IsEnabled="{Binding IsEnabledAdd}"/>
             <Button Content="Cancel"

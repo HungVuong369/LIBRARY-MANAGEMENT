@@ -25,26 +25,57 @@ namespace HungVuong_C5_Assignment
             return Items;
         }
 
-        public void UpdateValueByID(string id, string value)
+        public static string GetNewID()
         {
-            int nRow = DataProvider.Instance.ExcuteNonQuery(CommandType.Text, TSQL.UpdateParameterById(id, value));
+            string id = "QD";
 
-            if (nRow != -1)
-            {
-                var item = Items.FirstOrDefault(i => i.Id == id);
+            var number = DatabaseFirst.Instance.db.Parameters.Select(reader => reader.Id.Substring(2)).AsEnumerable().Select(num => int.Parse(num)).DefaultIfEmpty().Max() + 1;
 
-                item.Value = value;
-            }
-            else
-                MessageBox.Show("Records Inserted Failed!");
+            id += number;
+
+            return id;
+        }
+
+        public void Add(Parameter newParameter)
+        {
+            Items.Add(newParameter);
+
+            DatabaseFirst.Instance.db.Parameters.Add(newParameter);
+        }
+
+        public void Remove(Parameter parameter)
+        {
+            Items.Remove(parameter);
+
+            var item = DatabaseFirst.Instance.db.Parameters.FirstOrDefault(i => i.Id == parameter.Id);
+
+            item.Status = false;
+        }
+
+        public void Restore(Parameter parameter)
+        {
+            Items.Remove(parameter);
+
+            var item = DatabaseFirst.Instance.db.Parameters.FirstOrDefault(i => i.Id == parameter.Id);
+
+            item.Status = true;
+        }
+
+        public void Update(Parameter parameter, Parameter newParameter)
+        {
+            parameter.ModifiedAt = newParameter.ModifiedAt;
+            parameter.Name = newParameter.Name;
+            parameter.Description = newParameter.Description;
+            parameter.Value = newParameter.Value;
+
+            var item = DatabaseFirst.Instance.db.Parameters.FirstOrDefault(i => i.Id == parameter.Id);
+
+            item.Name = newParameter.Name;
+            item.ModifiedAt = newParameter.ModifiedAt;
+            item.Description = newParameter.Description;
+            item.Value = newParameter.Value;
         }
 
         public Parameter GetByID(string id) => Items.Find(e => e.Id.CompareTo(id) == 0);
-
-        public void Delete(string id)
-        {
-            var entity = Items.Where(e => e.Id.CompareTo(id) == 0).FirstOrDefault();
-            Items.Remove(entity);
-        }
     }
 }

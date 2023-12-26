@@ -94,6 +94,7 @@ namespace HungVuong_C5_Assignment
         {
             ucBook.ReloadStorageInfo();
             ReloadDataGrid();
+            ucBook.dgBookInfo.Columns[11].Visibility = Visibility.Collapsed;
             ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Visible;
             ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Collapsed;
         }
@@ -102,6 +103,7 @@ namespace HungVuong_C5_Assignment
         {
             ucBook.ReloadStorageAll();
             ReloadDataGrid();
+            ucBook.dgBookInfo.Columns[11].Visibility = Visibility.Visible;
             ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Collapsed;
             ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Visible;
         }

@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <local:ExpiredDateConverter x:Key="ConvertExpiredDate"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,6 +21,7 @@
                   SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Created By" Binding="{Binding CreatedBy}"/>
                 <DataGridTextColumn Header="Reader Name" Binding="{Binding FullName}"/>
                 <DataGridTextColumn Header="Quantity Book" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Loan Paid" Binding="{Binding LoanPaid}"/>
@@ -37,6 +42,19 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                    <DataTrigger Binding="{Binding ReturnDate, Converter={StaticResource ConvertExpiredDate}}" Value="True">
+                            <Setter Property="Foreground" Value="Red"/>
+                        </DataTrigger>
+
+                        <Trigger Property="IsSelected" Value="True">
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
         <local:Pagination Grid.Row="1"

@@ -115,7 +115,7 @@ namespace HungVuong_C5_Assignment
                         int quantityLoanSlipAdult = SelectedReader.LoanSlips.Select(i => i.Quantity).Sum();
                         int quantityLoanSlipChild = SelectedReader.Adult.Children.Select(i => i.Reader.LoanSlips.Select(item => item.Quantity).Sum()).Sum();
 
-                        if(quantityLoanSlipAdult + quantityLoanSlipChild + LstLoaningBook.Count >= int.Parse(parameterVM.GetValueByID("QD2").Split(':')[0]))
+                        if(quantityLoanSlipAdult + quantityLoanSlipChild + LstLoaningBook.Count >= int.Parse(parameterVM.GetValueByID("QD2")))
                         {
                             MessageBox.Show("Cannot loan more books!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                             return;
@@ -123,7 +123,20 @@ namespace HungVuong_C5_Assignment
                     }
                     else
                     {
-                        bool isExisted = SelectedReader.Child.Adult.Reader.LoanSlips.SelectMany(i => i.LoanDetails).Any(item => item.Book.ISBN == bookISBN.ISBN);
+                        Reader adultReader = SelectedReader.Child.Adult.Reader;
+
+                        if (adultReader.LoanSlips.Any(ls => ls.LoanDetails.Any(ld => ld.Book.ISBN == bookISBN.ISBN)))
+                        {
+                            MessageBox.Show("Each Book ISBN can only loan 1 book!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            return;
+                        }
+
+                        bool isExisted = adultReader.Adult.Children.Select(i => i.Reader)
+                                        .SelectMany(child => child.LoanSlips ?? Enumerable.Empty<LoanSlip>())
+                                        .SelectMany(loanSlip => loanSlip.LoanDetails ?? Enumerable.Empty<LoanDetail>())
+                                        .Any(loanDetail => loanDetail.Book?.ISBN == bookISBN.ISBN);
+
+                        //bool isExisted = SelectedReader.Child.Adult.Reader.LoanSlips.SelectMany(i => i.LoanDetails).Any(item => item.Book.ISBN == bookISBN.ISBN);
                         if (isExisted)
                         {
                             MessageBox.Show("Each Book ISBN can only loan 1 book!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);

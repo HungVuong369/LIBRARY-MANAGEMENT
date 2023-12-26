@@ -31,7 +31,7 @@ namespace HungVuong_C5_Assignment
         {
             InitializeComponent();
 
-            UpdateDataGridByQuantityChild(int.Parse(_ParameterVM.GetValueByID("QU1")));
+            UpdateDataGridByQuantityChild(int.Parse(_ParameterVM.GetValueByID("QD1")));
         }
 
         public void RemoveGuardianByQuantityChild(int quantity)

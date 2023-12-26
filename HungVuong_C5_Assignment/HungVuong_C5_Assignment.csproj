@@ -262,6 +262,18 @@
     <Compile Include="UserControls\Admin\Function\ucViewFeature.xaml.cs">
       <DependentUpon>ucViewFeature.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Admin\Parameter\DataGrid\ucParameterDataGrid.xaml.cs">
+      <DependentUpon>ucParameterDataGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Parameter\ParameterManagement.xaml.cs">
+      <DependentUpon>ParameterManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Parameter\ucAddParameter.xaml.cs">
+      <DependentUpon>ucAddParameter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Admin\Parameter\ucUpdateParameter.xaml.cs">
+      <DependentUpon>ucUpdateParameter.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Admin\PenaltyReason\DataGrid\ucPenaltyReasonDataGrid.xaml.cs">
       <DependentUpon>ucPenaltyReasonDataGrid.xaml</DependentUpon>
     </Compile>
@@ -516,6 +528,7 @@
     <Compile Include="ViewModels\Admin\Category\CRUDCategoryViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\FunctionViewModel.cs" />
     <Compile Include="ViewModels\Admin\Function\RoleFunctionViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Parameter\CRUDParameterViewModel.cs" />
     <Compile Include="ViewModels\Admin\PenaltyReason\CRUDPenaltyReasonViewModel.cs" />
     <Compile Include="ViewModels\Admin\Province\CRUDProvinceViewModel.cs" />
     <Compile Include="ViewModels\Admin\Province\ProvinceViewModel.cs" />
@@ -527,7 +540,7 @@
     <Compile Include="ViewModels\Admin\User\UserRoleViewModel.cs" />
     <Compile Include="ViewModels\Admin\User\UserViewModel.cs" />
     <Compile Include="ViewModels\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModels\ParameterViewModel.cs" />
+    <Compile Include="ViewModels\Admin\Parameter\ParameterViewModel.cs" />
     <Compile Include="ViewModels\Admin\Author\AuthorViewModel.cs" />
     <Compile Include="ViewModels\User\Book\BookISBNViewModel.cs" />
     <Compile Include="ViewModels\User\Book\BookTitleViewModel.cs" />
@@ -705,6 +718,22 @@
     <Page Include="UserControls\Admin\Function\ucViewFeature.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Admin\Parameter\DataGrid\ucParameterDataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Parameter\ParameterManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Parameter\ucAddParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Admin\Parameter\ucUpdateParameter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Admin\PenaltyReason\DataGrid\ucPenaltyReasonDataGrid.xaml">
       <SubType>Designer</SubType>
