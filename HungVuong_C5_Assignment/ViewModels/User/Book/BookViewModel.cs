@@ -13,7 +13,7 @@ namespace HungVuong_C5_Assignment
     public class BookViewModel
     {
         public string NewLoanSlipID;
-        public int NewID { get; set; } = BookRepository.GetNewID();
+        public int NewID { get; set; }
         public string SelectedLanguage { get; set; }
         public string Quantity { get; set; }
         public string Price { get; set; }
@@ -39,7 +39,7 @@ namespace HungVuong_C5_Assignment
                         return false;
                 }
                 
-                if (Quantity == null || int.Parse(Quantity) == 0)
+                if (Quantity == null || int.Parse(Quantity.Replace(",", "")) == 0)
                     return false;
                 return true;
             }
@@ -68,6 +68,8 @@ namespace HungVuong_C5_Assignment
 
         public BookViewModel(WindowDefault parent, List<string> languages, List<Publisher> publishers, List<Translator> translators)
         {
+            NewID = BookRepository.GetNewID();
+
             this.bookRepo = unitOfWork.Books;
             LstLanguage = languages;
             this.SelectedLanguage = languages[0];
@@ -86,11 +88,11 @@ namespace HungVuong_C5_Assignment
                 bool isCheck;
                     try
                     {
-                        isCheck = bookManagementRepo.Add(SelectedBookISBN.ISBN, SelectedPublisher.Id, SelectedTranslator.Id, SelectedLanguage, SelectedPublishDate, decimal.Parse(Price.Replace(",", "").Insert(Price.Replace(",", "").Length - 3, "."), CultureInfo.InvariantCulture), int.Parse(Quantity));
+                        isCheck = bookManagementRepo.Add(SelectedBookISBN.ISBN, SelectedPublisher.Id, SelectedTranslator.Id, SelectedLanguage, SelectedPublishDate, decimal.Parse(Price.Replace(",", "").Insert(Price.Replace(",", "").Length - 3, "."), CultureInfo.InvariantCulture), int.Parse(Quantity.Replace(",", "")));
                     }
                     catch(Exception)
                     {
-                        isCheck = bookManagementRepo.Add(SelectedBookISBN.ISBN, SelectedPublisher.Id, SelectedTranslator.Id, SelectedLanguage, SelectedPublishDate, decimal.Parse(int.Parse(Price).ToString("0.000")), int.Parse(Quantity));
+                        isCheck = bookManagementRepo.Add(SelectedBookISBN.ISBN, SelectedPublisher.Id, SelectedTranslator.Id, SelectedLanguage, SelectedPublishDate, decimal.Parse(int.Parse(Price).ToString("0.000")), int.Parse(Quantity.Replace(",", "")));
                     }
 
                     if (!isCheck)

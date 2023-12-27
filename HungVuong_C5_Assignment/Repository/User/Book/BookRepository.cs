@@ -82,7 +82,6 @@ namespace HungVuong_C5_Assignment
                     Status = true,
                 };
                 Items.Add(newBook);
-
                 DatabaseFirst.Instance.db.Books.Add(newBook);
             }
         }

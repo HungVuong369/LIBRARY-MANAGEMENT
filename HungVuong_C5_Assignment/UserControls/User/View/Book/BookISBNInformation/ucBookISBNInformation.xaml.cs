@@ -21,32 +21,19 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class ucBookISBNInformation : UserControl
     {
-        private BookViewModel _BookVM = new BookViewModel();
         private ObservableCollection<BookISBNInformation> _StorageLstBookISBNInfo;
         private ObservableCollection<BookISBNInformation> _LstBookISBNInfo;
 
         public ucBookISBNInformation()
         {
             InitializeComponent();
-            this._StorageLstBookISBNInfo = new ObservableCollection<BookISBNInformation>(DataAccess.GetListBookISBNInformation());
-
-            this._LstBookISBNInfo = new ObservableCollection<BookISBNInformation>(this._StorageLstBookISBNInfo);
-
-            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
-
-            dgBookISBN.ItemsSource = null;
-            dgBookISBN.ItemsSource = _LstBookISBNInfo.Take(pagination.ItemPerPage);
-
-            pagination.LoadPage();
-
-            dgBookISBN.ItemsSource = _LstBookISBNInfo;
         }
 
         public void ReloadDataGrid()
         {
             dgBookISBN.ItemsSource = null;
             dgBookISBN.ItemsSource = _LstBookISBNInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            pagination.ReloadShowing<BookISBNInformation>(_LstBookISBNInfo.ToList());
+            pagination.ReloadShowing<BookISBNInformation>(_LstBookISBNInfo.Count);
         }
 
         public void ReloadStorage()
@@ -55,7 +42,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookISBNInfo = new ObservableCollection<BookISBNInformation>(this._StorageLstBookISBNInfo);
 
-            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
+            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.Count);
 
             dgBookISBN.ItemsSource = _LstBookISBNInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
@@ -75,7 +62,7 @@ namespace HungVuong_C5_Assignment
                 else if(item.AuthorBoF.ToString("dd/MM/yyyy").Contains(search))
                     this._LstBookISBNInfo.Add(item);
             }
-            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.ToList());
+            pagination.SetMaxPage<BookISBNInformation>(_LstBookISBNInfo.Count);
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }

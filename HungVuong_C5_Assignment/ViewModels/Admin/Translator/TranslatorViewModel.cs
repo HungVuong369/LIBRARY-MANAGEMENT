@@ -251,7 +251,7 @@ namespace HungVuong_C5_Assignment
         {
             TranslatorDataGrid.dgTranslators.ItemsSource = null;
             TranslatorDataGrid.dgTranslators.ItemsSource = _LstTranslator.Skip((TranslatorDataGrid.pagination.CurrentPage - 1) * TranslatorDataGrid.pagination.ItemPerPage).Take(TranslatorDataGrid.pagination.ItemPerPage);
-            TranslatorDataGrid.pagination.ReloadShowing<Translator>(_LstTranslator.ToList());
+            TranslatorDataGrid.pagination.ReloadShowing<Translator>(_LstTranslator.Count);
         }
 
         private void ReloadStorage()
@@ -260,7 +260,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstTranslator = new ObservableCollection<Translator>(this._StorageLstTranslator);
 
-            TranslatorDataGrid.pagination.SetMaxPage<Translator>(_LstTranslator.ToList());
+            TranslatorDataGrid.pagination.SetMaxPage<Translator>(_LstTranslator.Count);
 
             TranslatorDataGrid.dgTranslators.ItemsSource = _LstTranslator.Skip((TranslatorDataGrid.pagination.CurrentPage - 1) * TranslatorDataGrid.pagination.ItemPerPage).Take(TranslatorDataGrid.pagination.ItemPerPage);
         }
@@ -293,7 +293,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            TranslatorDataGrid.pagination.SetMaxPage<Translator>(_LstTranslator.ToList());
+            TranslatorDataGrid.pagination.SetMaxPage<Translator>(_LstTranslator.Count);
             TranslatorDataGrid.pagination.CurrentPage = 1;
             TranslatorDataGrid.pagination.LoadPage();
         }

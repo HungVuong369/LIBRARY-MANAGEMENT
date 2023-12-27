@@ -189,7 +189,7 @@ namespace HungVuong_C5_Assignment
         {
             PublisherDataGrid.dgPublishers.ItemsSource = null;
             PublisherDataGrid.dgPublishers.ItemsSource = _LstPublisher.Skip((PublisherDataGrid.pagination.CurrentPage - 1) * PublisherDataGrid.pagination.ItemPerPage).Take(PublisherDataGrid.pagination.ItemPerPage);
-            PublisherDataGrid.pagination.ReloadShowing<Publisher>(_LstPublisher.ToList());
+            PublisherDataGrid.pagination.ReloadShowing<Publisher>(_LstPublisher.Count);
         }
 
         private void ReloadStorage()
@@ -198,7 +198,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstPublisher = new ObservableCollection<Publisher>(this._StorageLstPublisher);
 
-            PublisherDataGrid.pagination.SetMaxPage<Publisher>(_LstPublisher.ToList());
+            PublisherDataGrid.pagination.SetMaxPage<Publisher>(_LstPublisher.Count);
 
             PublisherDataGrid.dgPublishers.ItemsSource = _LstPublisher.Skip((PublisherDataGrid.pagination.CurrentPage - 1) * PublisherDataGrid.pagination.ItemPerPage).Take(PublisherDataGrid.pagination.ItemPerPage);
         }
@@ -223,7 +223,7 @@ namespace HungVuong_C5_Assignment
                     this._LstPublisher.Add(item);
             }
 
-            PublisherDataGrid.pagination.SetMaxPage<Publisher>(_LstPublisher.ToList());
+            PublisherDataGrid.pagination.SetMaxPage<Publisher>(_LstPublisher.Count);
             PublisherDataGrid.pagination.CurrentPage = 1;
             PublisherDataGrid.pagination.LoadPage();
         }

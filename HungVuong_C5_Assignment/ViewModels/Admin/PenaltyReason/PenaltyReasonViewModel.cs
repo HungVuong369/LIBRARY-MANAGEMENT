@@ -189,7 +189,7 @@ namespace HungVuong_C5_Assignment
         {
             PenaltyReasonDataGrid.dgPenaltyReasons.ItemsSource = null;
             PenaltyReasonDataGrid.dgPenaltyReasons.ItemsSource = _LstPenaltyReason.Skip((PenaltyReasonDataGrid.pagination.CurrentPage - 1) * PenaltyReasonDataGrid.pagination.ItemPerPage).Take(PenaltyReasonDataGrid.pagination.ItemPerPage);
-            PenaltyReasonDataGrid.pagination.ReloadShowing<PenaltyReason>(_LstPenaltyReason.ToList());
+            PenaltyReasonDataGrid.pagination.ReloadShowing<PenaltyReason>(_LstPenaltyReason.Count);
         }
 
         private void ReloadStorage()
@@ -198,7 +198,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstPenaltyReason = new ObservableCollection<PenaltyReason>(this._StorageLstPenaltyReason);
 
-            PenaltyReasonDataGrid.pagination.SetMaxPage<PenaltyReason>(_LstPenaltyReason.ToList());
+            PenaltyReasonDataGrid.pagination.SetMaxPage<PenaltyReason>(_LstPenaltyReason.Count);
 
             PenaltyReasonDataGrid.dgPenaltyReasons.ItemsSource = _LstPenaltyReason.Skip((PenaltyReasonDataGrid.pagination.CurrentPage - 1) * PenaltyReasonDataGrid.pagination.ItemPerPage).Take(PenaltyReasonDataGrid.pagination.ItemPerPage);
         }
@@ -231,7 +231,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            PenaltyReasonDataGrid.pagination.SetMaxPage<PenaltyReason>(_LstPenaltyReason.ToList());
+            PenaltyReasonDataGrid.pagination.SetMaxPage<PenaltyReason>(_LstPenaltyReason.Count);
             PenaltyReasonDataGrid.pagination.CurrentPage = 1;
             PenaltyReasonDataGrid.pagination.LoadPage();
         }

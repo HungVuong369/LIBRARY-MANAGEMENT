@@ -27,17 +27,6 @@ namespace HungVuong_C5_Assignment
         public ucLoanHistoryDataGrid()
         {
             InitializeComponent();
-
-            this._StorageLstLoanHistory = new ObservableCollection<LoanHistory>(DatabaseFirst.Instance.db.LoanHistories.ToList());
-            this._LstLoanHistory = new ObservableCollection<LoanHistory>(this._StorageLstLoanHistory);
-
-            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());
-
-            dgLoanHistories.ItemsSource = null;
-
-            dgLoanHistories.ItemsSource = _LstLoanHistory.Take(pagination.ItemPerPage);
-
-            pagination.LoadPage();
         }
 
         public void Search(string search)
@@ -57,7 +46,7 @@ namespace HungVuong_C5_Assignment
                 else if (item.ExpDate.ToString("dd/MM/yyyy").Contains(search))
                     this._LstLoanHistory.Add(item);
             }
-            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());
+            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.Count);
             pagination.CurrentPage = 1;
             pagination.LoadPage();
         }
@@ -73,7 +62,7 @@ namespace HungVuong_C5_Assignment
         {
             dgLoanHistories.ItemsSource = null;
             dgLoanHistories.ItemsSource = _LstLoanHistory.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            pagination.ReloadShowing<LoanHistory>(_LstLoanHistory.ToList());
+            pagination.ReloadShowing<LoanHistory>(_LstLoanHistory.Count);
         }
 
         public void ReloadStorage()
@@ -82,7 +71,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstLoanHistory = new ObservableCollection<LoanHistory>(this._StorageLstLoanHistory);
 
-            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());
+            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.Count);
 
             dgLoanHistories.ItemsSource = _LstLoanHistory.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
@@ -93,7 +82,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstLoanHistory = new ObservableCollection<LoanHistory>(this._StorageLstLoanHistory);
 
-            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.ToList());
+            pagination.SetMaxPage<LoanHistory>(_LstLoanHistory.Count);
 
             dgLoanHistories.ItemsSource = _LstLoanHistory.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }

@@ -253,7 +253,7 @@ namespace HungVuong_C5_Assignment
         {
             CategoryDataGrid.dgCategories.ItemsSource = null;
             CategoryDataGrid.dgCategories.ItemsSource = _LstCategory.Skip((CategoryDataGrid.pagination.CurrentPage - 1) * CategoryDataGrid.pagination.ItemPerPage).Take(CategoryDataGrid.pagination.ItemPerPage);
-            CategoryDataGrid.pagination.ReloadShowing<Category>(_LstCategory.ToList());
+            CategoryDataGrid.pagination.ReloadShowing<Category>(_LstCategory.Count);
         }
 
         private void ReloadStorage()
@@ -262,7 +262,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstCategory = new ObservableCollection<Category>(this._StorageLstCategory);
 
-            CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.ToList());
+            CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.Count);
 
             CategoryDataGrid.dgCategories.ItemsSource = _LstCategory.Skip((CategoryDataGrid.pagination.CurrentPage - 1) * CategoryDataGrid.pagination.ItemPerPage).Take(CategoryDataGrid.pagination.ItemPerPage);
         }
@@ -283,7 +283,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.ToList());
+            CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.Count);
             CategoryDataGrid.pagination.CurrentPage = 1;
             CategoryDataGrid.pagination.LoadPage();
         }

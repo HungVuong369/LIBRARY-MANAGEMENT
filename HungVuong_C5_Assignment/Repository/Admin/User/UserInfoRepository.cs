@@ -25,17 +25,6 @@ namespace HungVuong_C5_Assignment
             return Items;
         }
 
-        public List<UserInfo> Load(string idUser)
-        {
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-
-                Items[Items.FindIndex(i => i.IdUser == idUser)] = db.UserInfoes.Include("User").ToList().FirstOrDefault(i => i.IdUser == idUser);
-            }
-            return Items;
-        }
-
         public string GetNewID()
         {
             string id = "U";

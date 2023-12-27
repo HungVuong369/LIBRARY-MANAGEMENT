@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <local:TrueFalseToAvailableUnavailable x:Key="convertTrueFalse"/>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>

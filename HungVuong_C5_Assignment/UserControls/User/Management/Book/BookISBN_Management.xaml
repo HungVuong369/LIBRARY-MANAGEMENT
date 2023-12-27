@@ -44,7 +44,7 @@
                     FontSize="12"/>
         </Grid>
 
-        <local:ucBookISBNInformation Grid.Row="2" 
+        <local:ucBookISBNInformation Grid.Row="2"
                                      x:Name="ucBookISBN"/>
     </Grid>
 </UserControl>

@@ -253,7 +253,7 @@ namespace HungVuong_C5_Assignment
         {
             ParameterDataGrid.dgParameters.ItemsSource = null;
             ParameterDataGrid.dgParameters.ItemsSource = _LstParameter.Skip((ParameterDataGrid.pagination.CurrentPage - 1) * ParameterDataGrid.pagination.ItemPerPage).Take(ParameterDataGrid.pagination.ItemPerPage);
-            ParameterDataGrid.pagination.ReloadShowing<Parameter>(_LstParameter.ToList());
+            ParameterDataGrid.pagination.ReloadShowing<Parameter>(_LstParameter.Count);
         }
 
         private void ReloadStorage()
@@ -262,7 +262,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstParameter = new ObservableCollection<Parameter>(this._StorageLstParameter);
 
-            ParameterDataGrid.pagination.SetMaxPage<Parameter>(_LstParameter.ToList());
+            ParameterDataGrid.pagination.SetMaxPage<Parameter>(_LstParameter.Count);
 
             ParameterDataGrid.dgParameters.ItemsSource = _LstParameter.Skip((ParameterDataGrid.pagination.CurrentPage - 1) * ParameterDataGrid.pagination.ItemPerPage).Take(ParameterDataGrid.pagination.ItemPerPage);
         }
@@ -283,7 +283,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            ParameterDataGrid.pagination.SetMaxPage<Parameter>(_LstParameter.ToList());
+            ParameterDataGrid.pagination.SetMaxPage<Parameter>(_LstParameter.Count);
             ParameterDataGrid.pagination.CurrentPage = 1;
             ParameterDataGrid.pagination.LoadPage();
         }

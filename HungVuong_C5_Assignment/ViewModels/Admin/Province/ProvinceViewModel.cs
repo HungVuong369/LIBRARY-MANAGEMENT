@@ -247,7 +247,7 @@ namespace HungVuong_C5_Assignment
         {
             ProvinceDataGrid.dgProvinces.ItemsSource = null;
             ProvinceDataGrid.dgProvinces.ItemsSource = _LstProvince.Skip((ProvinceDataGrid.pagination.CurrentPage - 1) * ProvinceDataGrid.pagination.ItemPerPage).Take(ProvinceDataGrid.pagination.ItemPerPage);
-            ProvinceDataGrid.pagination.ReloadShowing<Province>(_LstProvince.ToList());
+            ProvinceDataGrid.pagination.ReloadShowing<Province>(_LstProvince.Count);
         }
 
         private void ReloadStorage()
@@ -256,7 +256,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstProvince = new ObservableCollection<Province>(this._StorageLstProvince);
 
-            ProvinceDataGrid.pagination.SetMaxPage<Province>(_LstProvince.ToList());
+            ProvinceDataGrid.pagination.SetMaxPage<Province>(_LstProvince.Count);
 
             ProvinceDataGrid.dgProvinces.ItemsSource = _LstProvince.Skip((ProvinceDataGrid.pagination.CurrentPage - 1) * ProvinceDataGrid.pagination.ItemPerPage).Take(ProvinceDataGrid.pagination.ItemPerPage);
         }
@@ -277,7 +277,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            ProvinceDataGrid.pagination.SetMaxPage<Province>(_LstProvince.ToList());
+            ProvinceDataGrid.pagination.SetMaxPage<Province>(_LstProvince.Count);
             ProvinceDataGrid.pagination.CurrentPage = 1;
             ProvinceDataGrid.pagination.LoadPage();
         }

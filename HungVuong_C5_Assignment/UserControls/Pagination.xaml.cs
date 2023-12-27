@@ -36,21 +36,21 @@ namespace HungVuong_C5_Assignment
             InitializeComponent();
         }
 
-        public void ReloadShowing<T>(List<T> list)
+        public void ReloadShowing<T>(int count)
         {
             if (MaxPage == 0)
                 lblShowing.Content = $"Showing 0 to 0 entities";
-            else if (MaxPage == CurrentPage && list.Count % ItemPerPage != 0)
-                lblShowing.Content = $"Showing {(CurrentPage - 1) * ItemPerPage + 1} to {(CurrentPage - 1) * ItemPerPage + list.Count % ItemPerPage} entities";
+            else if (MaxPage == CurrentPage && count % ItemPerPage != 0)
+                lblShowing.Content = $"Showing {(CurrentPage - 1) * ItemPerPage + 1} to {(CurrentPage - 1) * ItemPerPage + count % ItemPerPage} entities";
             else
                 lblShowing.Content = $"Showing {(CurrentPage - 1) * ItemPerPage + 1} to {(CurrentPage) * ItemPerPage} entities";
         }
 
-        public void SetMaxPage<T>(List<T> list)
+        public void SetMaxPage<T>(int count)
         {
-            MaxPage = (list.Count / ItemPerPage);
+            MaxPage = (count / ItemPerPage);
 
-            if (list.Count % ItemPerPage != 0)
+            if (count % ItemPerPage != 0)
             {
                 MaxPage += 1;
             }

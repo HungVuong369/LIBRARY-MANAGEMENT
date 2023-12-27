@@ -15,11 +15,7 @@ namespace HungVuong_C5_Assignment
         {
             List<Reader> readers = new List<Reader>();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                readers.AddRange(db.Readers.Where(i => i.Status == status));
-            }
+            readers.AddRange(DatabaseFirst.Instance.db.Readers.Where(i => i.Status == status));
 
             return readers;
         }
@@ -28,11 +24,7 @@ namespace HungVuong_C5_Assignment
         {
             List<Adult> adults = new List<Adult>();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                adults.AddRange(db.Adults.Where(i => i.Status == status));
-            }
+            adults.AddRange(DatabaseFirst.Instance.db.Adults.Where(i => i.Status == status));
 
             return adults;
         }
@@ -41,11 +33,8 @@ namespace HungVuong_C5_Assignment
         {
             List<Child> children = new List<Child>();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                children.AddRange(db.Children.Where(i => i.Status == status));
-            }
+            children.AddRange(DatabaseFirst.Instance.db.Children.Where(i => i.Status == status));
+            
             return children;
         }
 
@@ -53,20 +42,15 @@ namespace HungVuong_C5_Assignment
         {
             List<Guardian> guardians = new List<Guardian>();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
+            ChildViewModel childVM = new ChildViewModel();
+
+            foreach (var item in DatabaseFirst.Instance.db.Adults)
             {
-                ChildViewModel childVM = new ChildViewModel();
-
-                db.Configuration.LazyLoadingEnabled = false;
-
-                foreach(var item in db.Adults.Include("Reader"))
-                {
-                    if (item.Reader.Status == false)
-                        continue;
-                    int quantityChild = childVM.GetQuantityChildByAdultID(item.IdReader);
-                    if(quantityChild < quantity)
-                        guardians.Add(new Guardian(item.IdReader, item.Identify, item.Reader.LName + " " + item.Reader.FName, item.City, item.Phone, quantityChild, item.Reader.boF));
-                }
+                if (item.Reader.Status == false)
+                    continue;
+                int quantityChild = childVM.GetQuantityChildByAdultID(item.IdReader);
+                if (quantityChild < quantity)
+                    guardians.Add(new Guardian(item.IdReader, item.Identify, item.Reader.LName + " " + item.Reader.FName, item.City, item.Phone, quantityChild, item.Reader.boF));
             }
 
             return guardians;
@@ -75,25 +59,19 @@ namespace HungVuong_C5_Assignment
         public static List<BookISBNInformation> GetListBookISBNInformation()
         {
             List<BookISBNInformation> bookISBNsInformation = new List<BookISBNInformation>();
-            BookViewModel bookVM = new BookViewModel();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
+            foreach (var item in DatabaseFirst.Instance.db.BookISBNs)
             {
-                db.Configuration.LazyLoadingEnabled = false;
-
-                foreach (var item in db.BookISBNs.Include("Author"))
+                var newBookISBNInformation = new BookISBNInformation()
                 {
-                    var newBookISBNInformation = new BookISBNInformation()
-                    {
-                        ISBN = item.ISBN,
-                        AuthorBoF = item.Author.boF,
-                        AuthorID = item.Author.Id,
-                        AuthorName = item.Author.Name,
-                        Language = item.OriginLanguage,
-                        Status = item.Status
-                    };
-                    bookISBNsInformation.Add(newBookISBNInformation);
-                }
+                    ISBN = item.ISBN,
+                    AuthorBoF = item.Author.boF,
+                    AuthorID = item.Author.Id,
+                    AuthorName = item.Author.Name,
+                    Language = item.OriginLanguage,
+                    Status = item.Status
+                };
+                bookISBNsInformation.Add(newBookISBNInformation);
             }
 
             return bookISBNsInformation;
@@ -105,22 +83,18 @@ namespace HungVuong_C5_Assignment
 
             BookViewModel bookVM = new BookViewModel();
 
-            using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
+            foreach (var item in DatabaseFirst.Instance.db.BookISBNs)
             {
-                db.Configuration.LazyLoadingEnabled = false;
+                BookISBNStatus bookISBNStatus = new BookISBNStatus(item.ISBN, item.OriginLanguage, item.Author.Name, item.Author.boF);
 
-                foreach (var item in db.BookISBNs.Include("Author"))
-                {
-                    BookISBNStatus bookISBNStatus = new BookISBNStatus(item.ISBN, item.OriginLanguage, item.Author.Name, item.Author.boF);
+                if (bookVM.GetQuantityBookByISBN(item.ISBN, true) == 0)
+                    bookISBNStatus.Status = "No";
+                else
+                    bookISBNStatus.Status = "Yes";
 
-                    if (bookVM.GetQuantityBookByISBN(item.ISBN, true) == 0)
-                        bookISBNStatus.Status = "No";
-                    else
-                        bookISBNStatus.Status = "Yes";
-
-                    lstBookISBNStatus.Add(bookISBNStatus);
-                }
+                lstBookISBNStatus.Add(bookISBNStatus);
             }
+
             return lstBookISBNStatus;
         }
 

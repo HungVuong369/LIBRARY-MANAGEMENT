@@ -163,6 +163,7 @@
     <Compile Include="Repository\Admin\User\UserInfoRepository.cs" />
     <Compile Include="Repository\Admin\User\UserRepository.cs" />
     <Compile Include="Repository\Admin\User\UserRoleRepository.cs" />
+    <Compile Include="Repository\BookStatusRepository.cs" />
     <Compile Include="Repository\ParameterRepository.cs" />
     <Compile Include="Repository\RepositoryBase\IRepositoryBase.cs" />
     <Compile Include="Repository\RepositoryBase\RepositoryBase.cs" />
@@ -1144,6 +1145,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\background.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

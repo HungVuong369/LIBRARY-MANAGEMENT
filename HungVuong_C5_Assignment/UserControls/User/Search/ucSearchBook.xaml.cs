@@ -24,35 +24,18 @@ namespace HungVuong_C5_Assignment
         private ObservableCollection<BookInformation> _StorageBookInfo;
         private ObservableCollection<BookInformation> _LstBookInfo;
 
-        private CategoryViewModel _CategoryVM = new CategoryViewModel();
-        private BookISBNViewModel _BookISBNVM = new BookISBNViewModel();
-        private BookTitleViewModel _BookTitleVM = new BookTitleViewModel();
-        private AuthorViewModel _AuthorVM = new AuthorViewModel();
         private BookViewModel _BookVM = new BookViewModel();
-
+        
         public ucSearchBook()
         {
             InitializeComponent();
-
-            this._StorageBookInfo = new ObservableCollection<BookInformation>(this.GetListBookInfo());
-
-            this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
-
-            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
-
-            dgBookInfo.ItemsSource = null;
-            dgBookInfo.ItemsSource = _LstBookInfo.Take(pagination.ItemPerPage);
-
-            pagination.LoadPage();
-
-            dgBookInfo.ItemsSource = _LstBookInfo;
         }
 
         public void ReloadDataGrid()
         {
             dgBookInfo.ItemsSource = null;
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
-            pagination.ReloadShowing<BookInformation>(_LstBookInfo.ToList());
+            pagination.ReloadShowing<BookInformation>(_LstBookInfo.Count);
         }
 
         public void ReloadStorageInfo()
@@ -61,7 +44,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.Count);
 
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
@@ -72,18 +55,18 @@ namespace HungVuong_C5_Assignment
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.Count);
 
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
 
         public void ReloadStorageAllByISBN(string isbn)
         {
-            this._StorageBookInfo = new ObservableCollection<BookInformation>(this.GetListBookInfoShowAll().Where(i => i.ISBN.ToLower() == isbn.ToLower() && i.Status == true));
+            this._StorageBookInfo = new ObservableCollection<BookInformation>(GetListBookInfoShowAllByISBN(isbn));
 
             this._LstBookInfo = new ObservableCollection<BookInformation>(this._StorageBookInfo);
 
-            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.Count);
 
             dgBookInfo.ItemsSource = _LstBookInfo.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
@@ -116,7 +99,7 @@ namespace HungVuong_C5_Assignment
                     this._LstBookInfo.Add(item);
             }
 
-            pagination.SetMaxPage<BookInformation>(_LstBookInfo.ToList());
+            pagination.SetMaxPage<BookInformation>(_LstBookInfo.Count);
 
             pagination.CurrentPage = 1;
             pagination.LoadPage();
@@ -154,7 +137,7 @@ namespace HungVuong_C5_Assignment
                         Language = item.Language,
                         Quantity = quantity,
                         Status = item.BookISBN.Status,
-                        BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
+                        BookStatus =  DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
                     };
                     lstBookInfo.Add(newBookInfo);
                 }
@@ -169,6 +152,39 @@ namespace HungVuong_C5_Assignment
             
             foreach(var item in DatabaseFirst.Instance.db.Books)
             {
+                var newBookInfo = new BookInformation()
+                {
+                    Id = item.Id,
+                    Quantity = -1,
+                    BookAuthor = item.BookISBN.Author,
+                    Name = item.BookISBN.BookTitle.Name,
+                    BookPublisher = item.Publisher,
+                    PublishDate = item.PublishDate,
+                    BookTranslator = item.Translator,
+                    Category = item.BookISBN.BookTitle.Category.Name,
+                    ISBN = item.ISBN,
+                    Language = item.Language,
+                    Status = item.Status,
+                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
+                };
+
+                lstBookInfo.Add(newBookInfo);
+            }
+
+            return lstBookInfo;
+        }
+
+        private List<BookInformation> GetListBookInfoShowAllByISBN(string isbn)
+        {
+            List<BookInformation> lstBookInfo = new List<BookInformation>();
+
+            var bookISBN = DatabaseFirst.Instance.db.BookISBNs.FirstOrDefault(i => i.ISBN.ToLower() == isbn.ToLower());
+
+            foreach (var item in bookISBN.Books)
+            {
+                if (!item.Status)
+                    continue;
+
                 var newBookInfo = new BookInformation()
                 {
                     Id = item.Id,

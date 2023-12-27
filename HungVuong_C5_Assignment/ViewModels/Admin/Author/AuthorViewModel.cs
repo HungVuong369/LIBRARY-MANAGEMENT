@@ -251,7 +251,7 @@ namespace HungVuong_C5_Assignment
         {
             AuthorDataGrid.dgAuthors.ItemsSource = null;
             AuthorDataGrid.dgAuthors.ItemsSource = _LstAuthor.Skip((AuthorDataGrid.pagination.CurrentPage - 1) * AuthorDataGrid.pagination.ItemPerPage).Take(AuthorDataGrid.pagination.ItemPerPage);
-            AuthorDataGrid.pagination.ReloadShowing<Author>(_LstAuthor.ToList());
+            AuthorDataGrid.pagination.ReloadShowing<Author>(_LstAuthor.Count);
         }
 
         private void ReloadStorage()
@@ -260,7 +260,7 @@ namespace HungVuong_C5_Assignment
 
             this._LstAuthor = new ObservableCollection<Author>(this._StorageLstAuthor);
 
-            AuthorDataGrid.pagination.SetMaxPage<Author>(_LstAuthor.ToList());
+            AuthorDataGrid.pagination.SetMaxPage<Author>(_LstAuthor.Count);
 
             AuthorDataGrid.dgAuthors.ItemsSource = _LstAuthor.Skip((AuthorDataGrid.pagination.CurrentPage - 1) * AuthorDataGrid.pagination.ItemPerPage).Take(AuthorDataGrid.pagination.ItemPerPage);
         }
@@ -290,7 +290,7 @@ namespace HungVuong_C5_Assignment
                 }
             }
 
-            AuthorDataGrid.pagination.SetMaxPage<Author>(_LstAuthor.ToList());
+            AuthorDataGrid.pagination.SetMaxPage<Author>(_LstAuthor.Count);
             AuthorDataGrid.pagination.CurrentPage = 1;
             AuthorDataGrid.pagination.LoadPage();
         }

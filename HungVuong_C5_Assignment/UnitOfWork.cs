@@ -32,6 +32,7 @@ namespace HungVuong_C5_Assignment
         private LoanHistoryRepository _ListLoanHistory;
         private TranslatorRepository _ListTranslator;
         private ProvinceRepository _ListProvince;
+        private BookStatusRepository _ListBookStatus;
         #endregion
 
         #region Properties
@@ -264,6 +265,16 @@ namespace HungVuong_C5_Assignment
                 return this._ListProvince;
             }
         }
+
+        public BookStatusRepository BookStatus
+        {
+            get
+            {
+                if (this._ListBookStatus == null)
+                    this._ListBookStatus = new BookStatusRepository();
+                return this._ListBookStatus;
+            }
+        }
         #endregion
 
         public UnitOfWork() {
@@ -293,6 +304,7 @@ namespace HungVuong_C5_Assignment
             _ListLoanHistory = new LoanHistoryRepository();
             _ListTranslator = new TranslatorRepository();
             _ListProvince = new ProvinceRepository();
+            _ListBookStatus = new BookStatusRepository();
             #endregion
 
             #region Load
@@ -340,6 +352,8 @@ namespace HungVuong_C5_Assignment
             _ListTranslator.Load();
 
             _ListProvince.Load();
+
+            _ListBookStatus.Load();
             #endregion
         }
     }
