@@ -47,9 +47,6 @@ namespace HungVuong_C5_Assignment
 
             categoryRepo = unitOfWork.Categories;
 
-            ReloadStorage();
-            CategoryDataGrid.pagination.LoadPage();
-
             CategoryDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             CategoryDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             CategoryDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -240,13 +237,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            CategoryDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            CategoryDataGrid.pagination.CurrentPage = 1;
             CategoryDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.Count);
         }
 
         private void ReloadDataGrid()
@@ -263,6 +262,8 @@ namespace HungVuong_C5_Assignment
             this._LstCategory = new ObservableCollection<Category>(this._StorageLstCategory);
 
             CategoryDataGrid.pagination.SetMaxPage<Category>(_LstCategory.Count);
+
+            CategoryDataGrid.dgCategories.ItemsSource = null;
 
             CategoryDataGrid.dgCategories.ItemsSource = _LstCategory.Skip((CategoryDataGrid.pagination.CurrentPage - 1) * CategoryDataGrid.pagination.ItemPerPage).Take(CategoryDataGrid.pagination.ItemPerPage);
         }

@@ -6,151 +6,191 @@
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
              Padding="15"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <TextBlock Text="Add Book ISBN"
+                   HorizontalAlignment="Center"
+                   FontSize="20"
+                   FontWeight="Bold"/>
+
+        <Grid Grid.Row="1"
+              Height="230"
+              Width="300">
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Content="Add Book ISBN"
-                   FontSize="20"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"/>
-
-            <StackPanel Grid.Row="1"
-                        Margin="10">
-                <TextBlock Text="ISBN"
-                           FontSize="14"
-                           FontWeight="SemiBold"
-                           Margin="0 0 0 5"/>
-                <TextBox IsEnabled="False"
-                         Name="txtISBN"
-                         Text="{Binding NewID}"/>
-                
-                <TextBlock Text="Language"
-                           FontSize="14"
-                           FontWeight="SemiBold"
-                           Margin="0 5"/>
-                <ComboBox x:Name="cbLanguage"
-                          SelectedIndex="0"
-                          Margin="0 0 5 0"
-                          ItemsSource="{Binding Languages}"
-                          SelectedItem="{Binding SelectedLanguage, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
-        </Grid>
-
-        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid>
+
+            <TextBlock Text="ISBN: "
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
+            <TextBox Grid.Column="1"
+                     VerticalAlignment="Center"
+                     Name="txtISBN"
+                     Style="{StaticResource PlaceHolderTextStyle}"
+                     Tag="Input here...">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding ISBNTextChangedCommand}" 
+                                               CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+
+            <TextBlock Text="Language: "
+                       FontSize="14"
+                       Grid.Row="1"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
+            <ComboBox Grid.Column="1"
+                      Grid.Row="1"
+                      VerticalAlignment="Center"
+                      SelectedIndex="0"
+                      ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding SelectedLanguage}"/>
+
+            <TextBlock Text="Book Title: "
+                       FontSize="14"
+                       Grid.Row="2"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
+            <Grid Grid.Row="2"
+                  Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0"
-                                Margin="0 5 0 0">
-                    <TextBox Name="txtBookTitleSearch"
-                             Margin="10 0 10 5"
-                             TextChanged="txtBookTitleSearch_TextChanged"
-                             Style="{StaticResource PlaceHolderTextStyle}"
-                             Tag="Search by Name and Author Name"/>
-                    <TextBlock Name="tbSelectBookTitle"
-                               Text="Please select a book title"
-                               FontSize="12"
-                               FontWeight="SemiBold"
-                               Foreground="Red"
-                               Margin="10 0 10 5"/>
-                </StackPanel>
+                <TextBox VerticalAlignment="Center"
+                         Name="txtBookTitle"
+                         Style="{StaticResource PlaceHolderTextStyle}"
+                         Tag="Search here...">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding BookTitleTextChangedCommand}" 
+                                                   CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
 
-                <DataGrid Name="dgBookTitleInfo" AutoGenerateColumns="False"
-                          IsReadOnly="True" SelectionMode="Single"
+                <ComboBox Height="0" Width="0"
+                          HorizontalAlignment="Left"
                           Grid.Row="1"
-                          Margin="10 0 10 10"
-                          SelectionChanged="dgBookTitleInfo_SelectionChanged"
-                          SelectedItem="{Binding SelectedBookTitleInformation, UpdateSourceTrigger=PropertyChanged}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
-                        <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                          VerticalAlignment="Top"
+                          ItemsSource="{Binding FilterBookTitles}"
+                          Name="cbBookTitle">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding BookTitleSelectionChangedCommand}" 
+                                                   CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Id}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
 
-            <Grid Grid.Column="1">
+            <TextBlock Text="Author: "
+                       FontSize="14"
+                       Grid.Row="3"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"/>
+
+            <Grid Grid.Row="3"
+                  Grid.Column="1">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0"
-                                Margin="0 5 0 0">
-                    <!--<TextBlock Text=""
-                           FontSize="14"
-                           FontWeight="SemiBold"
-                           Margin="10 0 10 5"/>-->
-                    <TextBox Name="txtAuthorSearch"
-                             Margin="10 0 10 5"
-                             TextChanged="txtAuthorSearch_TextChanged"
-                                 Tag="Search by Name and Id"
-                                 Style="{StaticResource PlaceHolderTextStyle}"/>
-                    <TextBlock Name="tbSelectAuthor"
-                                   Text="Please select an author"
-                                   FontSize="12"
-                                   FontWeight="SemiBold"
-                                   Margin="10 0 10 5"
-                                   Foreground="Red"/>
-                </StackPanel>
+                <TextBox VerticalAlignment="Center"
+                         Name="txtAuthor"
+                         Style="{StaticResource PlaceHolderTextStyle}"
+                         Tag="Search here...">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="TextChanged">
+                            <i:InvokeCommandAction Command="{Binding AuthorTextChangedCommand}" 
+                                                   CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
 
-                <DataGrid Name="dgAuthor" 
-                          AutoGenerateColumns="False" 
-                          IsReadOnly="True" 
-                          SelectionMode="Single" Margin="10 0 10 10"
+                <ComboBox Height="0" Width="0"
+                          HorizontalAlignment="Left"
                           Grid.Row="1"
-                              SelectionChanged="dgBookTitleInfo_SelectionChanged"
-                          SelectedItem="{Binding SelectedAuthor, UpdateSourceTrigger=PropertyChanged}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="BoF" Binding="{Binding boF, StringFormat='dd/MM/yyyy'}"/>
-                        <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                          VerticalAlignment="Top"
+                          ItemsSource="{Binding FilterAuthors}"
+                          Name="cbAuthor">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding AuthorSelectionChangedCommand}" 
+                                                   CommandParameter="{Binding}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Id}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding Name}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"/>
+                                <TextBlock Text=" - "/>
+                                <TextBlock Text="{Binding boF, StringFormat='dd/MM/yyyy'}"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
         </Grid>
-        
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Button Name="btnAdd"
-                    Content="Add"
-                    Margin="10"
-                    Command="{Binding AddCommand}"
-                    IsEnabled="False"
-                    Height="auto"
-                    Width="auto"/>
-
-            <Button Name="btnCancel"
-                    Content="Cancel"
-                    Margin="10"
-                    Height="auto"
-                    Width="auto"
-                    Grid.Column="1"
+            <Button Content="Add"
+                    Margin="5 0"
+                    IsEnabled="{Binding IsEnabledAdd}"
+                    Command="{Binding AddCommand}"/>
+            <Button Content="Cancel" Grid.Column="1"
+                    Margin="5 0"
                     Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>

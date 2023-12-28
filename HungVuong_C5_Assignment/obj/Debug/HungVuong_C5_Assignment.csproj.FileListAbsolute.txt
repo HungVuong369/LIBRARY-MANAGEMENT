@@ -413,3 +413,7 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\Admin\Parameter\ParameterManagement.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\Admin\Parameter\ucAddParameter.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\Admin\Parameter\ucUpdateParameter.baml
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatiRectangle.g.cs
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatisticalLibrarian.g.cs
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatiRectangle.baml
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatisticalLibrarian.baml

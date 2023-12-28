@@ -11,11 +11,18 @@ namespace HungVuong_C5_Assignment
     {
         private BookISBNViewModel _BookISBNVM = new BookISBNViewModel();
 
-        public bool Add(string language, string bookTitleName, string authorID, string bookTitleID)
+        public bool Add(string isbn, string language, string bookTitleName, string authorID, string bookTitleID)
         {
+            // Check book title and author is existed.
             if (this._BookISBNVM.isExist(bookTitleName, authorID))
             {
                 MessageBox.Show("Book ISBN Existed!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            if(DatabaseFirst.Instance.db.BookISBNs.FirstOrDefault(i => i.ISBN.ToLower() == isbn.Trim().ToLower()) != null)
+            {
+                MessageBox.Show("ISBN Existed!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 

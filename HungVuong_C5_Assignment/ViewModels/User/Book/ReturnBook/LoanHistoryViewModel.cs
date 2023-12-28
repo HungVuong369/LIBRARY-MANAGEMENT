@@ -267,11 +267,15 @@ namespace HungVuong_C5_Assignment
                 p => true,
                 p =>
                 {
-                    if (Price == "0.000")
-                        return;
-
                     var selectedLoanBook = ShowBooksViewModel.Instance.SelectedLoanBook;
+
                     var loanDetailHistory = selectedLoanBook.Tag as LoanDetailHistory;
+
+                    if (Price == "0.000")
+                    {
+                        loanDetailHistory.Note = SelectedPenaltyReason.Id;
+                        return;
+                    }
 
                     if (_PreviousPrice != null)
                     {
@@ -369,6 +373,8 @@ namespace HungVuong_C5_Assignment
 
         private void UpdatePaymentAndOtherFee(string price, string newPrice)
         {
+            if (price == "0")
+                price = "0,000";
             Payment -= decimal.Parse(price.Replace(".", ",").Replace(",", "").Insert(price.Replace(".", ",").Replace(",", "").Length - 3, "."));
             Payment += decimal.Parse(newPrice.Replace(".", ",").Replace(",", "").Insert(newPrice.Replace(".", ",").Replace(",", "").Length - 3, "."));
 

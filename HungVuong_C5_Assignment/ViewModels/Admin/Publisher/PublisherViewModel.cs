@@ -42,9 +42,6 @@ namespace HungVuong_C5_Assignment
 
             PublisherRepo = unitOfWork.Publishers;
 
-            ReloadStorage();
-            PublisherDataGrid.pagination.LoadPage();
-
             PublisherDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             PublisherDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             PublisherDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -176,13 +173,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            PublisherDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            PublisherDataGrid.pagination.CurrentPage = 1;
             PublisherDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            PublisherDataGrid.pagination.ReloadShowing<Publisher>(_LstPublisher.Count);
         }
 
         private void ReloadDataGrid()
@@ -199,6 +198,8 @@ namespace HungVuong_C5_Assignment
             this._LstPublisher = new ObservableCollection<Publisher>(this._StorageLstPublisher);
 
             PublisherDataGrid.pagination.SetMaxPage<Publisher>(_LstPublisher.Count);
+
+            PublisherDataGrid.dgPublishers.ItemsSource = null;
 
             PublisherDataGrid.dgPublishers.ItemsSource = _LstPublisher.Skip((PublisherDataGrid.pagination.CurrentPage - 1) * PublisherDataGrid.pagination.ItemPerPage).Take(PublisherDataGrid.pagination.ItemPerPage);
         }

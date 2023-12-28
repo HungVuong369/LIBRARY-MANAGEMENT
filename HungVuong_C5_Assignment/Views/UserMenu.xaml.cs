@@ -100,7 +100,15 @@ namespace HungVuong_C5_Assignment
         public void OpenFeature(string IdFunction)
         {
             TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
-            TreeViewItem treeViewParent = selectedItem.Parent as TreeViewItem;
+            TreeViewItem treeViewParent;
+            try
+            {
+                treeViewParent = selectedItem.Parent as TreeViewItem;
+            }
+            catch
+            {
+                treeViewParent = null;
+            }
 
             if (isOpenFeature == true)
             {
@@ -156,6 +164,9 @@ namespace HungVuong_C5_Assignment
                         }
                         grdMain.Children.Add(new LoanHistoryManagement());
                         break;
+                    case "":
+                        grdMain.Children.Add(new ucStatisticalLibrarian());
+                        break;
                     default:
                         isOpenFeature = false;
                         break;
@@ -180,13 +191,13 @@ namespace HungVuong_C5_Assignment
             {
                 From = 0,
                 To = HeightDefault,
-                Duration = TimeSpan.FromSeconds(0.4)
+                Duration = TimeSpan.FromSeconds(1)
             };
             DoubleAnimation animationWidth = new DoubleAnimation()
             {
                 From = 0,
                 To = WidthDefault,
-                Duration = TimeSpan.FromSeconds(0.4)
+                Duration = TimeSpan.FromSeconds(1)
             };
 
             if (grdMain.Children.Count >= 1)
@@ -197,7 +208,10 @@ namespace HungVuong_C5_Assignment
 
             ColorAnimation colorAnimation = new ColorAnimation();
 
-            colorAnimation.From = (Color)ColorConverter.ConvertFromString("#C3C2C9");
+            //colorAnimation.From = (Color)ColorConverter.ConvertFromString("#C3C2C9");
+            //colorAnimation.To = Colors.White;
+
+            colorAnimation.From = Colors.White;
             colorAnimation.To = Colors.White;
             colorAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
 
@@ -228,6 +242,12 @@ namespace HungVuong_C5_Assignment
         {
             ucUserInfoShow userInfo = sender as ucUserInfoShow;
             userInfo.DataContext = UserInfo;
+        }
+
+        private void TreeViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Animation();
+            OpenFeature("");
         }
     }
 }

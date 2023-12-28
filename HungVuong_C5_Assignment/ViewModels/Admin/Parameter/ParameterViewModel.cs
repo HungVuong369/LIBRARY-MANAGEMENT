@@ -47,9 +47,6 @@ namespace HungVuong_C5_Assignment
 
             parameterRepo = unitOfWork.Parameters;
 
-            ReloadStorage();
-            ParameterDataGrid.pagination.LoadPage();
-
             ParameterDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             ParameterDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             ParameterDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -240,13 +237,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            ParameterDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            ParameterDataGrid.pagination.CurrentPage = 1;
             ParameterDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            ParameterDataGrid.pagination.ReloadShowing<Parameter>(_LstParameter.Count);
         }
 
         private void ReloadDataGrid()
@@ -263,6 +262,8 @@ namespace HungVuong_C5_Assignment
             this._LstParameter = new ObservableCollection<Parameter>(this._StorageLstParameter);
 
             ParameterDataGrid.pagination.SetMaxPage<Parameter>(_LstParameter.Count);
+
+            ParameterDataGrid.dgParameters.ItemsSource = null;
 
             ParameterDataGrid.dgParameters.ItemsSource = _LstParameter.Skip((ParameterDataGrid.pagination.CurrentPage - 1) * ParameterDataGrid.pagination.ItemPerPage).Take(ParameterDataGrid.pagination.ItemPerPage);
         }

@@ -65,9 +65,6 @@ namespace HungVuong_C5_Assignment
         {
             WindowDefault window = new WindowDefault();
             window.Content = new ucAddBookISBN(window);
-            window.SizeToContent = SizeToContent.Manual;
-            window.Width = 900;
-            window.Height = 650;
             window.ShowDialog();
 
             if(window.DialogResult == true)

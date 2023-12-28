@@ -42,9 +42,6 @@ namespace HungVuong_C5_Assignment
 
             PenaltyReasonRepo = unitOfWork.PenaltyReasons;
 
-            ReloadStorage();
-            PenaltyReasonDataGrid.pagination.LoadPage();
-
             PenaltyReasonDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             PenaltyReasonDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             PenaltyReasonDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -176,13 +173,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            PenaltyReasonDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            PenaltyReasonDataGrid.pagination.CurrentPage = 1;
             PenaltyReasonDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            PenaltyReasonDataGrid.pagination.ReloadShowing<PenaltyReason>(_LstPenaltyReason.Count);
         }
 
         private void ReloadDataGrid()
@@ -199,6 +198,8 @@ namespace HungVuong_C5_Assignment
             this._LstPenaltyReason = new ObservableCollection<PenaltyReason>(this._StorageLstPenaltyReason);
 
             PenaltyReasonDataGrid.pagination.SetMaxPage<PenaltyReason>(_LstPenaltyReason.Count);
+
+            PenaltyReasonDataGrid.dgPenaltyReasons.ItemsSource = null;
 
             PenaltyReasonDataGrid.dgPenaltyReasons.ItemsSource = _LstPenaltyReason.Skip((PenaltyReasonDataGrid.pagination.CurrentPage - 1) * PenaltyReasonDataGrid.pagination.ItemPerPage).Take(PenaltyReasonDataGrid.pagination.ItemPerPage);
         }

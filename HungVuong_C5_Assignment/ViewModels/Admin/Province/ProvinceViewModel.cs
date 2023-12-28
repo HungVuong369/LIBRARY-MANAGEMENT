@@ -46,9 +46,6 @@ namespace HungVuong_C5_Assignment
 
             ProvinceRepo = unitOfWork.Provinces;
 
-            ReloadStorage();
-            ProvinceDataGrid.pagination.LoadPage();
-
             ProvinceDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             ProvinceDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             ProvinceDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -234,13 +231,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            ProvinceDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            ProvinceDataGrid.pagination.CurrentPage = 1;
             ProvinceDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            ProvinceDataGrid.pagination.ReloadShowing<Province>(_LstProvince.Count);
         }
 
         private void ReloadDataGrid()
@@ -257,6 +256,8 @@ namespace HungVuong_C5_Assignment
             this._LstProvince = new ObservableCollection<Province>(this._StorageLstProvince);
 
             ProvinceDataGrid.pagination.SetMaxPage<Province>(_LstProvince.Count);
+
+            ProvinceDataGrid.dgProvinces.ItemsSource = null;
 
             ProvinceDataGrid.dgProvinces.ItemsSource = _LstProvince.Skip((ProvinceDataGrid.pagination.CurrentPage - 1) * ProvinceDataGrid.pagination.ItemPerPage).Take(ProvinceDataGrid.pagination.ItemPerPage);
         }

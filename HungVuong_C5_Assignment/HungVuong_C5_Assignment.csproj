@@ -196,6 +196,12 @@
     <Compile Include="Translator.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\User\Statistical\ucStatiRectangle.xaml.cs">
+      <DependentUpon>ucStatiRectangle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\User\Statistical\ucStatisticalLibrarian.xaml.cs">
+      <DependentUpon>ucStatisticalLibrarian.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -635,6 +641,14 @@
     <Page Include="Styles\TreeViews.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\User\Statistical\ucStatiRectangle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\User\Statistical\ucStatisticalLibrarian.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Admin\Author\DataGrid\ucAuthorDataGrid.xaml">
       <SubType>Designer</SubType>

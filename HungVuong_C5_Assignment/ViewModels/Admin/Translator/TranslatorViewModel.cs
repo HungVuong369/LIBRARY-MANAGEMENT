@@ -45,9 +45,6 @@ namespace HungVuong_C5_Assignment
 
             translatorRepo = unitOfWork.Translators;
 
-            ReloadStorage();
-            TranslatorDataGrid.pagination.LoadPage();
-
             TranslatorDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             TranslatorDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             TranslatorDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -238,13 +235,15 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            TranslatorDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
+
             Search = string.Empty;
 
-            TranslatorDataGrid.pagination.CurrentPage = 1;
             TranslatorDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            TranslatorDataGrid.pagination.ReloadShowing<Translator>(_LstTranslator.Count);
         }
 
         private void ReloadDataGrid()
@@ -261,6 +260,8 @@ namespace HungVuong_C5_Assignment
             this._LstTranslator = new ObservableCollection<Translator>(this._StorageLstTranslator);
 
             TranslatorDataGrid.pagination.SetMaxPage<Translator>(_LstTranslator.Count);
+
+            TranslatorDataGrid.dgTranslators.ItemsSource = null;
 
             TranslatorDataGrid.dgTranslators.ItemsSource = _LstTranslator.Skip((TranslatorDataGrid.pagination.CurrentPage - 1) * TranslatorDataGrid.pagination.ItemPerPage).Take(TranslatorDataGrid.pagination.ItemPerPage);
         }

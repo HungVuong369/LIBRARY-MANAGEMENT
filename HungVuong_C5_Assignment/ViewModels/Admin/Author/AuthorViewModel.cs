@@ -45,9 +45,6 @@ namespace HungVuong_C5_Assignment
 
             authorRepo = unitOfWork.Authors;
 
-            ReloadStorage();
-            AuthorDataGrid.pagination.LoadPage();
-
             AuthorDataGrid.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             AuthorDataGrid.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             AuthorDataGrid.pagination.cbPage.SelectedIndex = 1;
@@ -238,13 +235,14 @@ namespace HungVuong_C5_Assignment
 
         private void Reload()
         {
+            AuthorDataGrid.pagination.CurrentPage = 1;
+
             ReloadStorage();
             Search = string.Empty;
 
-            AuthorDataGrid.pagination.CurrentPage = 1;
             AuthorDataGrid.pagination.LoadPage();
 
-            ReloadDataGrid();
+            AuthorDataGrid.pagination.ReloadShowing<Author>(_LstAuthor.Count);
         }
 
         private void ReloadDataGrid()
@@ -261,6 +259,8 @@ namespace HungVuong_C5_Assignment
             this._LstAuthor = new ObservableCollection<Author>(this._StorageLstAuthor);
 
             AuthorDataGrid.pagination.SetMaxPage<Author>(_LstAuthor.Count);
+
+            AuthorDataGrid.dgAuthors.ItemsSource = null;
 
             AuthorDataGrid.dgAuthors.ItemsSource = _LstAuthor.Skip((AuthorDataGrid.pagination.CurrentPage - 1) * AuthorDataGrid.pagination.ItemPerPage).Take(AuthorDataGrid.pagination.ItemPerPage);
         }
