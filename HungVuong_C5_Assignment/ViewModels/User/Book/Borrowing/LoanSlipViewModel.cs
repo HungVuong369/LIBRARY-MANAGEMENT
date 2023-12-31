@@ -269,6 +269,8 @@ namespace HungVuong_C5_Assignment
                         ShowBooksViewModel.Instance.ResetLoaningBook();
 
                         ShowBooksViewModel.Instance.UpdateViewBooks("None", "None", "");
+
+                        Previous();
                     }
                 }
             );
@@ -292,16 +294,21 @@ namespace HungVuong_C5_Assignment
                 p => true,
                 p =>
                 {
-                    BackgroundMultipleStep = Brushes.Transparent;
-                    ForegroundMultipleStep = BorderBrushMultipleStep = Brushes.Black;
-                    OnPropertyChanged(nameof(ForegroundMultipleStep));
-                    OnPropertyChanged(nameof(BorderBrushMultipleStep));
-                    OnPropertyChanged(nameof(BackgroundMultipleStep));
-
-                    SearchBookVisibility = Visibility.Collapsed;
-                    ReaderInformationVisibility = Visibility.Visible;
+                    Previous();
                 }    
             );
+        }
+
+        private void Previous()
+        {
+            BackgroundMultipleStep = Brushes.Transparent;
+            ForegroundMultipleStep = BorderBrushMultipleStep = Brushes.Black;
+            OnPropertyChanged(nameof(ForegroundMultipleStep));
+            OnPropertyChanged(nameof(BorderBrushMultipleStep));
+            OnPropertyChanged(nameof(BackgroundMultipleStep));
+
+            SearchBookVisibility = Visibility.Collapsed;
+            ReaderInformationVisibility = Visibility.Visible;
         }
 
         private void SetValueByReaderType()
