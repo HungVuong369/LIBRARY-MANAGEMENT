@@ -82,7 +82,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddProvince(window);
+                    window.grdContainer.Children.Add(new ucAddProvince(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -179,7 +179,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdateProvince addCategory = new ucUpdateProvince(window, SelectedProvince);
-                   window.Content = addCategory;
+                   window.grdContainer.Children.Add(addCategory);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

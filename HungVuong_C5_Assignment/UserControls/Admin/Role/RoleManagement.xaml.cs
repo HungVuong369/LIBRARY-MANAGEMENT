@@ -62,7 +62,7 @@ namespace HungVuong_C5_Assignment
             WindowDefault window = new WindowDefault();
 
             ucUserAssignmentView userAssignmentView = new ucUserAssignmentView(window, new User() { Id = userRoleDto.Id, Username = userRoleDto.Username, Password = userRoleDto.Password, Status = userRoleDto.Status, CreatedAt = userRoleDto.CreatedAt, ModifiedAt = userRoleDto.ModifiedAt }, userInfo);
-            window.Content = userAssignmentView;
+            window.grdContainer.Children.Add(userAssignmentView);
 
             window.ShowDialog();
 
@@ -131,7 +131,7 @@ namespace HungVuong_C5_Assignment
             window.Width = 560;
             window.Height = 230;
             ucAddRole addRole = new ucAddRole(window);
-            window.Content = addRole;
+            window.grdContainer.Children.Add(addRole);
             window.ShowDialog();
 
             ucFeatureAssignment.Load();

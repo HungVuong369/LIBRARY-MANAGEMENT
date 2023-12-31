@@ -22,11 +22,10 @@ namespace HungVuong_C5_Assignment
     {
         public ucStatiRectangle(string source, string quantity, string content, string colorQuantity, string colorFill, int width = 50, int height = 50)
         {
-            //string source, int quantity, string colorQuantity, string content, string colorContent
             InitializeComponent();
             path.Tag = source;
             tbQuantity.Text = quantity;
-            tbContent.Text = content;
+            gbContainer.Header = content;
             path.Width = width;
             path.Height = height;
 

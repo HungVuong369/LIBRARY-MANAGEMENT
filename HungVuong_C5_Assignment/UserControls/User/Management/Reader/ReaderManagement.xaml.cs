@@ -118,7 +118,8 @@ namespace HungVuong_C5_Assignment
         {
             WindowDefault window = new WindowDefault();
             window.SizeToContent = SizeToContent.Height;
-            window.Content = new ucAddReader(window);
+
+            window.grdContainer.Children.Add(new ucAddReader(window));
             window.ShowDialog();
 
             if(window.DialogResult == true)
@@ -137,7 +138,7 @@ namespace HungVuong_C5_Assignment
         private void btnTransitioningChild_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucTransitioningChild();
+            window.grdContainer.Children.Add(new ucTransitioningChild());
             window.ShowDialog();
         }
 

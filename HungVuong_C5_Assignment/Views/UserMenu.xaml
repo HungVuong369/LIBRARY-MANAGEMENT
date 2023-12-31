@@ -80,8 +80,8 @@
             </Setter>
         </Style>
     </Window.Resources>
-    
-    <Grid>
+
+    <Grid Background="{StaticResource main_Background}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>

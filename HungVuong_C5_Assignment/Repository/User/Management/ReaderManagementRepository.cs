@@ -55,7 +55,7 @@ namespace HungVuong_C5_Assignment
             {
                 WindowDefault window = new WindowDefault();
                 ucConfirmDelete ucConfirmDelete = new ucConfirmDelete(window, _ChildVM.GetByAdultID(id), _ChildVM.GetByAdultIDSecond(id));
-                window.Content = ucConfirmDelete;
+                window.grdContainer.Children.Add(ucConfirmDelete);
                 window.ShowDialog();
 
                 if (window.DialogResult == true)
@@ -133,7 +133,7 @@ namespace HungVuong_C5_Assignment
 
                     Adult adult = _AdultVM.adultRepo.GetByIdReader(child.IdAdult);
 
-                    window.Content = new ucConfirmRestoreChild(window, adultReader, adult);
+                    window.grdContainer.Children.Add(new ucConfirmRestoreChild(window, adultReader, adult));
 
                     window.ShowDialog();
 
@@ -195,7 +195,7 @@ namespace HungVuong_C5_Assignment
 
                     ucConfirmRestoreAdult ucConfirm = new ucConfirmRestoreAdult(window, childReader1, child1, childReader2, child2);
 
-                    window.Content = ucConfirm;
+                    window.grdContainer.Children.Add(ucConfirm);
 
                     window.ShowDialog();
 

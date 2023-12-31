@@ -153,7 +153,7 @@ namespace HungVuong_C5_Assignment
                     }
 
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucSelectBookByISBN(window, bookISBN.ISBN);
+                    window.grdContainer.Children.Add(new ucSelectBookByISBN(window, bookISBN.ISBN));
                     window.ShowDialog();
 
                     if(window.DialogResult == true)

@@ -417,3 +417,4 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatisticalLibrarian.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatiRectangle.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatisticalLibrarian.baml
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Styles\ColorStyles.baml

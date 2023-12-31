@@ -83,7 +83,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddCategory(window);
+                    window.grdContainer.Children.Add(new ucAddCategory(window));
                     window.ShowDialog();
 
                     if(window.DialogResult == true)
@@ -185,7 +185,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdateCategory addCategory = new ucUpdateCategory(window, SelectedCategory);
-                   window.Content = addCategory;
+                   window.grdContainer.Children.Add(addCategory);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

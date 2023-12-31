@@ -202,7 +202,7 @@ namespace HungVuong_C5_Assignment
                     };
 
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ConfirmLoanBooks(window, loanSlip, ShowBookVM.LstLoaningBook.Select(i => DatabaseFirst.Instance.db.Books.FirstOrDefault(item => item.Id == i.BookInfo.Id)).ToList());
+                    window.grdContainer.Children.Add(new ConfirmLoanBooks(window, loanSlip, ShowBookVM.LstLoaningBook.Select(i => DatabaseFirst.Instance.db.Books.FirstOrDefault(item => item.Id == i.BookInfo.Id)).ToList()));
                     window.ShowDialog();
 
                     int count = 1;

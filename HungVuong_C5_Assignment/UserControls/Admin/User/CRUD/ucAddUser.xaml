@@ -19,9 +19,10 @@
                HorizontalAlignment="Center"
                VerticalAlignment="Center"/>
 
-        <local:InputUser x:Name="ucInputUser" Grid.Row="1"/>
+        <local:InputUser x:Name="ucInputUser" Grid.Row="1"
+                         Width="350"/>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Width="350">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -29,20 +30,16 @@
 
             <Button Content="Add" 
                     Grid.Column="0"
-                    Width="200"
                     Name="btnAdd"
                     IsEnabled="False"
                     Click="btnAdd_Click"
-                    HorizontalAlignment="Right"
                     Margin="10 15 10 15"/>
 
             <Button Content="Cancel" 
                         Grid.Column="1"
-                        Width="200"
                         Margin="10 15 10 15"
                         Name="btnClose"
-                        Click="btnClose_Click"
-                    HorizontalAlignment="Left"/>
+                        Click="btnClose_Click"/>
         </Grid>
     </Grid>
 </UserControl>

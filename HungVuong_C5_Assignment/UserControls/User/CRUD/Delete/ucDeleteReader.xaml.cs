@@ -54,7 +54,7 @@ namespace HungVuong_C5_Assignment
                     {
                         WindowDefault window = new WindowDefault();
                         ucConfirmDelete ucConfirmDelete = new ucConfirmDelete(window, childVM.GetByAdultID(id), childVM.GetByAdultIDSecond(id));
-                        window.Content = ucConfirmDelete;
+                        window.grdContainer.Children.Add(ucConfirmDelete);
                         window.ShowDialog();
 
                         if(window.DialogResult == true)

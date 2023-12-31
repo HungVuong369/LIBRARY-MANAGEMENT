@@ -54,7 +54,7 @@ namespace HungVuong_C5_Assignment
         private void btnDetail_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucDetailLoanHistory(dgLoanHistories.SelectedItem as LoanHistory);
+            window.grdContainer.Children.Add(new ucDetailLoanHistory(dgLoanHistories.SelectedItem as LoanHistory));
             window.ShowDialog();
         }
 

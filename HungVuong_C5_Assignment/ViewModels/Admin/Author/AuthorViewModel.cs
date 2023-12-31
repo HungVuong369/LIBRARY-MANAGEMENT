@@ -81,7 +81,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddAuthor(window);
+                    window.grdContainer.Children.Add(new ucAddAuthor(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -183,7 +183,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdateAuthor updateAuthor = new ucUpdateAuthor(window, SelectedAuthor);
-                   window.Content = updateAuthor;
+                   window.grdContainer.Children.Add(updateAuthor);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

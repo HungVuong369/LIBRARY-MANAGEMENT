@@ -161,13 +161,13 @@ namespace HungVuong_C5_Assignment
                 From = 0,
                 To = HeightDefault,
                 // Default 0.4
-                Duration = TimeSpan.FromSeconds(1)
+                Duration = TimeSpan.FromSeconds(0.4)
             };
             DoubleAnimation animationWidth = new DoubleAnimation()
             {
                 From = 0,
                 To = mainWindow.WidthDefault,
-                Duration = TimeSpan.FromSeconds(1)
+                Duration = TimeSpan.FromSeconds(0.4)
             };
 
             if (grdMain.Children.Count >= 1)
@@ -181,8 +181,8 @@ namespace HungVuong_C5_Assignment
             //colorAnimation.From = (Color)ColorConverter.ConvertFromString("#C3C2C9");
             //colorAnimation.To = Colors.White;
 
-            colorAnimation.From = Colors.White;
-            colorAnimation.To = Colors.White;
+            colorAnimation.From = Colors.Transparent;
+            colorAnimation.To = Colors.Transparent;
             colorAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
 
             Storyboard storyboard = new Storyboard();

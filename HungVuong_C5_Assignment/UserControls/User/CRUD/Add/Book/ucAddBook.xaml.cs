@@ -51,7 +51,7 @@ namespace HungVuong_C5_Assignment
             Button button = sender as Button;
 
             WindowDefault window = new WindowDefault();
-            window.Content = new ucDetailBookISBN(button.Tag.ToString());
+            window.grdContainer.Children.Add(new ucDetailBookISBN(button.Tag.ToString()));
             window.ShowDialog();
         }
 

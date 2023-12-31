@@ -132,7 +132,7 @@ namespace HungVuong_C5_Assignment
             UserInfo userInfo = _UserInfoVM.UserInfoRepo.GetByID(user.Id);
 
             WindowDefault window = new WindowDefault();
-            window.Content = new ucUserInfoShow(userInfo);
+            window.grdContainer.Children.Add(new ucUserInfoShow(userInfo));
             window.ShowDialog();
         }
 

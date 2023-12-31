@@ -112,7 +112,7 @@ namespace HungVuong_C5_Assignment
             LoanSlip loanSlip = _LoanSlipVM.loanSlipRepo.GetByID(loanSlipDto.Id);
 
             WindowDefault window = new WindowDefault();
-            window.Content = new ucLoanDetail(loanSlip);
+            window.grdContainer.Children.Add(new ucLoanDetail(loanSlip));
             window.ShowDialog();
         }
     }

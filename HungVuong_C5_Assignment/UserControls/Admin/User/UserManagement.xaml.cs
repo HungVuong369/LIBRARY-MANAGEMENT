@@ -81,7 +81,7 @@ namespace HungVuong_C5_Assignment
 
             WindowDefault window = new WindowDefault();
 
-            window.Content = new ucUpdateUserView(window, user);
+            window.grdContainer.Children.Add(new ucUpdateUserView(window, user));
 
             window.ShowDialog();
 
@@ -129,11 +129,8 @@ namespace HungVuong_C5_Assignment
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.SizeToContent = SizeToContent.Manual;
-            window.Width = 560;
-            window.Height = 400;
             ucAddUser addUser = new ucAddUser(window);
-            window.Content = addUser;
+            window.grdContainer.Children.Add(addUser);
             window.ShowDialog();
             
             ucUserDataGrid.ReloadStorage();

@@ -64,7 +64,7 @@ namespace HungVuong_C5_Assignment
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucAddBookTitle(window);
+            window.grdContainer.Children.Add(new ucAddBookTitle(window));
             window.ShowDialog();
 
             if(window.DialogResult == true)

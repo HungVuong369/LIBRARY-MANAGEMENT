@@ -12,9 +12,46 @@
               Width="230"
               Cursor="Hand"
               FontSize="14"
+              Background="Transparent"
               Name="gbContainer"
               Tag="{Binding SelectedShowBook, Mode=TwoWay}"
               MouseLeftButtonDown="GroupBox_MouseLeftButtonDown">
+        <GroupBox.Style>
+            <Style TargetType="GroupBox">
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform Y="0"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="LightGray" Direction="180" ShadowDepth="1" Opacity="0.5"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                     To="-5"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                     To="0"
+                                                     Duration="0:0:0.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </GroupBox.Style>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseLeftButtonDown">
                 <i:InvokeCommandAction Command="{Binding AddBookCommand}" 
@@ -40,7 +77,7 @@
                        FontWeight="SemiBold"
                        FontSize="14"/>
 
-            <TextBlock Text="Category: "
+            <!--<TextBlock Text="Category: "
                        Grid.Row="1"
                        FontWeight="SemiBold"
                        FontSize="14"/>
@@ -53,10 +90,10 @@
             <TextBlock Text="Language: "
                        Grid.Row="3"
                        FontWeight="SemiBold"
-                       FontSize="14"/>
+                       FontSize="14"/>-->
             
             <TextBlock Text="Quantity: "
-                       Grid.Row="4"
+                       Grid.Row="1"
                        FontWeight="SemiBold"
                        FontSize="14"/>
 
@@ -66,7 +103,7 @@
                        VerticalAlignment="Center"
                        FontSize="13"/>
 
-            <TextBlock Grid.Column="1"
+            <!--<TextBlock Grid.Column="1"
                        Grid.Row="1"
                        Text="{Binding BookTitle.Category.Name}"
                        TextWrapping="Wrap"
@@ -85,10 +122,10 @@
                        Text="{Binding OriginLanguage}"
                        TextWrapping="Wrap"
                        VerticalAlignment="Center"
-                       FontSize="13"/>
+                       FontSize="13"/>-->
             
             <TextBlock Grid.Column="1"
-                       Grid.Row="4"
+                       Grid.Row="1"
                        Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                        TextWrapping="Wrap"
                        FontSize="13"

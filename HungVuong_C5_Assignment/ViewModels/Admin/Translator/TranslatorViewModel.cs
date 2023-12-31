@@ -81,7 +81,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddTranslator(window);
+                    window.grdContainer.Children.Add(new ucAddTranslator(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -183,7 +183,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdateTranslator updateTranslator = new ucUpdateTranslator(window, SelectedTranslator);
-                   window.Content = updateTranslator;
+                   window.grdContainer.Children.Add(updateTranslator);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

@@ -60,6 +60,8 @@
                             
                             <TextBox Name="txtReaderID"
                                      Margin="5"
+                                     Style="{StaticResource PlaceHolderTextStyle}"
+                                     Tag="Search here..."
                                      IsEnabled="{Binding ShowBookVM.IsInputReader}"
                                      Text="{Binding ReaderID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <i:Interaction.Triggers>

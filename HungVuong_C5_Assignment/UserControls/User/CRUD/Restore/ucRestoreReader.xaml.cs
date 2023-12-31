@@ -150,7 +150,7 @@ namespace HungVuong_C5_Assignment
 
                     Adult adult = GetAdultByIdReader(child.IdAdult);
 
-                    window.Content = new ucConfirmRestoreChild(window, adultReader, adult);
+                    window.grdContainer.Children.Add(new ucConfirmRestoreChild(window, adultReader, adult));
 
                     window.ShowDialog();
 
@@ -204,7 +204,7 @@ namespace HungVuong_C5_Assignment
 
                     ucConfirmRestoreAdult ucConfirm = new ucConfirmRestoreAdult(window, childReader1, child1, childReader2, child2);
 
-                    window.Content = ucConfirm;
+                    window.grdContainer.Children.Add(ucConfirm);
 
                     window.ShowDialog();
 

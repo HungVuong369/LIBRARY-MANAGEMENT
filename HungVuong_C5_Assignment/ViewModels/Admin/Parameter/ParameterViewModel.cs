@@ -83,7 +83,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddParameter(window);
+                    window.grdContainer.Children.Add(new ucAddParameter(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -185,7 +185,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdateParameter addParameter = new ucUpdateParameter(window, SelectedParameter);
-                   window.Content = addParameter;
+                   window.grdContainer.Children.Add(addParameter);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

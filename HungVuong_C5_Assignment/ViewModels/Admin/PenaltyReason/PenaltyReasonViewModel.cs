@@ -60,7 +60,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddPenaltyReason(window);
+                    window.grdContainer.Children.Add(new ucAddPenaltyReason(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -128,7 +128,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdatePenaltyReason updatePenaltyReason = new ucUpdatePenaltyReason(window, SelectedPenaltyReason);
-                   window.Content = updatePenaltyReason;
+                   window.grdContainer.Children.Add(updatePenaltyReason);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

@@ -6,9 +6,35 @@
         xmlns:local="clr-namespace:HungVuong_C5_Assignment"
         mc:Ignorable="d"
         Title="WindowDefault"
-        WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight">
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Border Background="{StaticResource cs_Background}" CornerRadius="20"
+                BorderBrush="Black" BorderThickness="1"/>
+
+        <Grid Name="grdContainer"></Grid>
         
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top">
+            <Button x:Name="BtnMinimize"
+                    Margin="0 5 5 0"
+                    Style="{StaticResource bt_MinimizeWindow}"
+                    Click="BtnMinimize_Click"/>
+
+            <Button x:Name="BtnMaximize"
+                    Margin="0 5 5 0"
+                    Style="{StaticResource bt_MaximizeWindow}"
+                    Click="BtnMaximize_Click"/>
+
+            <Button x:Name="BtnClose"
+                    Margin="0 5 15 0"
+                    Style="{StaticResource bt_CloseWindow}"
+                    Click="BtnClose_Click"/>
+
+        </StackPanel>
     </Grid>
 </Window>

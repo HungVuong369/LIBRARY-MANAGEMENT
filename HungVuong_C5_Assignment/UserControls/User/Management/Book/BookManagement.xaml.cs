@@ -63,7 +63,7 @@ namespace HungVuong_C5_Assignment
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucAddBook(window);
+            window.grdContainer.Children.Add(new ucAddBook(window));
             window.SizeToContent = SizeToContent.Manual;
             window.Height = 600;
             window.Width = 850;
@@ -111,7 +111,7 @@ namespace HungVuong_C5_Assignment
         private void btnReturnBook_Click(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucReturnBook();
+            window.grdContainer.Children.Add(new ucReturnBook());
             window.ShowDialog();
 
             if (window.DialogResult == true)

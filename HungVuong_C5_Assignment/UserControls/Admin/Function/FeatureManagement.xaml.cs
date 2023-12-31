@@ -119,7 +119,7 @@ namespace HungVuong_C5_Assignment
         private void UcFunctionDataGrid_updateEvent(object sender, RoutedEventArgs e)
         {
             WindowDefault window = new WindowDefault();
-            window.Content = new ucUpdateFeatureView(window, ucFunctionDataGrid.dgFunction.SelectedItem as Function);
+            window.grdContainer.Children.Add(new ucUpdateFeatureView(window, ucFunctionDataGrid.dgFunction.SelectedItem as Function));
             window.ShowDialog();
 
             if (window.DialogResult == true)
@@ -196,7 +196,7 @@ namespace HungVuong_C5_Assignment
                 else
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucConfirmDeleteFeature(window, function.Id);
+                    window.grdContainer.Children.Add(new ucConfirmDeleteFeature(window, function.Id));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -246,7 +246,7 @@ namespace HungVuong_C5_Assignment
             WindowDefault window = new WindowDefault();
             List<Function> selectedFunctions = ucFunctionDataGrid.dgFunction.SelectedItems.Cast<Function>().ToList();
 
-            window.Content = new ucConfirmDeleteFeature(window, selectedFunctions);
+            window.grdContainer.Children.Add(new ucConfirmDeleteFeature(window, selectedFunctions));
             window.ShowDialog();
 
             if (window.DialogResult == true)
@@ -269,7 +269,7 @@ namespace HungVuong_C5_Assignment
             WindowDefault window = new WindowDefault();
             List<Function> selectedFunctions = ucFunctionDataGrid.dgFunction.SelectedItems.Cast<Function>().ToList();
 
-            window.Content = new ucConfirmRestoreFunction(window, selectedFunctions);
+            window.grdContainer.Children.Add(new ucConfirmRestoreFunction(window, selectedFunctions));
             window.ShowDialog();
 
             if (window.DialogResult == true)

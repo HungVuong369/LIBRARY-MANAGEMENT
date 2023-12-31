@@ -75,7 +75,7 @@ namespace HungVuong_C5_Assignment
             window.SizeToContent = SizeToContent.Manual;
             window.Width = 750;
             window.Height = 550;
-            window.Content = new ucDetailBookISBN(button.Tag.ToString());
+            window.grdContainer.Children.Add(new ucDetailBookISBN(button.Tag.ToString()));
             window.ShowDialog();
         }
     }

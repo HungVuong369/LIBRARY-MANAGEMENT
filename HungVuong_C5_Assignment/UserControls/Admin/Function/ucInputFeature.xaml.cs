@@ -120,7 +120,7 @@ namespace HungVuong_C5_Assignment
             };
 
             confirm.ucFunction.SetVisibilityButton(Visibility.Collapsed, Visibility.Collapsed, Visibility.Collapsed);
-            window.Content = confirm;
+            window.grdContainer.Children.Add(confirm);
             window.ShowDialog();
 
             if (window.DialogResult == true)

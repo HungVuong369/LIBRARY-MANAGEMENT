@@ -60,7 +60,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     WindowDefault window = new WindowDefault();
-                    window.Content = new ucAddPublisher(window);
+                    window.grdContainer.Children.Add(new ucAddPublisher(window));
                     window.ShowDialog();
 
                     if (window.DialogResult == true)
@@ -128,7 +128,7 @@ namespace HungVuong_C5_Assignment
                {
                    WindowDefault window = new WindowDefault();
                    ucUpdatePublisher updatePublisher = new ucUpdatePublisher(window, SelectedPublisher);
-                   window.Content = updatePublisher;
+                   window.grdContainer.Children.Add(updatePublisher);
                    window.ShowDialog();
 
                    if (window.DialogResult == true)

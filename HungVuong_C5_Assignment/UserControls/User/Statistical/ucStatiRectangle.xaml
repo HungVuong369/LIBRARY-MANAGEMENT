@@ -6,11 +6,12 @@
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <GroupBox Width="300"
-              Height="100"
+    <GroupBox Width="210"
+              Height="120"
               Margin="30 30 0 0"
               BorderBrush="#A6A6A6"
-              Header="I'm Rectangle"
+              FontSize="20"
+              FontWeight="SemiBold"
               Background="Transparent"
               x:Name="gbContainer">
         <GroupBox.Style>
@@ -65,30 +66,29 @@
                   Height="50"
                   Data="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}"
                   ></Path>
-            <!--<Image Margin="10"
-                   Source="{Binding Path=Tag, RelativeSource={RelativeSource Mode=Self}}"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-                   Name="img"/>-->
 
-            <Grid Grid.Column="1"
+            <TextBlock HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="25"
+                       Foreground="#1ABC9C"
+                       Name="tbQuantity"
+                       Margin="10"
+                       Grid.Column="1"/>
+            <!--<Grid Grid.Column="1"
                   Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock HorizontalAlignment="Right"
-                           VerticalAlignment="Bottom"
-                           FontSize="25"
-                           Foreground="#1ABC9C"
-                           Name="tbQuantity"/>
-                <TextBlock Grid.Row="1"
+                
+                
+                --><!--<TextBlock Grid.Row="1"
                            FontSize="20"
                            HorizontalAlignment="Right"
                            VerticalAlignment="Top"
-                           Name="tbContent"/>
-            </Grid>
+                           Name="tbContent"/>--><!--
+            </Grid>-->
         </Grid>
     </GroupBox>
 </UserControl>

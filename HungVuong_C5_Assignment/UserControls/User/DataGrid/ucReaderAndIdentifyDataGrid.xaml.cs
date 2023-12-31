@@ -166,7 +166,7 @@ namespace HungVuong_C5_Assignment
                 Child child2 = _ChildVM.GetByAdultIDSecond(reader.Id);
                 ucAdultInformation info = new ucAdultInformation(_ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == reader.Id), adult, child1, child2);
                 WindowDefault window = new WindowDefault();
-                window.Content = info;
+                window.grdContainer.Children.Add(info);
                 window.ShowDialog();
             }
             else
@@ -177,7 +177,7 @@ namespace HungVuong_C5_Assignment
 
                 ucChildInformation info = new ucChildInformation(adultReader, adult, _ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == reader.Id), child);
                 WindowDefault window = new WindowDefault();
-                window.Content = info;
+                window.grdContainer.Children.Add(info);
                 window.ShowDialog();
             }
         }
@@ -222,7 +222,7 @@ namespace HungVuong_C5_Assignment
 
             WindowDefault window = new WindowDefault();
 
-            window.Content = detail;
+            window.grdContainer.Children.Add(detail);
 
             window.ShowDialog();
         }

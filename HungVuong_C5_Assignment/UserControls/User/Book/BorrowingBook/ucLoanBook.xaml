@@ -12,6 +12,7 @@
     <Grid Name="grdTest">
         <Button Name="btnContainer"
                 Click="btnContainer_Click"
+                Background="Transparent"
                 Tag="{Binding SelectedLoanBook, Mode=TwoWay}"
                 Command="{Binding RemoveBookCommand}">
             <Button.Style>
@@ -22,7 +23,44 @@
                                 <GroupBox BorderBrush="Black"
                                           Header="^.^"
                                           FontSize="14"
+                                          Background="Transparent"
                                           Loaded="GroupBox_Loaded">
+                                    <GroupBox.Style>
+                                        <Style TargetType="GroupBox">
+                                            <Setter Property="RenderTransform">
+                                                <Setter.Value>
+                                                    <TranslateTransform Y="0"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect Color="LightGray" Direction="180" ShadowDepth="1" Opacity="0.5"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                     To="-5"
+                                                     Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                                                     To="0"
+                                                     Duration="0:0:0.2" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </GroupBox.Style>
                                     <Grid Loaded="Grid_Loaded">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="auto"/>

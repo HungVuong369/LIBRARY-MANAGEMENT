@@ -618,6 +618,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\ColorStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\ComboBoxs.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1160,6 +1164,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\ic_CloseAct.png" />
+    <Resource Include="Images\ic_MaximizeAct.png" />
+    <Resource Include="Images\ic_MinimizeAct.png" />
+    <Resource Include="Images\ic_ClosePas.png" />
+    <Resource Include="Images\ic_MaximizePas.png" />
+    <Resource Include="Images\ic_MinimizePas.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
