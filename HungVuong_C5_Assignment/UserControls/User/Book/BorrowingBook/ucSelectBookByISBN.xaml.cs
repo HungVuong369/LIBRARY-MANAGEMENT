@@ -43,8 +43,6 @@ namespace HungVuong_C5_Assignment
             pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             dgBookInfo.SelectionChanged += DgBookInfo_SelectionChanged;
 
-            ReloadStorageAllByISBN(isbn);
-
             pagination.cbPage.SelectedIndex = 0;
 
             pagination.HideButton();
@@ -99,16 +97,16 @@ namespace HungVuong_C5_Assignment
             btnConfirm.IsEnabled = true;
         }
 
-        //private void ReloadAll()
-        //{
-        //    ReloadStorageAllByISBN(ISBN);
-        //    txtSearch.Text = "";
+        private void ReloadAll()
+        {
+            ReloadStorageAllByISBN(ISBN);
+            txtSearch.Text = "";
 
-        //    pagination.CurrentPage = 1;
-        //    pagination.LoadPage();
+            pagination.CurrentPage = 1;
+            pagination.LoadPage();
 
-        //    ReloadDataGrid();
-        //}
+            ReloadDataGrid();
+        }
 
         public void ReloadDataGrid()
         {
@@ -120,7 +118,7 @@ namespace HungVuong_C5_Assignment
         private void Pagination_SelectionChangedComboBoxEvent(object sender, SelectionChangedEventArgs e)
         {
             pagination.ItemPerPage = int.Parse((pagination.cbPage.SelectedItem as ComboBoxItem).Content.ToString());
-            ReloadDataGrid();
+            ReloadAll();
         }
 
         private void Pagination_ChangedPageEvent(Pagination pagination)

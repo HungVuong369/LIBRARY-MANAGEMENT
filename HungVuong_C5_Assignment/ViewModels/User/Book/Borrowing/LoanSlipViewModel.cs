@@ -17,6 +17,10 @@ namespace HungVuong_C5_Assignment
         private ParameterViewModel _ParameterVM = new ParameterViewModel();
 
         public Brush ForegroundQuantity { get; set; } = Brushes.Green;
+        public Brush BackgroundMultipleStep { get; set; }
+        public Brush ForegroundMultipleStep { get; set; } = Brushes.Black;
+        public Brush BorderBrushMultipleStep { get; set; } = Brushes.Black;
+
         public string ISBN { get; set; } = "";
         public string ReaderID { get; set; } = "";
         public string ReaderName { get; set; } = "None";
@@ -66,6 +70,34 @@ namespace HungVuong_C5_Assignment
             }
         }
 
+        private Visibility _ReaderInformationVisibility = Visibility.Visible;
+        public Visibility ReaderInformationVisibility
+        {
+            get
+            {
+                return _ReaderInformationVisibility;
+            }
+            set
+            {
+                _ReaderInformationVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Visibility _SearBookVisibility = Visibility.Collapsed;
+        public Visibility SearchBookVisibility
+        {
+            get
+            {
+                return _SearBookVisibility;
+            }
+            set
+            {
+                _SearBookVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ShowBooksViewModel ShowBookVM { get; set; } = ShowBooksViewModel.Instance;
         private Reader _SelectedReader = null;
         public Reader SelectedReader
@@ -104,10 +136,15 @@ namespace HungVuong_C5_Assignment
         public RelayCommand<object> TextChangedReaderIDCommand { get; private set; }
         public RelayCommand<object> SelectionChangedReaderIDCommand { get; private set; }
         public RelayCommand<object> CreateLoanSlipCommand { get; private set; }
+        public RelayCommand<object> NextCommand { get; private set; }
+        public RelayCommand<object> PreviousCommand { get; private set; }
         public ucBorrowingBook borrowingBook;
 
         public LoanSlipViewModel()
         {
+            //BackgroundMultipleStep = (Brush)new BrushConverter().ConvertFromString("#27AE60");
+            BackgroundMultipleStep = Brushes.Transparent;
+
             this.loanSlipRepo = unitOfWork.Loanslips;
             ShowBookVM.IsInputReader = true;
             ShowBookVM.IsCreateLoanSlip = false;
@@ -234,6 +271,36 @@ namespace HungVuong_C5_Assignment
                         ShowBooksViewModel.Instance.UpdateViewBooks("None", "None", "");
                     }
                 }
+            );
+
+            NextCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    BorderBrushMultipleStep = BackgroundMultipleStep = (Brush)new BrushConverter().ConvertFromString("#27AE60");
+                    ForegroundMultipleStep = Brushes.White;
+                    OnPropertyChanged(nameof(ForegroundMultipleStep));
+                    OnPropertyChanged(nameof(BorderBrushMultipleStep));
+                    OnPropertyChanged(nameof(BackgroundMultipleStep));
+
+                    SearchBookVisibility = Visibility.Visible;
+                    ReaderInformationVisibility = Visibility.Collapsed;
+                }    
+            );
+
+            PreviousCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    BackgroundMultipleStep = Brushes.Transparent;
+                    ForegroundMultipleStep = BorderBrushMultipleStep = Brushes.Black;
+                    OnPropertyChanged(nameof(ForegroundMultipleStep));
+                    OnPropertyChanged(nameof(BorderBrushMultipleStep));
+                    OnPropertyChanged(nameof(BackgroundMultipleStep));
+
+                    SearchBookVisibility = Visibility.Collapsed;
+                    ReaderInformationVisibility = Visibility.Visible;
+                }    
             );
         }
 
