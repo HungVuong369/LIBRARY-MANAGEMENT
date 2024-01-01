@@ -31,8 +31,35 @@ namespace HungVuong_C5_Assignment
             ucReader.pagination.ChangedPageEvent += Pagination_ChangedPageEvent;
             ucReader.pagination.SelectionChangedComboBoxEvent += Pagination_SelectionChangedComboBoxEvent;
             ucReader.pagination.cbPage.SelectedIndex = 1;
+            ucReader.lockEvent += UcReader_lockEvent;
             ucReader.deleteEvent += UcReader_deleteEvent;
             ucReader.restoreEvent += UcReader_restoreEvent;
+        }
+
+        private void UcReader_lockEvent(object sender, RoutedEventArgs e)
+        {
+            AdultReader adultReader = (sender as Button).Tag as AdultReader;
+
+            if (MessageBox.Show("Are you sure you want to lock?", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                _ReaderManagementRepo.LockReader(adultReader.Id);
+
+                ucReader.ReloadStorage();
+                if (ucReader.pagination.CurrentPage > ucReader.pagination.MaxPage)
+                {
+                    ucReader.pagination.CurrentPage -= 1;
+                    ucReader.ReloadDataGrid();
+                    ucReader.pagination.LoadPage();
+                }
+                else
+                {
+                    ucReader.ReloadDataGrid();
+                    ucReader.pagination.LoadPage();
+                }
+
+                if (txtSearch.Text != string.Empty)
+                    ReloadDataGridBySearch(txtSearch.Text);
+            }
         }
 
         private void ReloadRestored()
@@ -159,7 +186,7 @@ namespace HungVuong_C5_Assignment
             _AdultVM.adultRepo.Load(false);
             _ChildVM.childRepo.Load(false);
             ReloadDataGrid();
-            ucReader.SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
+            ucReader.SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
         }
 
         private void toggleButton_Unchecked(object sender, RoutedEventArgs e)
@@ -168,7 +195,7 @@ namespace HungVuong_C5_Assignment
             _AdultVM.adultRepo.Load(true);
             _ChildVM.childRepo.Load(true);
             ReloadDataGrid();
-            ucReader.SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+            ucReader.SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
         }
     }
 }

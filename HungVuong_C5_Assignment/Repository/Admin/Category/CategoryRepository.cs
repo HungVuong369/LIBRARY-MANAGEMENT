@@ -45,13 +45,22 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.Categories.Add(newCategory);
         }
 
-        public void Remove(Category category)
+        public void Lock(Category category)
         {
             Items.Remove(category);
 
             var item = DatabaseFirst.Instance.db.Categories.FirstOrDefault(i => i.Id == category.Id);
 
             item.Status = false;
+        }
+
+        public void Delete(Category category)
+        {
+            Items.Remove(category);
+
+            var item = DatabaseFirst.Instance.db.Categories.FirstOrDefault(i => i.Id == category.Id);
+
+            DatabaseFirst.Instance.db.Categories.Remove(item);
         }
 
         public void Restore(Category category)

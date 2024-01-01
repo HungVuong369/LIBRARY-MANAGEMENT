@@ -27,7 +27,7 @@
                      SelectionChanged="lbTabMenu_SelectionChanged"
                      Margin="10 5">
                 <ListBoxItem>Add Adult</ListBoxItem>
-                <ListBoxItem>Add Child</ListBoxItem>
+                <!--<ListBoxItem>Add Child</ListBoxItem>-->
             </ListBox>
 
             <local:ucAddAdultReader Grid.Row="1" Visibility="Collapsed"

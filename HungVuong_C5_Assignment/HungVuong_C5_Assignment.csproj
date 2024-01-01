@@ -422,11 +422,8 @@
     <Compile Include="UserControls\User\Book\BorrowingBook\ucBorrowingBook.xaml.cs">
       <DependentUpon>ucBorrowingBook.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\User\CRUD\Delete\ucConfirmDelete.xaml.cs">
-      <DependentUpon>ucConfirmDelete.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\User\CRUD\Delete\ucDeleteReader.xaml.cs">
-      <DependentUpon>ucDeleteReader.xaml</DependentUpon>
+    <Compile Include="UserControls\User\CRUD\Delete\ucConfirmLock.xaml.cs">
+      <DependentUpon>ucConfirmLock.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\User\CRUD\Restore\ucConfirmRestoreAdult.xaml.cs">
       <DependentUpon>ucConfirmRestoreAdult.xaml</DependentUpon>
@@ -511,9 +508,6 @@
     </Compile>
     <Compile Include="UserControls\User\View\Reader\ReaderInformation\ucChildInformation.xaml.cs">
       <DependentUpon>ucChildInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.xaml.cs">
-      <DependentUpon>ucReaderInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInfo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -942,11 +936,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\User\CRUD\Delete\ucConfirmDelete.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\User\CRUD\Delete\ucDeleteReader.xaml">
+    <Page Include="UserControls\User\CRUD\Delete\ucConfirmLock.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1059,10 +1049,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\User\View\Reader\ReaderInformation\ucChildInformation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

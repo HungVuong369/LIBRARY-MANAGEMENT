@@ -32,6 +32,7 @@ namespace HungVuong_C5_Assignment
 
         public RelayCommand<object> AddCommand { get; private set; }
         public RelayCommand<object> RestoreCommand { get; private set; }
+        public RelayCommand<object> LockCommand { get; private set; }
         public RelayCommand<object> DeleteCommand { get; private set; }
         public RelayCommand<object> UpdateCommand { get; private set; }
 
@@ -64,7 +65,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     Reload();
-                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
+                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
                 }
             );
 
@@ -73,7 +74,7 @@ namespace HungVuong_C5_Assignment
                p =>
                {
                    Reload();
-                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
                }
            );
 
@@ -107,14 +108,14 @@ namespace HungVuong_C5_Assignment
                 }
             );
 
-            DeleteCommand = new RelayCommand<object>(
+            LockCommand = new RelayCommand<object>(
                p => true,
                p =>
                {
-                   if (MessageBox.Show($"Are you sure you want to delete Province '{SelectedProvince.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                   if (MessageBox.Show($"Are you sure you want to lock Province '{SelectedProvince.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                    {
                        string name = SelectedProvince.Name;
-                       ProvinceRepo.Remove(SelectedProvince);
+                       ProvinceRepo.Lock(SelectedProvince);
                        DatabaseFirst.Instance.SaveChanged();
 
                        ReloadStorage();
@@ -134,10 +135,42 @@ namespace HungVuong_C5_Assignment
                        if (Search != string.Empty)
                            ReloadDataGridBySearch(Search);
 
-                       MessageBox.Show($"Province '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                       MessageBox.Show($"Province '{name}' successfully locked!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
                    }
                }
            );
+
+            DeleteCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    if (MessageBox.Show($"Are you sure you want to delete Province '{SelectedProvince.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        string name = SelectedProvince.Name;
+                        ProvinceRepo.Delete(SelectedProvince);
+                        DatabaseFirst.Instance.SaveChanged();
+
+                        ReloadStorage();
+
+                        if (ProvinceDataGrid.pagination.CurrentPage > ProvinceDataGrid.pagination.MaxPage)
+                        {
+                            ProvinceDataGrid.pagination.CurrentPage -= 1;
+                            ReloadDataGrid();
+                            ProvinceDataGrid.pagination.LoadPage();
+                        }
+                        else
+                        {
+                            ReloadDataGrid();
+                            ProvinceDataGrid.pagination.LoadPage();
+                        }
+
+                        if (Search != string.Empty)
+                            ReloadDataGridBySearch(Search);
+
+                        MessageBox.Show($"Province '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }    
+            );
 
             RestoreCommand = new RelayCommand<object>(
                p => true,
@@ -205,11 +238,12 @@ namespace HungVuong_C5_Assignment
            );
         }
 
-        private void SetVisibilityButton(Visibility delete, Visibility restore, Visibility update)
+        private void SetVisibilityButton(Visibility lockVisi, Visibility restore, Visibility update, Visibility delete)
         {
             ProvinceDataGrid.dgProvinces.Columns[3].Visibility = update;
-            ProvinceDataGrid.dgProvinces.Columns[4].Visibility = delete;
+            ProvinceDataGrid.dgProvinces.Columns[4].Visibility = lockVisi;
             ProvinceDataGrid.dgProvinces.Columns[5].Visibility = restore;
+            ProvinceDataGrid.dgProvinces.Columns[6].Visibility = delete;
         }
 
         private void ReloadDataGridBySearch(string search)

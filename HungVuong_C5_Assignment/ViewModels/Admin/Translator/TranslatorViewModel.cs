@@ -31,6 +31,7 @@ namespace HungVuong_C5_Assignment
         public RelayCommand<object> AddCommand { get; private set; }
 
         public RelayCommand<object> RestoreCommand { get; private set; }
+        public RelayCommand<object> LockCommand { get; private set; }
         public RelayCommand<object> DeleteCommand { get; private set; }
         public RelayCommand<object> UpdateCommand { get; private set; }
 
@@ -63,7 +64,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     Reload();
-                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
+                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
                 }
             );
 
@@ -72,7 +73,7 @@ namespace HungVuong_C5_Assignment
                p =>
                {
                    Reload();
-                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
                }
            );
 
@@ -106,19 +107,19 @@ namespace HungVuong_C5_Assignment
                 }
             );
 
-            DeleteCommand = new RelayCommand<object>(
+            LockCommand = new RelayCommand<object>(
                p => true,
                p =>
                {
                    if (SelectedTranslator.Books.Count != 0)
                    {
-                       MessageBox.Show($"Cannot delete translator '{SelectedTranslator.Name}'", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                       MessageBox.Show($"Cannot lock translator '{SelectedTranslator.Name}'", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                        return;
                    }
-                   if (MessageBox.Show($"Are you sure you want to delete translator '{SelectedTranslator.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                   if (MessageBox.Show($"Are you sure you want to lock translator '{SelectedTranslator.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                    {
                        string name = SelectedTranslator.Name;
-                       translatorRepo.Remove(SelectedTranslator);
+                       translatorRepo.Lock(SelectedTranslator);
                        DatabaseFirst.Instance.SaveChanged();
 
                        ReloadStorage();
@@ -138,10 +139,42 @@ namespace HungVuong_C5_Assignment
                        if (Search != string.Empty)
                            ReloadDataGridBySearch(Search);
 
-                       MessageBox.Show($"Translator '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                       MessageBox.Show($"Translator '{name}' successfully locked!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
                    }
                }
            );
+
+            DeleteCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    if (MessageBox.Show($"Are you sure you want to delete translator '{SelectedTranslator.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        string name = SelectedTranslator.Name;
+                        translatorRepo.Delete(SelectedTranslator);
+                        DatabaseFirst.Instance.SaveChanged();
+
+                        ReloadStorage();
+
+                        if (TranslatorDataGrid.pagination.CurrentPage > TranslatorDataGrid.pagination.MaxPage)
+                        {
+                            TranslatorDataGrid.pagination.CurrentPage -= 1;
+                            ReloadDataGrid();
+                            TranslatorDataGrid.pagination.LoadPage();
+                        }
+                        else
+                        {
+                            ReloadDataGrid();
+                            TranslatorDataGrid.pagination.LoadPage();
+                        }
+
+                        if (Search != string.Empty)
+                            ReloadDataGridBySearch(Search);
+
+                        MessageBox.Show($"Translator '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }    
+            );
 
             RestoreCommand = new RelayCommand<object>(
                p => true,
@@ -209,11 +242,12 @@ namespace HungVuong_C5_Assignment
            );
         }
 
-        private void SetVisibilityButton(Visibility delete, Visibility restore, Visibility update)
+        private void SetVisibilityButton(Visibility lockVisi, Visibility restore, Visibility update, Visibility delete)
         {
             TranslatorDataGrid.dgTranslators.Columns[8].Visibility = update;
-            TranslatorDataGrid.dgTranslators.Columns[9].Visibility = delete;
+            TranslatorDataGrid.dgTranslators.Columns[9].Visibility = lockVisi;
             TranslatorDataGrid.dgTranslators.Columns[10].Visibility = restore;
+            TranslatorDataGrid.dgTranslators.Columns[11].Visibility = delete;
         }
 
         private void ReloadDataGridBySearch(string search)

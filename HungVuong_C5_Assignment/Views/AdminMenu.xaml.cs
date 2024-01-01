@@ -257,5 +257,19 @@ namespace HungVuong_C5_Assignment
             ucUserInfoShow userInfo = sender as ucUserInfoShow;
             userInfo.DataContext = UserInfo;
         }
+
+        private void arrowRight_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            grdContainer.Visibility = Visibility.Visible;
+            arrowLeft.Visibility = Visibility.Visible;
+            arrowRight.Visibility = Visibility.Collapsed;
+        }
+
+        private void arrowLeft_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            grdContainer.Visibility = Visibility.Collapsed;
+            arrowLeft.Visibility = Visibility.Collapsed;
+            arrowRight.Visibility = Visibility.Visible;
+        }
     }
 }

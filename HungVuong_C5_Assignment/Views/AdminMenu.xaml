@@ -181,6 +181,83 @@
         <Grid Name="grdMain" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
         </Grid>
 
+        <Grid Grid.Column="1">
+            <Polygon Points="50,200 45,195 50,190" Fill="Black"
+                     Stretch="Uniform"
+                     Width="20"
+                     Height="20"
+                     Margin="10"
+                     Name="arrowLeft"
+                     HorizontalAlignment="Left"
+                     Visibility="Visible"
+                     Opacity="0.5"
+                     VerticalAlignment="Center"
+                     MouseLeftButtonDown="arrowLeft_MouseLeftButtonDown">
+                <Polygon.Style>
+                    <Style TargetType="Polygon">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="20" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Polygon.Style>
+            </Polygon>
+
+            <!-- Mũi tên bên trái -->
+            <Polygon Points="50,50 45,45 45,55" Fill="Black"
+                     Stretch="Uniform"
+                     Width="20"
+                     Height="20"
+                     Name="arrowRight"
+                     Margin="10"
+                     HorizontalAlignment="Left"
+                     Visibility="Collapsed"
+                     Opacity="0.5"
+                     VerticalAlignment="Center"
+                     MouseLeftButtonDown="arrowRight_MouseLeftButtonDown">
+                <Polygon.Style>
+                    <Style TargetType="Polygon">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="20" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Polygon.Style>
+            </Polygon>
+        </Grid>
+
         <Control Style="{StaticResource PageTitleHeaderStyle}"
                  VerticalAlignment="Top"
                  Grid.Column="1"

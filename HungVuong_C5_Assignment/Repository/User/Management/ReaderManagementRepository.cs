@@ -42,19 +42,20 @@ namespace HungVuong_C5_Assignment
             return true;
         }
 
-        private void DeleteAdult(int quantityChild, string id)
+        private void LockAdult(int quantityChild, string id)
         {
             if (quantityChild == 0)
             {
                 _AdultVM.adultRepo.RemoveByIdReader(id);
                 _ReaderVM.readerRepo.RemoveByID(id);
                 DatabaseFirst.Instance.SaveChanged();
-                MessageBox.Show("Deleted successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Lock successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 WindowDefault window = new WindowDefault();
-                ucConfirmDelete ucConfirmDelete = new ucConfirmDelete(window, _ChildVM.GetByAdultID(id), _ChildVM.GetByAdultIDSecond(id));
+                var reader = _ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == id);
+                ucConfirmLock ucConfirmDelete = new ucConfirmLock(window, reader, reader.Adult, "Confirm Lock", "Lock", true);
                 window.grdContainer.Children.Add(ucConfirmDelete);
                 window.ShowDialog();
 
@@ -72,19 +73,84 @@ namespace HungVuong_C5_Assignment
                     _ReaderVM.readerRepo.RemoveByID(id);
 
                     DatabaseFirst.Instance.SaveChanged();
-                    MessageBox.Show("Deleted successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Lock successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
 
-        private void DeleteChild(string id)
+        private void DeleteAdult(int quantityChild, string id)
+        {
+            if (quantityChild == 0)
+            {
+                _AdultVM.adultRepo.DeleteByIdReader(id);
+                _ReaderVM.readerRepo.RemoveByID(id);
+                DatabaseFirst.Instance.SaveChanged();
+                MessageBox.Show("Delete successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                WindowDefault window = new WindowDefault();
+                var reader = _ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == id);
+                ucConfirmLock ucConfirmDelete = new ucConfirmLock(window, reader, reader.Adult, "Confirm Delete", "Delete", false);
+                window.grdContainer.Children.Add(ucConfirmDelete);
+                window.ShowDialog();
+
+                if (window.DialogResult == true)
+                {
+                    Child child = _ChildVM.GetByAdultID(id);
+
+                    while (child != null)
+                    {
+                        _ChildVM.childRepo.DeleteByIdReader(child.IdReader);
+                        _ReaderVM.readerRepo.DeleteByID(child.IdReader);
+                        child = _ChildVM.GetByAdultID(id);
+                    }
+                    _AdultVM.adultRepo.DeleteByIdReader(id);
+                    _ReaderVM.readerRepo.DeleteByID(id);
+
+                    DatabaseFirst.Instance.SaveChanged();
+                    MessageBox.Show("Delete successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        }
+
+        private void LockChild(string id)
         {
             _ChildVM.childRepo.RemoveByIdReader(id);
             _ReaderVM.readerRepo.RemoveByID(id);
         }
 
+        private void DeleteChild(string id)
+        {
+            _ChildVM.childRepo.DeleteByIdReader(id);
+            _ReaderVM.readerRepo.DeleteByID(id);
+        }
+
+        public void LockReader(string id)
+        {
+            if (_ReaderVM.isAdult(id))
+            {
+                int quantityChild = _ChildVM.GetQuantityChildByAdultID(id);
+                LockAdult(quantityChild, id);
+            }
+            else
+            {
+                LockChild(id);
+                DatabaseFirst.Instance.SaveChanged();
+                MessageBox.Show("Lock successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
         public void DeleteReader(string id)
         {
+            var reader = _ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == id);
+
+            if (reader.LoanHistories.Count != 0 || reader.LoanSlips.Count != 0)
+            {
+                MessageBox.Show("Cannot delete this reader due to Loan History or Loan Slip!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             if (_ReaderVM.isAdult(id))
             {
                 int quantityChild = _ChildVM.GetQuantityChildByAdultID(id);
@@ -94,10 +160,9 @@ namespace HungVuong_C5_Assignment
             {
                 DeleteChild(id);
                 DatabaseFirst.Instance.SaveChanged();
-                MessageBox.Show("Deleted successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Delete successfully!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
 
         private void RestoreChild(Reader reader, Child child)
         {

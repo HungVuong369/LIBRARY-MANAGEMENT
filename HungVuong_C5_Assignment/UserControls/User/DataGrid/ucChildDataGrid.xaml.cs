@@ -29,7 +29,7 @@ namespace HungVuong_C5_Assignment
             InitializeComponent();
         }
 
-        public void SetItemsSourceByAdultIdReader(string adultIdReader)
+        public void SetItemsSourceByAdultIdReader(string adultIdReader, bool status)
         {
             List<ChildInformation> lstChildInfo = new List<ChildInformation>();
 
@@ -37,7 +37,7 @@ namespace HungVuong_C5_Assignment
 
             foreach (Child child in adult.Children)
             {
-                if (!child.Status)
+                if (child.Status != status)
                     continue;
                 if (child != null)
                 {

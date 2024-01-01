@@ -33,6 +33,7 @@ namespace HungVuong_C5_Assignment
         public RelayCommand<object> AddCommand { get; private set; }
 
         public RelayCommand<object> RestoreCommand { get; private set; }
+        public RelayCommand<object> LockCommand { get; private set; }
         public RelayCommand<object> DeleteCommand { get; private set; }
         public RelayCommand<object> UpdateCommand { get; private set; }
 
@@ -65,7 +66,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     Reload();
-                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
+                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
                 }
             );
 
@@ -74,7 +75,7 @@ namespace HungVuong_C5_Assignment
                p =>
                {
                    Reload();
-                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
                }
            );
 
@@ -108,19 +109,19 @@ namespace HungVuong_C5_Assignment
                 }    
             );
 
-            DeleteCommand = new RelayCommand<object>(
+            LockCommand = new RelayCommand<object>(
                p => true,
                p =>
                {
                    if (SelectedCategory.BookTitles.Count != 0)
                    {
-                       MessageBox.Show($"Cannot delete category '{SelectedCategory.Name}'", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                       MessageBox.Show($"Cannot lock category '{SelectedCategory.Name}'", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                        return;
                    }
-                   if (MessageBox.Show($"Are you sure you want to delete category '{SelectedCategory.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                   if (MessageBox.Show($"Are you sure you want to lock category '{SelectedCategory.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                    {
                        string name = SelectedCategory.Name;
-                       categoryRepo.Remove(SelectedCategory);
+                       categoryRepo.Lock(SelectedCategory);
                        DatabaseFirst.Instance.SaveChanged();
 
                        ReloadStorage();
@@ -140,10 +141,42 @@ namespace HungVuong_C5_Assignment
                        if (Search != string.Empty)
                            ReloadDataGridBySearch(Search);
 
-                       MessageBox.Show($"Category '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                       MessageBox.Show($"Category '{name}' successfully locked!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
                    }
                }
            );
+
+            DeleteCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    if (MessageBox.Show($"Are you sure you want to delete category '{SelectedCategory.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        string name = SelectedCategory.Name;
+                        categoryRepo.Delete(SelectedCategory);
+                        DatabaseFirst.Instance.SaveChanged();
+
+                        ReloadStorage();
+
+                        if (CategoryDataGrid.pagination.CurrentPage > CategoryDataGrid.pagination.MaxPage)
+                        {
+                            CategoryDataGrid.pagination.CurrentPage -= 1;
+                            ReloadDataGrid();
+                            CategoryDataGrid.pagination.LoadPage();
+                        }
+                        else
+                        {
+                            ReloadDataGrid();
+                            CategoryDataGrid.pagination.LoadPage();
+                        }
+
+                        if (Search != string.Empty)
+                            ReloadDataGridBySearch(Search);
+
+                        MessageBox.Show($"Category '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }    
+            );
 
             RestoreCommand = new RelayCommand<object>(
                p => true,
@@ -211,11 +244,12 @@ namespace HungVuong_C5_Assignment
            );
         }
 
-        private void SetVisibilityButton(Visibility delete, Visibility restore, Visibility update)
+        private void SetVisibilityButton(Visibility lockVisibility, Visibility restore, Visibility update, Visibility delete)
         {
             CategoryDataGrid.dgCategories.Columns[5].Visibility = update;
-            CategoryDataGrid.dgCategories.Columns[6].Visibility = delete;
+            CategoryDataGrid.dgCategories.Columns[6].Visibility = lockVisibility;
             CategoryDataGrid.dgCategories.Columns[7].Visibility = restore;
+            CategoryDataGrid.dgCategories.Columns[8].Visibility = delete;
         }
 
         private void ReloadDataGridBySearch(string search)

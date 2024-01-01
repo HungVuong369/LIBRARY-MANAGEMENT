@@ -40,13 +40,22 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.Provinces.Add(newProvince);
         }
 
-        public void Remove(Province newProvince)
+        public void Lock(Province newProvince)
         {
             Items.Remove(newProvince);
 
             var item = DatabaseFirst.Instance.db.Provinces.FirstOrDefault(i => i.Id == newProvince.Id);
 
             item.Status = false;
+        }
+
+        public void Delete(Province newProvince)
+        {
+            Items.Remove(newProvince);
+
+            var item = DatabaseFirst.Instance.db.Provinces.FirstOrDefault(i => i.Id == newProvince.Id);
+
+            DatabaseFirst.Instance.db.Provinces.Remove(item);
         }
 
         public void Restore(Province province)

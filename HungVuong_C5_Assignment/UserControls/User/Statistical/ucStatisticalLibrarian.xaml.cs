@@ -101,6 +101,22 @@ namespace HungVuong_C5_Assignment
               "#E74C3C"
            );
 
+            var statiAdult = new ucStatiRectangle(
+              "M605.096,480 c-135.542-2.098-239.082-111.058-239.999-240C367.336,105.667,477.133,0.942,605.096,0c135.662,5.13,239.036,108.97,240.001,240 C842.429,374.439,733.19,479.09,605.096,480z M799.139,529.788c170.592,1.991,257.094,151.63,257.881,301.269V1200H889.784 l0.001-324.254c-4.072-22.416-19.255-30.018-33.164-27.82c-13.022,2.059-24.929,12.701-25.56,27.82V1200h-464.67V875.746 c-3.557-21.334-17.128-29.537-30.331-28.709c-14.138,0.889-27.853,12.135-28.393,28.709V1200h-164.68V831.057 c-0.98-159.475,99.901-300.087,259.137-301.269H799.139L799.139,529.788z",
+              DatabaseFirst.Instance.db.Adults.Where(i => i.Status).Count().ToString(),
+              "Adults",
+              "#000000",
+              "#000000"
+           );
+
+            var statiChildren = new ucStatiRectangle(
+              "M10 5c0 1.105-0.895 2-2 2s-2-0.895-2-2c0-1.105 0.895-2 2-2s2 0.895 2 2z M12.79 10.32l-2.6-2.63c-0.421-0.426-1.004-0.69-1.65-0.69h-1.070c-0 0-0 0-0.001 0-0.648 0-1.235 0.264-1.659 0.69l-2.6 2.63c-0.216 0.129-0.358 0.362-0.358 0.628 0 0.403 0.327 0.73 0.73 0.73 0.266 0 0.499-0.142 0.626-0.355l1.792-1.793v6.47h1.5v-4h1v4h1.5v-6.47l1.75 1.8c0.135 0.175 0.344 0.287 0.58 0.287 0.403 0 0.73-0.327 0.73-0.73 0-0.228-0.105-0.432-0.269-0.566z",
+              DatabaseFirst.Instance.db.Children.Where(i => i.Status).Count().ToString(),
+              "Children",
+              "#FF7B00",
+              "#FF7B00"
+           );
+
             wpContainer.Children.Add(statiBorrowedBookCount);
             wpContainer.Children.Add(statiBookCount);
             wpContainer.Children.Add(statiLoanCount);
@@ -109,6 +125,8 @@ namespace HungVuong_C5_Assignment
             wpContainer.Children.Add(statiISBNMostBorrowed);
             wpContainer.Children.Add(statiDamagedBook);
             wpContainer.Children.Add(statiLostBook);
+            wpContainer.Children.Add(statiAdult);
+            wpContainer.Children.Add(statiChildren);
         }
 
         private string GetMostBorrowedISBN()

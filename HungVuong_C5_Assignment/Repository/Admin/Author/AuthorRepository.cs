@@ -45,13 +45,22 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.Authors.Add(newAuthor);
         }
 
-        public void Remove(Author author)
+        public void Lock(Author author)
         {
             Items.Remove(author);
 
             var item = DatabaseFirst.Instance.db.Authors.FirstOrDefault(i => i.Id == author.Id);
 
             item.Status = false;
+        }
+
+        public void Delete(Author author)
+        {
+            Items.Remove(author);
+
+            var item = DatabaseFirst.Instance.db.Authors.FirstOrDefault(i => i.Id == author.Id);
+
+            DatabaseFirst.Instance.db.Authors.Remove(item);
         }
 
         public void Restore(Author author)

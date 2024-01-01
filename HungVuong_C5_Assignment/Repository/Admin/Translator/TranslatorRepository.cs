@@ -43,13 +43,22 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.Translators.Add(newTranslator);
         }
 
-        public void Remove(Translator translator)
+        public void Lock(Translator translator)
         {
             Items.Remove(translator);
 
             var item = DatabaseFirst.Instance.db.Translators.FirstOrDefault(i => i.Id == translator.Id);
 
             item.Status = false;
+        }
+
+        public void Delete(Translator translator)
+        {
+            Items.Remove(translator);
+
+            var item = DatabaseFirst.Instance.db.Translators.FirstOrDefault(i => i.Id == translator.Id);
+
+            DatabaseFirst.Instance.db.Translators.Remove(item);
         }
 
         public void Restore(Translator translator)

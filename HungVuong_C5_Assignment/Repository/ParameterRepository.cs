@@ -43,13 +43,22 @@ namespace HungVuong_C5_Assignment
             DatabaseFirst.Instance.db.Parameters.Add(newParameter);
         }
 
-        public void Remove(Parameter parameter)
+        public void Lock(Parameter parameter)
         {
             Items.Remove(parameter);
 
             var item = DatabaseFirst.Instance.db.Parameters.FirstOrDefault(i => i.Id == parameter.Id);
 
             item.Status = false;
+        }
+
+        public void Delete(Parameter parameter)
+        {
+            Items.Remove(parameter);
+
+            var item = DatabaseFirst.Instance.db.Parameters.FirstOrDefault(i => i.Id == parameter.Id);
+
+            DatabaseFirst.Instance.db.Parameters.Remove(item);
         }
 
         public void Restore(Parameter parameter)

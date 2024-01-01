@@ -221,8 +221,6 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Add\Reader\ucAddChildReader.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Add\Reader\ucAddReader.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Book\BorrowingBook\ucBorrowingBook.g.cs
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucConfirmDelete.g.cs
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucDeleteReader.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucConfirmRestoreAdult.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucConfirmRestoreChild.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucRestoreReader.g.cs
@@ -245,7 +243,6 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Book\ucStatusBookISBN.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucAdultInformation.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucChildInformation.g.cs
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\AdminMenu.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\ConnectionWindow.g.cs
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\Load.g.cs
@@ -313,8 +310,6 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Add\Reader\ucAddChildReader.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Add\Reader\ucAddReader.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Book\BorrowingBook\ucBorrowingBook.baml
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucConfirmDelete.baml
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucDeleteReader.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucConfirmRestoreAdult.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucConfirmRestoreChild.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Restore\ucRestoreReader.baml
@@ -337,7 +332,6 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Book\ucStatusBookISBN.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucAdultInformation.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucChildInformation.baml
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\View\Reader\ReaderInformation\ucReaderInformation.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\AdminMenu.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\ConnectionWindow.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Views\Load.baml
@@ -418,4 +412,5 @@ C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEW
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatiRectangle.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\Statistical\ucStatisticalLibrarian.baml
 C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\Styles\ColorStyles.baml
-C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\HungVuong_C5_Assignment.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucConfirmLock.g.cs
+C:\Users\Admin\Desktop\PC Management\HocLapTrinh\BTThayNam\9 -LINQ ENTITY FRAMEWORK\QuanLyThuVien\HungVuong_C5_Assignment\HungVuong_C5_Assignment\obj\Debug\UserControls\User\CRUD\Delete\ucConfirmLock.baml

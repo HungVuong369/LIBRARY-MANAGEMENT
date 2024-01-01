@@ -108,40 +108,60 @@ namespace HungVuong_C5_Assignment
         private List<BookInformation> GetListBookInfo()
         {
             List<BookInformation> lstBookInfo = new List<BookInformation>();
-
-            foreach(var item in this._BookVM.bookRepo.Items)
+            foreach(var item in DatabaseFirst.Instance.db.BookISBNs)
             {
-                if(lstBookInfo.Any(i => i.ISBN == item.ISBN))
+                var newBookInfo = new BookInformation()
                 {
-                    if (!item.Status)
-                        continue;
-                    lstBookInfo[lstBookInfo.FindIndex(i => i.ISBN == item.ISBN)].Quantity++;
-                }
-                else
-                {
-                    int quantity = 1;
-                    if (!item.BookISBN.Status)
-                    {
-                        quantity = 0;
-                    }
-                    var newBookInfo = new BookInformation()
-                    {
-                        Id = item.Id,
-                        BookAuthor = item.BookISBN.Author,
-                        BookPublisher = item.Publisher,
-                        PublishDate = item.PublishDate,
-                        BookTranslator = item.Translator,
-                        ISBN = item.ISBN,
-                        Category = item.BookISBN.BookTitle.Category.Name,
-                        Name = item.BookISBN.BookTitle.Name,
-                        Language = item.Language,
-                        Quantity = quantity,
-                        Status = item.BookISBN.Status,
-                        BookStatus =  DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
-                    };
-                    lstBookInfo.Add(newBookInfo);
-                }
+                    Id = -1,
+                    BookAuthor = item.Author,
+                    BookPublisher = new Publisher(),
+                    PublishDate = DateTime.Now,
+                    BookTranslator = new Translator(),
+                    ISBN = item.ISBN,
+                    Category = item.BookTitle.Category.Name,
+                    Name = item.BookTitle.Name,
+                    Language = item.OriginLanguage,
+                    Quantity = item.Books.Count,
+                    Status = item.Status,
+                    BookStatus = string.Empty
+                };
+                lstBookInfo.Add(newBookInfo);
+
             }
+            //foreach (var item in this._BookVM.bookRepo.Items)
+            //{
+            //    if(lstBookInfo.Any(i => i.ISBN == item.ISBN))
+            //    {
+            //        if (!item.Status)
+            //            continue;
+            //        lstBookInfo[lstBookInfo.FindIndex(i => i.ISBN == item.ISBN)].Quantity++;
+            //    }
+            //    else
+            //    {
+            //        int quantity = 1;
+            //        if (!item.BookISBN.Status)
+            //        {
+            //            quantity = 0;
+            //        }
+
+            //        var newBookInfo = new BookInformation()
+            //        {
+            //            Id = item.Id,
+            //            BookAuthor = item.BookISBN.Author,
+            //            BookPublisher = item.Publisher,
+            //            PublishDate = item.PublishDate,
+            //            BookTranslator = item.Translator,
+            //            ISBN = item.ISBN,
+            //            Category = item.BookISBN.BookTitle.Category.Name,
+            //            Name = item.BookISBN.BookTitle.Name,
+            //            Language = item.Language,
+            //            Quantity = quantity,
+            //            Status = item.BookISBN.Status,
+            //            BookStatus =  DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
+            //        };
+            //        lstBookInfo.Add(newBookInfo);
+            //    }
+            //}
 
             return lstBookInfo;
         }

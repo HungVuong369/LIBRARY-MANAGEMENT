@@ -96,7 +96,7 @@ namespace HungVuong_C5_Assignment
                 return;
             SetProperty("2/2", Visibility.Collapsed, Visibility.Visible, Brushes.Transparent, Brushes.Black, false);
 
-            ucChildDataGrid1.SetItemsSourceByAdultIdReader((ucAdultDataGrid1.dgAdult.SelectedItem as Guardian).AdultID);
+            //ucChildDataGrid1.SetItemsSourceByAdultIdReader((ucAdultDataGrid1.dgAdult.SelectedItem as Guardian).AdultID);
         }
 
         private void btnNext2_Click(object sender, RoutedEventArgs e)
@@ -105,7 +105,7 @@ namespace HungVuong_C5_Assignment
                 return;
             SetProperty("2/2", Visibility.Collapsed, Visibility.Visible, Brushes.Transparent, false);
             
-            ucChildDataGrid2.SetItemsSourceByAdultIdReader((ucAdultDataGrid2.dgAdult.SelectedItem as Guardian).AdultID);
+            //ucChildDataGrid2.SetItemsSourceByAdultIdReader((ucAdultDataGrid2.dgAdult.SelectedItem as Guardian).AdultID);
         }
 
         private void btnBack2_Click(object sender, RoutedEventArgs e)
@@ -118,8 +118,8 @@ namespace HungVuong_C5_Assignment
             Guardian guardian1 = (ucAdultDataGrid1.dgAdult.SelectedItem as Guardian);
             Guardian guardian2 = (ucAdultDataGrid2.dgAdult.SelectedItem as Guardian);
 
-            ucChildDataGrid1.SetItemsSourceByAdultIdReader(guardian1.AdultID);
-            ucChildDataGrid2.SetItemsSourceByAdultIdReader(guardian2.AdultID);
+            //ucChildDataGrid1.SetItemsSourceByAdultIdReader(guardian1.AdultID);
+            //ucChildDataGrid2.SetItemsSourceByAdultIdReader(guardian2.AdultID);
 
             ucAdultDataGrid2.UpdateDataGridByQuantityChild(2);
             ucAdultDataGrid2.SelectedItemByIdentify(guardian2.Identify);

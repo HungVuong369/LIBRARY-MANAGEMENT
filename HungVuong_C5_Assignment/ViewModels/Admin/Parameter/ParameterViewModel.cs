@@ -33,6 +33,7 @@ namespace HungVuong_C5_Assignment
         public RelayCommand<object> AddCommand { get; private set; }
 
         public RelayCommand<object> RestoreCommand { get; private set; }
+        public RelayCommand<object> LockCommand { get; private set; }
         public RelayCommand<object> DeleteCommand { get; private set; }
         public RelayCommand<object> UpdateCommand { get; private set; }
 
@@ -65,7 +66,7 @@ namespace HungVuong_C5_Assignment
                 p =>
                 {
                     Reload();
-                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
+                    SetVisibilityButton(Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
                 }
             );
 
@@ -74,7 +75,7 @@ namespace HungVuong_C5_Assignment
                p =>
                {
                    Reload();
-                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible);
+                   SetVisibilityButton(Visibility.Visible, Visibility.Collapsed, Visibility.Visible, Visibility.Collapsed);
                }
            );
 
@@ -108,19 +109,19 @@ namespace HungVuong_C5_Assignment
                 }
             );
 
-            DeleteCommand = new RelayCommand<object>(
+            LockCommand = new RelayCommand<object>(
                p => true,
                p =>
                {
                    if(int.Parse(SelectedParameter.Id.Substring(2)) <= 12 && int.Parse(SelectedParameter.Id.Substring(2)) != 5)
                    {
-                       MessageBox.Show("Cannot delete default Parameters!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
+                       MessageBox.Show("Cannot lock default Parameters!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);
                        return;
                    }
-                   if (MessageBox.Show($"Are you sure you want to delete Parameter '{SelectedParameter.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                   if (MessageBox.Show($"Are you sure you want to lock Parameter '{SelectedParameter.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                    {
                        string name = SelectedParameter.Name;
-                       parameterRepo.Remove(SelectedParameter);
+                       parameterRepo.Lock(SelectedParameter);
                        DatabaseFirst.Instance.SaveChanged();
 
                        ReloadStorage();
@@ -140,10 +141,42 @@ namespace HungVuong_C5_Assignment
                        if (Search != string.Empty)
                            ReloadDataGridBySearch(Search);
 
-                       MessageBox.Show($"Parameter '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                       MessageBox.Show($"Parameter '{name}' successfully locked!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
                    }
                }
            );
+
+            DeleteCommand = new RelayCommand<object>(
+                p => true,
+                p =>
+                {
+                    if (MessageBox.Show($"Are you sure you want to delete Parameter '{SelectedParameter.Name}'", "Notify", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        string name = SelectedParameter.Name;
+                        parameterRepo.Delete(SelectedParameter);
+                        DatabaseFirst.Instance.SaveChanged();
+
+                        ReloadStorage();
+
+                        if (ParameterDataGrid.pagination.CurrentPage > ParameterDataGrid.pagination.MaxPage)
+                        {
+                            ParameterDataGrid.pagination.CurrentPage -= 1;
+                            ReloadDataGrid();
+                            ParameterDataGrid.pagination.LoadPage();
+                        }
+                        else
+                        {
+                            ReloadDataGrid();
+                            ParameterDataGrid.pagination.LoadPage();
+                        }
+
+                        if (Search != string.Empty)
+                            ReloadDataGridBySearch(Search);
+
+                        MessageBox.Show($"Parameter '{name}' successfully deleted!", "Notify", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }    
+            );
 
             RestoreCommand = new RelayCommand<object>(
                p => true,
@@ -211,11 +244,12 @@ namespace HungVuong_C5_Assignment
            );
         }
 
-        private void SetVisibilityButton(Visibility delete, Visibility restore, Visibility update)
+        private void SetVisibilityButton(Visibility lockVisi, Visibility restore, Visibility update, Visibility delete)
         {
-            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 3].Visibility = update;
-            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 2].Visibility = delete;
-            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 1].Visibility = restore;
+            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 4].Visibility = update;
+            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 3].Visibility = lockVisi;
+            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 2].Visibility = restore;
+            ParameterDataGrid.dgParameters.Columns[ParameterDataGrid.dgParameters.Columns.Count - 1].Visibility = delete;
         }
 
         private void ReloadDataGridBySearch(string search)

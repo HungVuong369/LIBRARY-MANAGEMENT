@@ -52,6 +52,13 @@ namespace HungVuong_C5_Assignment
             Items.Remove(GetByIdReader(id));
         }
 
+        public void DeleteByIdReader(string id)
+        {
+            Items.Remove(GetByIdReader(id));
+            var item = DatabaseFirst.Instance.db.Adults.FirstOrDefault(i => i.IdReader == id);
+            DatabaseFirst.Instance.db.Adults.Remove(item);
+        }
+
         public void Restore(Adult adult)
         {
             var item = DatabaseFirst.Instance.db.Adults.FirstOrDefault(i => i.IdReader == adult.IdReader);

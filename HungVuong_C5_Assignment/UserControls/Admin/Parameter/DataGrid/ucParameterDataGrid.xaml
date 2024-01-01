@@ -68,14 +68,14 @@
                 <DataGridTemplateColumn Header="Action">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="btnDelete"
-                                    Content="Delete"
+                            <Button Name="btnLock"
+                                    Content="Lock"
                                     Tag="{Binding}"
                                     Width="100"
                                     Height="20"
                                     Margin="10 0"
                                     Style="{StaticResource ButtonDeleteStyle}"
-                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                                    Command="{Binding DataContext.LockCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -93,6 +93,21 @@
                                     Background="Orange"
                                     Foreground="DarkBlue"
                                     Command="{Binding DataContext.RestoreCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Action" Visibility="Collapsed">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Name="btnDelete"
+                                    Content="Delete"
+                                    Tag="{Binding}"
+                                    Width="100"
+                                    Height="20"
+                                    Margin="10 0"
+                                    Style="{StaticResource ButtonDeleteStyle}"
+                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

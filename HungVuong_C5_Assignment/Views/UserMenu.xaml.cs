@@ -142,10 +142,6 @@ namespace HungVuong_C5_Assignment
                     case "F36":
                         grdMain.Children.Add(new BookManagement());
                         break;
-                    case "F22":
-                        ucReaderInformation ucReader = new ucReaderInformation();
-                        grdMain.Children.Add(ucReader);
-                        break;
                     case "F41":
                         ShowBooksViewModel.Instance.ReloadStorage();
                         ShowBooksViewModel.Instance.LstLoaningBook.Clear();
@@ -248,6 +244,20 @@ namespace HungVuong_C5_Assignment
         {
             Animation();
             OpenFeature("");
+        }
+
+        private void arrowRight_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            grdContainer.Visibility = Visibility.Visible;
+            arrowLeft.Visibility = Visibility.Visible;
+            arrowRight.Visibility = Visibility.Collapsed;
+        }
+
+        private void arrowLeft_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            grdContainer.Visibility = Visibility.Collapsed;
+            arrowLeft.Visibility = Visibility.Collapsed;
+            arrowRight.Visibility = Visibility.Visible;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace HungVuong_C5_Assignment
 
             ChildViewModel childVM = new ChildViewModel();
 
-            foreach (var item in DatabaseFirst.Instance.db.Adults)
+            foreach (var item in DatabaseFirst.Instance.db.Adults.Where(i => i.Status))
             {
                 if (item.Reader.Status == false)
                     continue;

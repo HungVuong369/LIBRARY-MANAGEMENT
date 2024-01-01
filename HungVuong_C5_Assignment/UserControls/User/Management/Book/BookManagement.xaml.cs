@@ -20,8 +20,6 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class BookManagement : UserControl
     {
-        private BookManagementRepository _BookManagementRepo = new BookManagementRepository();
-
         public BookManagement()
         {
             InitializeComponent();
@@ -43,6 +41,7 @@ namespace HungVuong_C5_Assignment
 
             ucBook.ReloadDataGrid();
         }
+
         private void Pagination_SelectionChangedComboBoxEvent(object sender, SelectionChangedEventArgs e)
         {
             ucBook.pagination.ItemPerPage = int.Parse((ucBook.pagination.cbPage.SelectedItem as ComboBoxItem).Content.ToString());

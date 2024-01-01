@@ -21,6 +21,9 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class ucReaderAndIdentifyDataGrid : UserControl
     {
+        public delegate void LockHandle(object sender, RoutedEventArgs e);
+        public event LockHandle lockEvent;
+
         public delegate void DeleteHandle(object sender, RoutedEventArgs e);
         public event DeleteHandle deleteEvent;
 
@@ -80,11 +83,12 @@ namespace HungVuong_C5_Assignment
             dgReader.ItemsSource = _LstAdultReader.Skip((pagination.CurrentPage - 1) * pagination.ItemPerPage).Take(pagination.ItemPerPage);
         }
 
-        public void SetVisibilityButton(Visibility delete, Visibility restore, Visibility detail)
+        public void SetVisibilityButton(Visibility lockVisi, Visibility restore, Visibility detail, Visibility delete)
         {
             dgReader.Columns[7].Visibility = detail;
             dgReader.Columns[9].Visibility = restore;
-            dgReader.Columns[8].Visibility = delete;
+            dgReader.Columns[8].Visibility = lockVisi;
+            dgReader.Columns[dgReader.Columns.Count - 1].Visibility = delete;
         }
 
         private void SetMaxPage()
@@ -162,9 +166,7 @@ namespace HungVuong_C5_Assignment
             if (reader.Type == true)
             {
                 Adult adult = _AdultVM.adultRepo.GetByIdReader(reader.Id);
-                Child child1 = _ChildVM.GetByAdultID(reader.Id);
-                Child child2 = _ChildVM.GetByAdultIDSecond(reader.Id);
-                ucAdultInformation info = new ucAdultInformation(_ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == reader.Id), adult, child1, child2);
+                ucAdultInformation info = new ucAdultInformation(_ReaderVM.readerRepo.Items.FirstOrDefault(i => i.Id == reader.Id), adult);
                 WindowDefault window = new WindowDefault();
                 window.grdContainer.Children.Add(info);
                 window.ShowDialog();
@@ -225,6 +227,11 @@ namespace HungVuong_C5_Assignment
             window.grdContainer.Children.Add(detail);
 
             window.ShowDialog();
+        }
+
+        private void btnLock_Click(object sender, RoutedEventArgs e)
+        {
+            lockEvent?.Invoke(sender, e);
         }
     }
 }

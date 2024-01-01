@@ -14,7 +14,8 @@
         
         <Label Content="Detail Information"
                FontSize="20" FontWeight="Bold"
-               HorizontalAlignment="Center"/>
+               HorizontalAlignment="Center"
+               Name="lbHeader"/>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -137,6 +138,7 @@
             </Grid>
 
             <local:ucChildDataGrid Grid.Row="1"
+                                   Margin="10"
                                    x:Name="ucDataGrid"/>
         </Grid>
     </Grid>
