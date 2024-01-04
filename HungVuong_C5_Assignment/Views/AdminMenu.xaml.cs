@@ -44,13 +44,15 @@ namespace HungVuong_C5_Assignment
             TreeViewItem treeViewItem = new TreeViewItem();
             treeViewItem.Header = header;
             treeViewItem.Tag = urlImage;
-            treeViewItem.Padding = new Thickness(0, 5, 0, 5);
+            treeViewItem.Padding = new Thickness(5);
+            treeViewItem.Margin = new Thickness(5);
 
             string colorCode = "#0C1C2F";
             BrushConverter brushConverter = new BrushConverter();
-            Brush brush = (Brush)brushConverter.ConvertFromString(colorCode);
+            //Brush brush = (Brush)brushConverter.ConvertFromString(colorCode);
+            //Brush brush = Brushes.Transparent;
 
-            treeViewItem.Background = brush;
+            //treeViewItem.Background = brush;
 
             return treeViewItem;
         }
@@ -67,10 +69,11 @@ namespace HungVuong_C5_Assignment
                 if (function.IdParent == null)
                 {
                     TreeViewItem treeViewItem = CreateTreeViewItem(function.Name, function.UrlImage);
-                    tvManagement.Items.Add(treeViewItem);
+                    TreeView.Items.Add(treeViewItem);
 
                     treeViewItem.MouseLeftButtonUp += (sender, e) =>
                         {
+                            var actual = TreeView.ActualWidth;
                             Animation();
                             OpenFeature(function.Id);
                         };
@@ -81,7 +84,6 @@ namespace HungVuong_C5_Assignment
         private void OpenFeature(string IdFunction)
         {
             TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
-            TreeViewItem treeViewParent = selectedItem.Parent as TreeViewItem;
 
             if (isOpenFeature == true)
             {
@@ -101,54 +103,49 @@ namespace HungVuong_C5_Assignment
             else
                 isOpenFeature = true;
 
-            if (treeViewParent != null)
+            switch (IdFunction)
             {
-                switch (IdFunction)
-                {
-                    case "F1":
-                        UserManagement ucUserManagement = new UserManagement();
-                        grdMain.Children.Add(ucUserManagement);
-                        break;
-                    case "F7":
-                        FeatureManagement ucFeatureManagement = new FeatureManagement();
-                        grdMain.Children.Add(ucFeatureManagement);
-                        break;
-                    case "F12":
-                        grdMain.Children.Add(new RoleManagement());
-                        break;
-                    case "F45":
-                        grdMain.Children.Add(new CategoryManagement());
-                        break;
-                    case "F50":
-                        grdMain.Children.Add(new ucPublisherManagement());
-                        break;
-                    case "F54":
-                        grdMain.Children.Add(new ucAuthorManagement());
-                        break;
-                    case "F59":
-                        grdMain.Children.Add(new ucTranslatorManagement());
-                        break;
-                    case "F64":
-                        grdMain.Children.Add(new ucProvinceManagement());
-                        break;
-                    case "F69":
-                        grdMain.Children.Add(new ucPenaltyReasonManagement());
-                        break;
-                    case "F73":
-                        grdMain.Children.Add(new ParameterManagement());
-                        break;
-                    default:
-                        isOpenFeature = false;
-                        break;
-                }
+                case "F1":
+                    UserManagement ucUserManagement = new UserManagement();
+                    grdMain.Children.Add(ucUserManagement);
+                    break;
+                case "F7":
+                    FeatureManagement ucFeatureManagement = new FeatureManagement();
+                    grdMain.Children.Add(ucFeatureManagement);
+                    break;
+                case "F12":
+                    grdMain.Children.Add(new RoleManagement());
+                    break;
+                case "F45":
+                    grdMain.Children.Add(new CategoryManagement());
+                    break;
+                case "F50":
+                    grdMain.Children.Add(new ucPublisherManagement());
+                    break;
+                case "F54":
+                    grdMain.Children.Add(new ucAuthorManagement());
+                    break;
+                case "F59":
+                    grdMain.Children.Add(new ucTranslatorManagement());
+                    break;
+                case "F64":
+                    grdMain.Children.Add(new ucProvinceManagement());
+                    break;
+                case "F69":
+                    grdMain.Children.Add(new ucPenaltyReasonManagement());
+                    break;
+                case "F73":
+                    grdMain.Children.Add(new ParameterManagement());
+                    break;
+                default:
+                    isOpenFeature = false;
+                    break;
             }
-            else
-                isOpenFeature = false;
         }
 
         private void Animation()
         {
-            if(!flag)
+            if (!flag)
             {
                 WidthDefault = mainWindow.Width;
                 HeightDefault = mainWindow.Height;
@@ -256,20 +253,6 @@ namespace HungVuong_C5_Assignment
         {
             ucUserInfoShow userInfo = sender as ucUserInfoShow;
             userInfo.DataContext = UserInfo;
-        }
-
-        private void arrowRight_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            grdContainer.Visibility = Visibility.Visible;
-            arrowLeft.Visibility = Visibility.Visible;
-            arrowRight.Visibility = Visibility.Collapsed;
-        }
-
-        private void arrowLeft_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            grdContainer.Visibility = Visibility.Collapsed;
-            arrowLeft.Visibility = Visibility.Collapsed;
-            arrowRight.Visibility = Visibility.Visible;
         }
     }
 }

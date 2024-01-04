@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -123,45 +124,12 @@ namespace HungVuong_C5_Assignment
                     Language = item.OriginLanguage,
                     Quantity = item.Books.Count,
                     Status = item.Status,
-                    BookStatus = string.Empty
+                    BookStatus = string.Empty,
+                    UrlImage = item.BookTitle.UrlImage
                 };
                 lstBookInfo.Add(newBookInfo);
 
             }
-            //foreach (var item in this._BookVM.bookRepo.Items)
-            //{
-            //    if(lstBookInfo.Any(i => i.ISBN == item.ISBN))
-            //    {
-            //        if (!item.Status)
-            //            continue;
-            //        lstBookInfo[lstBookInfo.FindIndex(i => i.ISBN == item.ISBN)].Quantity++;
-            //    }
-            //    else
-            //    {
-            //        int quantity = 1;
-            //        if (!item.BookISBN.Status)
-            //        {
-            //            quantity = 0;
-            //        }
-
-            //        var newBookInfo = new BookInformation()
-            //        {
-            //            Id = item.Id,
-            //            BookAuthor = item.BookISBN.Author,
-            //            BookPublisher = item.Publisher,
-            //            PublishDate = item.PublishDate,
-            //            BookTranslator = item.Translator,
-            //            ISBN = item.ISBN,
-            //            Category = item.BookISBN.BookTitle.Category.Name,
-            //            Name = item.BookISBN.BookTitle.Name,
-            //            Language = item.Language,
-            //            Quantity = quantity,
-            //            Status = item.BookISBN.Status,
-            //            BookStatus =  DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
-            //        };
-            //        lstBookInfo.Add(newBookInfo);
-            //    }
-            //}
 
             return lstBookInfo;
         }
@@ -185,7 +153,8 @@ namespace HungVuong_C5_Assignment
                     ISBN = item.ISBN,
                     Language = item.Language,
                     Status = item.Status,
-                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
+                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name,
+                    UrlImage = item.BookISBN.BookTitle.UrlImage
                 };
 
                 lstBookInfo.Add(newBookInfo);
@@ -218,13 +187,31 @@ namespace HungVuong_C5_Assignment
                     ISBN = item.ISBN,
                     Language = item.Language,
                     Status = item.Status,
-                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name
+                    BookStatus = DatabaseFirst.Instance.db.BookStatus.FirstOrDefault(i => i.Id == item.IdBookStatus).Name,
+                    UrlImage = item.BookISBN.BookTitle.UrlImage
                 };
 
                 lstBookInfo.Add(newBookInfo);
             }
 
             return lstBookInfo;
+        }
+
+        private void dgBookInfo_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var tooltip = new ToolTip();
+
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
+            var image = new Image() {
+                Source = new BitmapImage(new Uri(projectDirectory + (e.Row.Item as BookInformation).UrlImage.Replace(@"/", @"\"), UriKind.RelativeOrAbsolute)),
+                Width = 250,
+                Height = 250,
+                Stretch = Stretch.Uniform
+            };
+            tooltip.Content = image;
+
+            e.Row.ToolTip = tooltip;
         }
     }
 }

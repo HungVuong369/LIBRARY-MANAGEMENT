@@ -28,9 +28,6 @@ namespace HungVuong_C5_Assignment
 
         private RoleManagementRepository _RoleManagementRepo = new RoleManagementRepository();
 
-        private TreeViewItem _TreeViewItem = null;
-        private ListBox _LstBox = null;
-
         public FeatureAssignment()
         {
             InitializeComponent();
@@ -42,20 +39,6 @@ namespace HungVuong_C5_Assignment
 
         private void FeatureAssignment_Loaded(object sender, RoutedEventArgs e)
         {
-            Grid grdMain = Utilities.FindParent<Grid>(this);
-
-            Grid grd1 = Utilities.FindParent<Grid>(grdMain);
-            _LstBox = grd1.Children[0] as ListBox;
-            Grid grd2 = Utilities.FindParent<Grid>(grd1);
-            Grid grd3 = Utilities.FindParent<Grid>(grd2);
-            Grid grd4 = Utilities.FindParent<Grid>(grd3);
-            Grid grd5 = Utilities.FindParent<Grid>(grd4);
-
-
-            Grid menuGrid = grd5.Children[0] as Grid;
-            TreeView treeView = menuGrid.Children[1] as TreeView;
-            TreeViewItem treeViewItem = treeView.Items[0] as TreeViewItem;
-            _TreeViewItem = treeViewItem;
         }
 
         public void Load()
@@ -94,15 +77,8 @@ namespace HungVuong_C5_Assignment
             return label;
         }
 
-        private void SetIsHitTestVisible(bool treeViewItem, bool listBox)
-        {
-            _TreeViewItem.IsHitTestVisible = treeViewItem;
-            _LstBox.IsHitTestVisible = listBox;
-        }
-
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SetIsHitTestVisible(true, true);
             SetLblSave(Brushes.Black);
             Role role = (cbRole.SelectedItem as Role);
 
@@ -197,8 +173,6 @@ namespace HungVuong_C5_Assignment
 
         private void MainCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            SetIsHitTestVisible(false, false);
-
             SetLblSave(Brushes.Red);
             Function functionMain = (sender as CheckBox).Tag as Function;
 
@@ -213,8 +187,6 @@ namespace HungVuong_C5_Assignment
 
         private void MainCheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            SetIsHitTestVisible(false, false);
-
             SetLblSave(Brushes.Red);
 
             Function functionMain = (sender as CheckBox).Tag as Function;
@@ -240,7 +212,6 @@ namespace HungVuong_C5_Assignment
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            SetIsHitTestVisible(false, false);
             SetLblSave(Brushes.Red);
 
             Function function = (sender as CheckBox).Tag as Function;
@@ -265,7 +236,6 @@ namespace HungVuong_C5_Assignment
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            SetIsHitTestVisible(false, false);
             SetLblSave(Brushes.Red);
 
             var item = _ListCheckBoxMain.Where(i => (i.Tag as Function).Id == ((sender as CheckBox).Tag as Function).IdParent).FirstOrDefault();
@@ -279,8 +249,6 @@ namespace HungVuong_C5_Assignment
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            SetIsHitTestVisible(true, true);
-
             SetLblSave(Brushes.Green);
 
             foreach (var item in _ListCheckBoxMain)

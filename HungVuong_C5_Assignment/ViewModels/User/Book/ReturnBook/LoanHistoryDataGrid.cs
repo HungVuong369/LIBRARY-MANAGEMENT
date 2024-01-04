@@ -120,7 +120,8 @@ namespace HungVuong_C5_Assignment
                     Language = i.Book.Language,
                     PublishDate = i.Book.PublishDate,
                     Quantity = -1,
-                    Status = true
+                    Status = true,
+                    UrlImage = i.Book.BookISBN.BookTitle.UrlImage
                 };
                 ucLoanBook ucLoanBook = new ucLoanBook(bookInfo);
                 ucLoanBook.btnContainer.Command = EditCommand;

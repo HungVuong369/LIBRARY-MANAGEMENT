@@ -25,24 +25,6 @@ namespace HungVuong_C5_Assignment
             return Items;
         }
 
-        public void UpdateStatusByISBN(int status, string isbn)
-        {
-            DataProvider.Instance.parameters = new string[] { FieldName.ISBN };
-            DataProvider.Instance.values = new object[] { isbn };
-
-            int nRow = DataProvider.Instance.ExcuteNonQuery(CommandType.Text, TSQL.UpdateStatusBook(status, isbn));
-
-            if (nRow != -1)
-            {
-                foreach(var item in Items)
-                {
-                    if (item.ISBN == isbn)
-                        item.Status = status == 0 ? false : true;
-                }
-            }
-            else
-                MessageBox.Show("Records Deleted Failed!");
-        }
 
         public static int GetNewID()
         {

@@ -12,29 +12,37 @@
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <Border Background="{StaticResource cs_Background}" CornerRadius="20"
+        <Border Background="White" CornerRadius="5"
                 BorderBrush="Black" BorderThickness="1"/>
 
-        <Grid Name="grdContainer"></Grid>
-        
-        <StackPanel Orientation="Horizontal"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top">
-            <Button x:Name="BtnMinimize"
+                <Button x:Name="BtnMinimize"
                     Margin="0 5 5 0"
                     Style="{StaticResource bt_MinimizeWindow}"
                     Click="BtnMinimize_Click"/>
 
-            <Button x:Name="BtnMaximize"
+                <Button x:Name="BtnMaximize"
                     Margin="0 5 5 0"
                     Style="{StaticResource bt_MaximizeWindow}"
                     Click="BtnMaximize_Click"/>
 
-            <Button x:Name="BtnClose"
+                <Button x:Name="BtnClose"
                     Margin="0 5 15 0"
                     Style="{StaticResource bt_CloseWindow}"
                     Click="BtnClose_Click"/>
 
-        </StackPanel>
+            </StackPanel>
+
+            <Grid Name="grdContainer"
+                  Grid.Row="1"/>
+        </Grid>
     </Grid>
 </Window>

@@ -13,7 +13,7 @@
         Title="ConnectionWindow" Height="300" Width="400">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/1.jpg"/>
+            <ImageBrush ImageSource="/Assets/Images/1.jpg"/>
         </Grid.Background>
         
         <Grid.RowDefinitions>

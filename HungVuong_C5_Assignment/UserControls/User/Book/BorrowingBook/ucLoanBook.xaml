@@ -9,6 +9,11 @@
              Margin="5 0"
              Loaded="UserControl_Loaded"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.ToolTip>
+        <ToolTip>
+            <Image Width="250" Height="250" Stretch="Uniform" Loaded="Image_Loaded"/>
+        </ToolTip>
+    </UserControl.ToolTip>
     <Grid Name="grdTest">
         <Button Name="btnContainer"
                 Click="btnContainer_Click"

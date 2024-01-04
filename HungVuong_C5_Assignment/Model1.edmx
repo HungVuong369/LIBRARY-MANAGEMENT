@@ -81,6 +81,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Note" Type="ntext" />
           <Property Name="Summary" Type="ntext" Nullable="false" />
+          <Property Name="UrlImage" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -781,6 +782,7 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Summary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrlImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="BookISBNs" Relationship="Self.FK__BookISBN__IdBook__31EC6D26" FromRole="BookTitle" ToRole="BookISBN" />
           <NavigationProperty Name="Category" Relationship="Self.FK__BookTitle__IdCat__2B3F6F97" FromRole="BookTitle" ToRole="Category" />
         </EntityType>
@@ -1508,6 +1510,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="UrlImage" ColumnName="UrlImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

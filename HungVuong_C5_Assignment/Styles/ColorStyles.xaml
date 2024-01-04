@@ -20,8 +20,8 @@
         <GradientStop Color="LightGray" Offset="0.5"/>
     </LinearGradientBrush>
 
-    <ImageBrush x:Key="ib_MinimizeAct" ImageSource="/Images/ic_MinimizeAct.png"/>
-    <ImageBrush x:Key="ib_MinimizePas" ImageSource="/Images/ic_MinimizePas.png"/>
+    <ImageBrush x:Key="ib_MinimizeAct" ImageSource="/Assets/Images/ic_MinimizeAct.png"/>
+    <ImageBrush x:Key="ib_MinimizePas" ImageSource="/Assets/Images/ic_MinimizePas.png"/>
 
     <Style x:Key="bt_MinimizeWindow" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="25"/>
@@ -49,8 +49,8 @@
         </Setter>
     </Style>
 
-    <ImageBrush x:Key="ib_MaximizeAct" ImageSource="/Images/ic_MaximizeAct.png"/>
-    <ImageBrush x:Key="ib_MaximizePas" ImageSource="/Images/ic_MaximizePas.png"/>
+    <ImageBrush x:Key="ib_MaximizeAct" ImageSource="/Assets/Images/ic_MaximizeAct.png"/>
+    <ImageBrush x:Key="ib_MaximizePas" ImageSource="/Assets/Images/ic_MaximizePas.png"/>
 
     <Style x:Key="bt_MaximizeWindow" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="25"/>
@@ -78,8 +78,8 @@
         </Setter>
     </Style>
 
-    <ImageBrush x:Key="ib_CloseAct" ImageSource="/Images/ic_CloseAct.png"/>
-    <ImageBrush x:Key="ib_ClosePas" ImageSource="/Images/ic_ClosePas.png"/>
+    <ImageBrush x:Key="ib_CloseAct" ImageSource="/Assets/Images/ic_CloseAct.png"/>
+    <ImageBrush x:Key="ib_ClosePas" ImageSource="/Assets/Images/ic_ClosePas.png"/>
 
     <Style x:Key="bt_CloseWindow" TargetType="{x:Type Button}">
         <Setter Property="Height" Value="25"/>

@@ -58,7 +58,7 @@ namespace HungVuong_C5_Assignment
                 if(role.Group == "librarian")
                 {
                     UserMenu mainMenu = new UserMenu(role, userInfoVM.UserInfoRepo.Items.FirstOrDefault(i => i.IdUser == DatabaseFirst.Instance.UserLoggedIn.Id));
-                    if (mainMenu.tvManagement.Items.Count == 0)
+                    if (mainMenu.TreeView.Items.Count == 0)
                     {
                         mainMenu.Close();
                         MessageBox.Show("Current role does not have access to any features!", "Notify", MessageBoxButton.OK, MessageBoxImage.Warning);

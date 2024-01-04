@@ -159,7 +159,7 @@ namespace HungVuong_C5_Assignment
                     if(window.DialogResult == true)
                     {
                         var book = window.Tag as BookInformation;
-                        LstLoaningBook.Add(new ucLoanBook(book));
+                        LstLoaningBook.Add(new ucLoanBook(book, bookISBN.BookTitle.UrlImage));
                         LstLoaningBook = new List<ucLoanBook>(LstLoaningBook.Select(i => i));
                         OnPropertyChanged(nameof(LstLoaningBook));
                         UpdateViewBooks();
@@ -208,7 +208,7 @@ namespace HungVuong_C5_Assignment
             {
                 var subtractNumber = LstLoaningBook.Where(i => (i.BookInfo).ISBN == item.ISBN).Count();
 
-                ucShowBook ucShowBook = new ucShowBook(item, subtractNumber);
+                ucShowBook ucShowBook = new ucShowBook(item, subtractNumber, item.BookTitle.UrlImage);
 
                 // Quantity Book Now
                 if(subtractNumber >= 1)
@@ -231,7 +231,7 @@ namespace HungVuong_C5_Assignment
             {
                 var subtractNumber = LstLoaningBook.Where(i => (i.BookInfo).ISBN == item.ISBN).Count();
 
-                ucShowBook ucShowBook = new ucShowBook(item, subtractNumber);
+                ucShowBook ucShowBook = new ucShowBook(item, subtractNumber, item.BookTitle.UrlImage);
 
                 if (subtractNumber >= 1)
                 {

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
              mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              d:DesignHeight="500" d:DesignWidth="500">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,9 +21,11 @@
 
         <Grid Grid.Row="1"
               Margin="5"
-              Height="185"
+              Height="390"
               Width="300">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -33,8 +36,8 @@
             </Grid.RowDefinitions>
 
             <TextBlock Text="Name: "
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 0 0 5"
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 0 0 5"
                        Grid.Row="0"/>
 
             <TextBox Name="txtBookTitleName"
@@ -63,8 +66,8 @@
                       Grid.Row="3"/>
 
             <TextBlock Text="Summary: "
-                               FontSize="14" FontWeight="SemiBold"
-                               Margin="0 10 0 5"
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 10 0 5"
                        Grid.Row="4"/>
             <TextBox Name="txtSummary"
                                  TextChanged="txtBookTitleName_TextChanged"
@@ -80,7 +83,25 @@
                 </TextBox.Text>
             </TextBox>
 
-            <Grid Grid.Row="6"
+            <TextBlock Text="Image: "
+                       FontSize="14" FontWeight="SemiBold"
+                       Margin="0 10 0 5"
+                       Grid.Row="6"/>
+
+            <Image Grid.Row="7"
+                   Margin="0 10 0 5"
+                   Height="150"
+                   Name="imgBookTitle"
+                   Source="{Binding ImageSource}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction Command="{Binding ChooseImageCommand}" 
+                                               CommandParameter="{Binding}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Image>
+
+            <Grid Grid.Row="8"
                   Margin="0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

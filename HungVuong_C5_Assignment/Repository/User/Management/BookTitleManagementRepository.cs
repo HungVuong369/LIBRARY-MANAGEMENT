@@ -11,7 +11,7 @@ namespace HungVuong_C5_Assignment
     {
         private BookTitleViewModel _BookTitleVM = new BookTitleViewModel();
 
-        public bool Add(string bookTitleName, string categoryID, string summary)
+        public bool Add(string bookTitleName, string categoryID, string summary, string urlImage)
         {
             if (_BookTitleVM.isExist(bookTitleName.Trim().ToLower(), categoryID, summary.Trim().ToLower()))
             {
@@ -22,7 +22,8 @@ namespace HungVuong_C5_Assignment
             _BookTitleVM.bookTitleRepo.Add(
                 categoryID,
                 bookTitleName,
-                summary
+                summary,
+                urlImage
             );
 
             DatabaseFirst.Instance.SaveChanged();

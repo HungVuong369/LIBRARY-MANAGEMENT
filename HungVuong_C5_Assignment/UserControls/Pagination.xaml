@@ -71,7 +71,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnPreviousPage}" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/ArrowLeft.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/ArrowLeft.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -79,7 +79,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnPreviousPage}" Value="False">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/ArrowLeftDisabled.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/ArrowLeftDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -98,7 +98,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnNextPage}" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/ArrowRight.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/ArrowRight.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -106,7 +106,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnNextPage}" Value="False">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/ArrowRightDisabled.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/ArrowRightDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -126,7 +126,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnFirstPage}" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/DoubleArrowLeft.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/DoubleArrowLeft.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -134,7 +134,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnFirstPage}" Value="False">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/DoubleArrowLeftDisabled.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/DoubleArrowLeftDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -153,7 +153,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnLastPage}" Value="True">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/DoubleArrowRight.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/DoubleArrowRight.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>
@@ -161,7 +161,7 @@
                             <DataTrigger Binding="{Binding IsEnabled, ElementName=btnLastPage}" Value="False">
                                 <Setter Property="Background">
                                     <Setter.Value>
-                                        <ImageBrush ImageSource="/Images/DoubleArrowRightDisabled.png"/>
+                                        <ImageBrush ImageSource="/Assets/Images/DoubleArrowRightDisabled.png"/>
                                     </Setter.Value>
                                 </Setter>
                             </DataTrigger>

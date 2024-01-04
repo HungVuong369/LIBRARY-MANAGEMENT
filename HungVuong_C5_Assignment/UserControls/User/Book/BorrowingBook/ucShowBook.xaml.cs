@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -43,9 +44,12 @@ namespace HungVuong_C5_Assignment
             }
         }
 
-        public ucShowBook(BookISBN bookISBN, int subtractNumber)
+        private string _UrlImage;
+
+        public ucShowBook(BookISBN bookISBN, int subtractNumber, string urlImage)
         {
             InitializeComponent();
+            this._UrlImage = urlImage;
             this.BookISBN = bookISBN;
             this.DataContext = ShowBooksViewModel.Instance;
             this._SubtractNumber = subtractNumber;
@@ -68,6 +72,15 @@ namespace HungVuong_C5_Assignment
         private void GroupBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             gbContainer.Tag = this;
+        }
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image image = sender as Image;
+
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
+            image.Source = new BitmapImage(new Uri(projectDirectory + _UrlImage.Replace(@"/", @"\"), UriKind.RelativeOrAbsolute));
         }
     }
 }

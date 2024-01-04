@@ -24,7 +24,7 @@
                                 <StackPanel Orientation="Horizontal"
                                             Name="spAdmin"
                                             HorizontalAlignment="Right">
-                                    <Image Source="/Images/User.png" Width="50" Height="30" Margin="10"
+                                    <Image Source="/Assets/Images/User.png" Width="50" Height="30" Margin="10"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Center"/>
                                     <TextBlock Text="User" VerticalAlignment="Center" Margin="0 0 10 0"
@@ -88,114 +88,55 @@
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0"
-              Background="#0C1E35"
+              Background="#212121"
               Name="grdContainer">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Image Source="/Images/2.jpg"
-                   Width="230"
-                   Height="200">
-            </Image>
-
             <TreeView Name="TreeView"
                       Grid.Row="1"
-                      Background="#0C1E35"
-                      BorderThickness="0">
-                <TreeViewItem Header="Management"
-                              Tag="/Images/5.png" IsExpanded="True"
-                              Name="tvManagement"
-                              Background="#0C1C2F">
-                    <TreeViewItem Header="Statistical"
-                                  Tag="/Images/14.png"
-                                  Background="#0C1C2F"
-                                  MouseLeftButtonUp="TreeViewItem_MouseLeftButtonUp"
-                                  Padding="0 5 0 5"></TreeViewItem>
-                </TreeViewItem>
+                      BorderThickness="0"
+                      Width="54"
+                      Foreground="Transparent"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <TreeView.Style>
+                    <Style TargetType="TreeView" BasedOn="{StaticResource TreeViewStyle}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TreeView.Foreground).(SolidColorBrush.Color)"
+                                                        To="#D4D9E3" Duration="0:0:0.3" />
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="268" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(TreeView.Foreground).(SolidColorBrush.Color)"
+                                                        To="Transparent" Duration="0:0:0.3" />
+                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="54" Duration="0:0:0.3"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TreeView.Style>
+                <TreeViewItem Header="Statistical"
+                              Tag="/Assets/Images/14.png"
+                              Background="#212121"
+                              MouseLeftButtonUp="TreeViewItem_MouseLeftButtonUp"
+                              Padding="5"
+                              Margin="5"></TreeViewItem>
             </TreeView>
         </Grid>
 
         <Grid Name="grdMain" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-            
-        </Grid>
 
-        <Grid Grid.Column="1">
-            <Polygon Points="50,200 45,195 50,190" Fill="Black"
-                     Stretch="Uniform"
-                     Width="20"
-                     Height="20"
-                     Margin="10"
-                     Name="arrowLeft"
-                     HorizontalAlignment="Left"
-                     Visibility="Visible"
-                     Opacity="0.5"
-                     VerticalAlignment="Center"
-                     MouseLeftButtonDown="arrowLeft_MouseLeftButtonDown">
-                <Polygon.Style>
-                    <Style TargetType="Polygon">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="20" Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Polygon.Style>
-            </Polygon>
-            
-            <!-- Mũi tên bên trái -->
-            <Polygon Points="50,50 45,45 45,55" Fill="Black"
-                     Stretch="Uniform"
-                     Width="20"
-                     Height="20"
-                     Name="arrowRight"
-                     Margin="10"
-                     HorizontalAlignment="Left"
-                     Visibility="Collapsed"
-                     Opacity="0.5"
-                     VerticalAlignment="Center"
-                     MouseLeftButtonDown="arrowRight_MouseLeftButtonDown">
-                <Polygon.Style>
-                    <Style TargetType="Polygon">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="30" Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.5" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Width" To="20" Duration="0:0:0.2"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="Height" To="20" Duration="0:0:0.2"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Polygon.Style>
-            </Polygon>
         </Grid>
 
         <!---->

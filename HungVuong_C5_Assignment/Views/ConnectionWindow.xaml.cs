@@ -22,21 +22,13 @@ namespace HungVuong_C5_Assignment
     /// </summary>
     public partial class ConnectionWindow : Window
     {
-        /// <summary>
-        /// Changed
-        /// </summary>
         Load load;
         private bool isLogined = false;
-        private string defaultConnectionString;
-        private bool flag = false;
         private ParameterViewModel _ParameterVM;
 
         public ConnectionWindow(bool isLogined)
         {
             InitializeComponent();
-            //cbConnect.Items.Add(DataProvider.Instance.ServerName1());
-            //cbConnect.Items.Add(DataProvider.Instance.ServerName2());
-            //cbDataSource.Items.Add("QuanLyThuVien");
 
             this.isLogined = isLogined;
 
@@ -57,9 +49,9 @@ namespace HungVuong_C5_Assignment
             {
                 status = serverNode.Attributes["Status"].Value;
 
-                cbDataSource.Items.Add(serverNode.Attributes["Catalog"].Value.Split('=')[1]);
+                cbDataSource.Items.Add(serverNode.Attributes["Catalog"].Value);
                 cbDataSource.SelectedIndex = 0;
-                cbConnect.Items.Add(serverNode.Attributes["Datasource"].Value.Split('=')[1]);
+                cbConnect.Items.Add(serverNode.Attributes["Datasource"].Value);
                 cbConnect.SelectedIndex = 0;
             }
             else
@@ -87,26 +79,6 @@ namespace HungVuong_C5_Assignment
 
         private void btnConnect_Click(object sender, RoutedEventArgs e)
         {
-            if(!flag)
-            {
-                defaultConnectionString = ConfigurationManager.ConnectionStrings["QuanLyThuVienEntities"].ConnectionString;
-                flag = true;
-            }
-
-            var connectionTemp = (string)defaultConnectionString.Clone();
-
-            var newConnectionString = connectionTemp.Replace("initial catalog=QuanLyThuVien", $"initial catalog={txtDataSource.Text}").Replace("data source=DESKTOP-IQBJA8G\\SQLEXPRESS", $"data source={txtConnect.Text}");
-
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            ConnectionStringSettings connectionStringSetting = config.ConnectionStrings.ConnectionStrings["QuanLyThuVienEntities"];
-
-            connectionStringSetting.ConnectionString = newConnectionString;
-
-            config.Save(ConfigurationSaveMode.Modified);
-
-            ConfigurationManager.RefreshSection("connectionStrings");
-
             Thread loadThread = new Thread(new ThreadStart(DoLoad));
 
             loadThread.SetApartmentState(ApartmentState.STA);
@@ -117,9 +89,11 @@ namespace HungVuong_C5_Assignment
 
             try
             {
-                using (QuanLyThuVienEntities db = new QuanLyThuVienEntities())
+                using (QuanLyThuVienEntities db = new QuanLyThuVienEntities(ConfigurationManager.ConnectionStrings["QuanLyThuVienEntities"].ConnectionString.Replace("QuanLyThuVien", $"{txtDataSource.Text}").Replace("DESKTOP-IQBJA8G\\SQLEXPRESS", $"{txtConnect.Text}")))
                 {
+                    db.Configuration.LazyLoadingEnabled = false;
                     var items = db.Parameters.ToList();
+                    DatabaseFirst.ConnectionStr = ConfigurationManager.ConnectionStrings["QuanLyThuVienEntities"].ConnectionString.Replace("QuanLyThuVien", $"{txtDataSource.Text}").Replace("DESKTOP-IQBJA8G\\SQLEXPRESS", $"{txtConnect.Text}");
                 }
             }
             catch (System.Data.Entity.Core.EntityException)
@@ -143,6 +117,7 @@ namespace HungVuong_C5_Assignment
             login.Focus();
 
             this.Close();
+
             loadThread.Abort();
         }
 
@@ -189,8 +164,8 @@ namespace HungVuong_C5_Assignment
                     return;
                 }
                 serverNode.Attributes["Status"].Value = "true";
-                serverNode.Attributes["Catalog"].Value = $"initial catalog={txtDataSource.Text}";
-                serverNode.Attributes["Datasource"].Value = $"data source={txtConnect.Text}";
+                serverNode.Attributes["Catalog"].Value = $"{txtDataSource.Text}";
+                serverNode.Attributes["Datasource"].Value = $"{txtConnect.Text}";
 
                 xmlDoc.Save(xmlFilePath);
             }

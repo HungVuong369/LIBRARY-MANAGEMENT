@@ -63,9 +63,6 @@ namespace HungVuong_C5_Assignment
         {
             WindowDefault window = new WindowDefault();
             window.grdContainer.Children.Add(new ucAddBook(window));
-            window.SizeToContent = SizeToContent.Manual;
-            window.Height = 600;
-            window.Width = 850;
             window.ShowDialog();
 
             if (window.DialogResult == true)
@@ -96,6 +93,11 @@ namespace HungVuong_C5_Assignment
             ucBook.dgBookInfo.Columns[11].Visibility = Visibility.Collapsed;
             ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Visible;
             ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Collapsed;
+
+            ucBook.dgBookInfo.Columns[6].Visibility = Visibility.Collapsed;
+            ucBook.dgBookInfo.Columns[7].Visibility = Visibility.Collapsed;
+            ucBook.dgBookInfo.Columns[8].Visibility = Visibility.Collapsed;
+
         }
 
         private void toggleButton_Checked(object sender, RoutedEventArgs e)
@@ -105,6 +107,10 @@ namespace HungVuong_C5_Assignment
             ucBook.dgBookInfo.Columns[11].Visibility = Visibility.Visible;
             ucBook.dgBookInfo.Columns[9].Visibility = Visibility.Collapsed;
             ucBook.dgBookInfo.Columns[0].Visibility = Visibility.Visible;
+
+            ucBook.dgBookInfo.Columns[6].Visibility = Visibility.Visible;
+            ucBook.dgBookInfo.Columns[7].Visibility = Visibility.Visible;
+            ucBook.dgBookInfo.Columns[8].Visibility = Visibility.Visible;
         }
 
         private void btnReturnBook_Click(object sender, RoutedEventArgs e)

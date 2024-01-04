@@ -41,7 +41,7 @@ namespace HungVuong_C5_Assignment
             return id;
         }
 
-        public void Add(string categoryID, string name, string summary)
+        public void Add(string categoryID, string name, string summary, string urlImage)
         {
             string newID = GetNewID();
 
@@ -50,7 +50,8 @@ namespace HungVuong_C5_Assignment
                 Id = newID,
                 IdCategory = categoryID,
                 Name = name,
-                Summary = summary
+                Summary = summary,
+                UrlImage = urlImage
             };
 
             DatabaseFirst.Instance.db.BookTitles.Add(newBookTitle);

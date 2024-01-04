@@ -10,23 +10,19 @@
 namespace HungVuong_C5_Assignment
 {
     using System;
-    using System.Configuration;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class QuanLyThuVienEntities : DbContext
     {
-        public QuanLyThuVienEntities()
-            : base(GetConnection())
+        public QuanLyThuVienEntities(string conStr)
+            : base(conStr)
         {
         }
-        
-        private static string GetConnection()
-        {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-            ConnectionStringSettings connectionStringSetting = config.ConnectionStrings.ConnectionStrings["QuanLyThuVienEntities"];
-            return connectionStringSetting.ConnectionString;
+        public QuanLyThuVienEntities()
+             : base(DatabaseFirst.ConnectionStr)
+        {
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

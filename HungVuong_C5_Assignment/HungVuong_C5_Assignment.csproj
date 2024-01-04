@@ -196,6 +196,9 @@
     <Compile Include="Translator.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\User\Statistical\ucStatiRectangle.xaml.cs">
       <DependentUpon>ucStatiRectangle.xaml</DependentUpon>
     </Compile>
@@ -203,9 +206,6 @@
       <DependentUpon>ucStatisticalLibrarian.xaml</DependentUpon>
     </Compile>
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Admin\Author\DataGrid\ucAuthorDataGrid.xaml.cs">
       <DependentUpon>ucAuthorDataGrid.xaml</DependentUpon>
     </Compile>
@@ -602,8 +602,6 @@
     <Compile Include="DTOs\User\Reader\ChildInformation.cs" />
     <Compile Include="DTOs\User\Reader\Guardian.cs" />
     <Compile Include="DTOs\User\UserDto.cs" />
-    <Compile Include="Global\FieldName.cs" />
-    <Compile Include="Global\TSQL.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -1119,43 +1117,62 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\1.jpg" />
-    <Resource Include="Images\10.png" />
-    <Resource Include="Images\11.jpg" />
-    <Resource Include="Images\12.png" />
-    <Resource Include="Images\13.png" />
-    <Resource Include="Images\14.png" />
-    <Resource Include="Images\18.png" />
-    <Resource Include="Images\19.png" />
-    <Resource Include="Images\2.jpg" />
-    <Resource Include="Images\3.png" />
-    <Resource Include="Images\4.png" />
-    <Resource Include="Images\5.png" />
-    <Resource Include="Images\6.png" />
-    <Resource Include="Images\7.png" />
-    <Resource Include="Images\8.png" />
-    <Resource Include="Images\9.png" />
-    <Resource Include="Images\ArrowLeft.png" />
-    <Resource Include="Images\ArrowLeftDisabled.png" />
-    <Resource Include="Images\ArrowRight.png" />
-    <Resource Include="Images\ArrowRightDisabled.png" />
-    <Resource Include="Images\DoubleArrowLeft.png" />
-    <Resource Include="Images\DoubleArrowLeftDisabled.png" />
-    <Resource Include="Images\DoubleArrowRight.png" />
-    <Resource Include="Images\DoubleArrowRightDisabled.png" />
-    <Resource Include="Images\User.png" />
+    <Resource Include="Assets\Images\1.jpg" />
+    <Resource Include="Assets\Images\10.png" />
+    <Resource Include="Assets\Images\11.jpg" />
+    <Resource Include="Assets\Images\12.png" />
+    <Resource Include="Assets\Images\13.png" />
+    <Resource Include="Assets\Images\14.png" />
+    <Resource Include="Assets\Images\18.png" />
+    <Resource Include="Assets\Images\19.png" />
+    <Resource Include="Assets\Images\2.jpg" />
+    <Resource Include="Assets\Images\3.png" />
+    <Resource Include="Assets\Images\4.png" />
+    <Resource Include="Assets\Images\5.png" />
+    <Resource Include="Assets\Images\6.png" />
+    <Resource Include="Assets\Images\7.png" />
+    <Resource Include="Assets\Images\8.png" />
+    <Resource Include="Assets\Images\9.png" />
+    <Resource Include="Assets\Images\ArrowLeft.png" />
+    <Resource Include="Assets\Images\ArrowLeftDisabled.png" />
+    <Resource Include="Assets\Images\ArrowRight.png" />
+    <Resource Include="Assets\Images\ArrowRightDisabled.png" />
+    <Resource Include="Assets\Images\DoubleArrowLeft.png" />
+    <Resource Include="Assets\Images\DoubleArrowLeftDisabled.png" />
+    <Resource Include="Assets\Images\DoubleArrowRight.png" />
+    <Resource Include="Assets\Images\DoubleArrowRightDisabled.png" />
+    <Resource Include="Assets\Images\User.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background.jpg" />
-    <Resource Include="Images\ic_CloseAct.png" />
-    <Resource Include="Images\ic_MaximizeAct.png" />
-    <Resource Include="Images\ic_MinimizeAct.png" />
-    <Resource Include="Images\ic_ClosePas.png" />
-    <Resource Include="Images\ic_MaximizePas.png" />
-    <Resource Include="Images\ic_MinimizePas.png" />
+    <Resource Include="Assets\Images\background.jpg" />
+    <Resource Include="Assets\Images\ic_CloseAct.png" />
+    <Resource Include="Assets\Images\ic_MaximizeAct.png" />
+    <Resource Include="Assets\Images\ic_MinimizeAct.png" />
+    <Resource Include="Assets\Images\ic_ClosePas.png" />
+    <Resource Include="Assets\Images\ic_MaximizePas.png" />
+    <Resource Include="Assets\Images\ic_MinimizePas.png" />
+    <Resource Include="Assets\BookImages\BT01.png" />
+    <Resource Include="Assets\BookImages\BT02.png" />
+    <Resource Include="Assets\BookImages\BT03.png" />
+    <Resource Include="Assets\BookImages\BT04.png" />
+    <Resource Include="Assets\BookImages\BT05.png" />
+    <Resource Include="Assets\BookImages\BT06.png" />
+    <Resource Include="Assets\BookImages\BT07.png" />
+    <Resource Include="Assets\BookImages\BT08.png" />
+    <Resource Include="Assets\BookImages\BT09.png" />
+    <Resource Include="Assets\BookImages\BT10.png" />
+    <Resource Include="Assets\BookImages\BT11.png" />
+    <Resource Include="Assets\BookImages\BT12.png" />
+    <Resource Include="Assets\BookImages\BT13.png" />
+    <Resource Include="Assets\BookImages\BT14.png" />
+    <Resource Include="Assets\BookImages\BT15.png" />
+    <Resource Include="Assets\BookImages\BT16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\ErrorImage.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -1167,7 +1184,6 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

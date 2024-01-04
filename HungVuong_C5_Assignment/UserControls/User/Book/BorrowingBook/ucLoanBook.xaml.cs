@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,21 @@ namespace HungVuong_C5_Assignment
         public BookInformation BookInfo;
         public Grid GridContainer;
         public Storyboard fadeInOutStoryboard;
+        private string _UrlImage;
 
         public ucLoanBook(BookInformation bookInfo)
         {
             InitializeComponent();
             BookInfo = bookInfo;
+            this._UrlImage = bookInfo.UrlImage;
+            this.DataContext = ShowBooksViewModel.Instance;
+        }
+
+        public ucLoanBook(BookInformation bookInfo, string urlImage)
+        {
+            InitializeComponent();
+            BookInfo = bookInfo;
+            this._UrlImage = urlImage;
             this.DataContext = ShowBooksViewModel.Instance;
         }
 
@@ -74,6 +85,15 @@ namespace HungVuong_C5_Assignment
                     return;
             }
             this.Resources.Add("FadeInOut", fadeInOutStoryboard);
+        }
+
+        private void Image_Loaded(object sender, RoutedEventArgs e)
+        {
+            Image image = sender as Image;
+
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
+            image.Source = new BitmapImage(new Uri(projectDirectory + _UrlImage.Replace(@"/", @"\"), UriKind.RelativeOrAbsolute));
         }
     }
 }

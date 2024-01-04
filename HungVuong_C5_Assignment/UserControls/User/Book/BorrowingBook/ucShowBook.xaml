@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HungVuong_C5_Assignment"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Name="showBook"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.ToolTip>
+        <ToolTip>
+            <Image Width="250" Height="250" Stretch="Uniform" Loaded="Image_Loaded"/>
+        </ToolTip>
+    </UserControl.ToolTip>
     <GroupBox BorderBrush="Black"
               Margin="5 0"
               Width="230"
@@ -47,6 +53,7 @@
                 </Style.Triggers>
             </Style>
         </GroupBox.Style>
+
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseLeftButtonDown">
                 <i:InvokeCommandAction Command="{Binding AddBookCommand}" 

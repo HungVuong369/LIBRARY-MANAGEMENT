@@ -51,13 +51,14 @@ namespace HungVuong_C5_Assignment
             TreeViewItem treeViewItem = new TreeViewItem();
             treeViewItem.Header = header;
             treeViewItem.Tag = urlImage;
-            treeViewItem.Padding = new Thickness(0, 5, 0, 5);
+            treeViewItem.Padding = new Thickness(5);
+            treeViewItem.Margin = new Thickness(5);
 
-            string colorCode = "#0C1C2F";
-            BrushConverter brushConverter = new BrushConverter();
-            Brush brush = (Brush)brushConverter.ConvertFromString(colorCode);
+            //string colorCode = "#0C1C2F";
+            //BrushConverter brushConverter = new BrushConverter();
+            //Brush brush = (Brush)brushConverter.ConvertFromString(colorCode);
 
-            treeViewItem.Background = brush;
+            //treeViewItem.Background = brush;
 
             return treeViewItem;
         }
@@ -71,7 +72,7 @@ namespace HungVuong_C5_Assignment
                 if (item == null)
                     continue;
                 TreeViewItem treeViewItem = CreateTreeViewItem(item.Name, item.UrlImage);
-                tvManagement.Items.Add(treeViewItem);
+                TreeView.Items.Add(treeViewItem);
 
                 treeViewItem.MouseLeftButtonUp += (sender, e) =>
                 {
@@ -100,81 +101,64 @@ namespace HungVuong_C5_Assignment
         public void OpenFeature(string IdFunction)
         {
             TreeViewItem selectedItem = TreeView.SelectedItem as TreeViewItem;
-            TreeViewItem treeViewParent;
-            try
-            {
-                treeViewParent = selectedItem.Parent as TreeViewItem;
-            }
-            catch
-            {
-                treeViewParent = null;
-            }
 
             if (isOpenFeature == true)
             {
-                if(grdMain.Children[1] is ReaderManagement)
+                if (grdMain.Children[1] is ReaderManagement)
                 {
                     _ChildVM.childRepo.Load(true);
                     _AdultVM.adultRepo.Load(true);
                     _ReaderVM.readerRepo.Load(true);
-                }
-                if(grdMain.Children[1] is ucLoanSlipManagement)
-                {
                 }
                 grdMain.Children.RemoveAt(1);
             }
             else
                 isOpenFeature = true;
 
-            if (treeViewParent != null)
+            switch (IdFunction)
             {
-                switch (IdFunction)
-                {
-                    case "F21":
-                        grdMain.Children.Add(new ReaderManagement());
-                        break;
-                    case "F29":
-                        grdMain.Children.Add(new BookTitleManagement());
-                        break;
-                    case "F32":
-                        grdMain.Children.Add(new BookISBN_Management());
-                        break;
-                    case "F36":
-                        grdMain.Children.Add(new BookManagement());
-                        break;
-                    case "F41":
-                        ShowBooksViewModel.Instance.ReloadStorage();
-                        ShowBooksViewModel.Instance.LstLoaningBook.Clear();
-                        ShowBooksViewModel.Instance.UpdateViewBooks("None", "None", "");
-                        LoanDetailDataGridViewModel.Instance.UpdateLoanDetailsByReaderID(string.Empty);
-                        grdMain.Children.Add(new ucLoanSlipManagement());
-                        break;
-                    case "F43":
-                        foreach(TreeViewItem item in tvManagement.Items)
+                case "F21":
+                    grdMain.Children.Add(new ReaderManagement());
+                    break;
+                case "F29":
+                    grdMain.Children.Add(new BookTitleManagement());
+                    break;
+                case "F32":
+                    grdMain.Children.Add(new BookISBN_Management());
+                    break;
+                case "F36":
+                    grdMain.Children.Add(new BookManagement());
+                    break;
+                case "F41":
+                    ShowBooksViewModel.Instance.ReloadStorage();
+                    ShowBooksViewModel.Instance.LstLoaningBook.Clear();
+                    ShowBooksViewModel.Instance.UpdateViewBooks("None", "None", "");
+                    LoanDetailDataGridViewModel.Instance.UpdateLoanDetailsByReaderID(string.Empty);
+                    grdMain.Children.Add(new ucLoanSlipManagement());
+                    break;
+                case "F43":
+                    foreach (TreeViewItem item in TreeView.Items)
+                    {
+                        if (item.Header.ToString() == DatabaseFirst.Instance.db.Functions.FirstOrDefault(i => i.Id == "F43").Name)
                         {
-                            if(item.Header.ToString() == DatabaseFirst.Instance.db.Functions.FirstOrDefault(i => i.Id == "F43").Name)
-                            {
-                                item.IsSelected = true;
-                                break;
-                            }
+                            item.IsSelected = true;
+                            break;
                         }
-                        grdMain.Children.Add(new LoanHistoryManagement());
-                        break;
-                    case "":
-                        grdMain.Children.Add(new ucStatisticalLibrarian());
-                        break;
-                    default:
-                        isOpenFeature = false;
-                        break;
-                }
+                    }
+                    grdMain.Children.Add(new LoanHistoryManagement());
+                    break;
+                case "":
+                    grdMain.Children.Add(new ucStatisticalLibrarian());
+                    break;
+                default:
+                    isOpenFeature = false;
+                    break;
             }
-            else
-                isOpenFeature = false;
         }
 
         public void Animation()
         {
-            if(!flag)
+            if (!flag)
             {
                 WidthDefault = mainWindow.Width;
                 HeightDefault = mainWindow.Height;
@@ -244,20 +228,6 @@ namespace HungVuong_C5_Assignment
         {
             Animation();
             OpenFeature("");
-        }
-
-        private void arrowRight_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            grdContainer.Visibility = Visibility.Visible;
-            arrowLeft.Visibility = Visibility.Visible;
-            arrowRight.Visibility = Visibility.Collapsed;
-        }
-
-        private void arrowLeft_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            grdContainer.Visibility = Visibility.Collapsed;
-            arrowLeft.Visibility = Visibility.Collapsed;
-            arrowRight.Visibility = Visibility.Visible;
         }
     }
 }

@@ -18,21 +18,21 @@
 
         <DataGrid Name="dgBookInfo" AutoGenerateColumns="False"
                       IsReadOnly="True" SelectionMode="Single"
-                      Grid.Row="0">
+                      Grid.Row="0" LoadingRow="dgBookInfo_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"
                                     Visibility="Collapsed"/>
                 <DataGridTextColumn Header="ISBN" Binding="{Binding ISBN}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
-                <!--<DataGridTextColumn Header="Author ID" Binding="{Binding BookAuthor.Id}"/>-->
                 <DataGridTextColumn Header="Author" Binding="{Binding BookAuthor.Name}"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"/>
-                <!--<DataGridTextColumn Header="Translator ID" Binding="{Binding BookTranslator.Id}"/>-->
-                <DataGridTextColumn Header="Translator" Binding="{Binding BookTranslator.Name}"/>
-                <!--<DataGridTextColumn Header="Publisher ID" Binding="{Binding BookPublisher.Id}"/>-->
-                <DataGridTextColumn Header="Publisher Name" Binding="{Binding BookPublisher.Name}"/>
-                <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"/>
+                <DataGridTextColumn Header="Translator" Binding="{Binding BookTranslator.Name}"
+                                    Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Publisher Name" Binding="{Binding BookPublisher.Name}"
+                                    Visibility="Collapsed"/>
+                <DataGridTextColumn Header="Publish Date" Binding="{Binding PublishDate, StringFormat='dd/MM/yyyy'}"
+                                    Visibility="Collapsed"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}"/>
                 <DataGridTextColumn Header="Status" Binding="{Binding Status,Converter={StaticResource convertTrueFalse}}">
                     <DataGridTextColumn.CellStyle>

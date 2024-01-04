@@ -10,7 +10,7 @@
         Loaded="Window_Loaded">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/Images/11.jpg"/>
+            <ImageBrush ImageSource="/Assets/Images/11.jpg"/>
         </Grid.Background>
         <Border Background="#0F1824"
                 CornerRadius="10"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,11 +77,30 @@ namespace HungVuong_C5_Assignment
                     item.Id,
                     item.Category.Name,
                     item.Name,
-                    item.Summary
+                    item.Summary,
+                    item.UrlImage
                 ));
             }
 
             return lstBookTitleInfo;
+        }
+
+        private void dgBookTitleInfo_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var tooltip = new ToolTip();
+
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName;
+
+            var image = new Image()
+            {
+                Source = new BitmapImage(new Uri(projectDirectory + (e.Row.Item as BookTitleInformation).UrlImage.Replace(@"/", @"\"), UriKind.RelativeOrAbsolute)),
+                Width = 250,
+                Height = 250,
+                Stretch = Stretch.Uniform
+            };
+            tooltip.Content = image;
+
+            e.Row.ToolTip = tooltip;
         }
     }
 }

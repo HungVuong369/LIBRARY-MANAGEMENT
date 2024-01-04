@@ -20,6 +20,7 @@ namespace HungVuong_C5_Assignment
         public int Quantity { get; set; }
         public bool Status { get; set; }
         public string BookStatus { get; set; }
+        public string UrlImage { get; set; }
 
         public BookInformation() {
             

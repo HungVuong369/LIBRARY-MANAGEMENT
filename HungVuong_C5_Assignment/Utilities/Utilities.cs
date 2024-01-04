@@ -37,6 +37,8 @@ namespace HungVuong_C5_Assignment
 
         public static T FindParent<T>(DependencyObject child) where T : DependencyObject
         {
+            if (child == null)
+                return null;
             DependencyObject parentObject = VisualTreeHelper.GetParent(child);
 
             if (parentObject == null)
